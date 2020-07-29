@@ -1,6 +1,10 @@
+/* eslint-disable */
 // https://github.com/spotify/web-api-auth-examples/blob/master/authorization_code/app.js
 
 require('dotenv').config();
+
+const webpack = require('webpack');
+const webpackConfig = require('./webpack.config');
 
 const express = require('express');
 const request = require('request');
@@ -9,7 +13,7 @@ const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 
-const PORT = process.env.PORT || 8888;
+const PORT = process.env.PORT || 3000;
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
@@ -34,14 +38,29 @@ const stateKey = 'spotify_auth_state';
 
 const app = express();
 
+// Dev hot reloading
+if (process.env.NODE_ENV !== 'production') {
+  const compiler = webpack(webpackConfig);
+  app.use(
+    require('webpack-dev-middleware')(compiler, {
+      noInfo: true,
+      publicPath: webpackConfig.output.publicPath,
+      writeToDisk: true,
+    })
+  );
+  app.use(require('webpack-hot-middleware')(compiler));
+}
+
 app
-  .use(express.static(__dirname + '../client/build'))
+  .use(express.static(__dirname + '/build'))
   .use(cors())
   .use(cookieParser());
 
-app.get('/', function (req, res) {
-  res.render(path.resolve(__dirname, '../client/build/index.html'));
-});
+if (process.env.NODE_ENV === 'production') {
+  app.get('/', function (req, res) {
+    res.render(path.resolve(__dirname, '/build/index.html'));
+  });
+}
 
 app.get('/login', function (req, res) {
   const state = generateRandomString(16);
@@ -55,7 +74,7 @@ app.get('/login', function (req, res) {
       client_id: CLIENT_ID,
       scope: scope,
       redirect_uri: REDIRECT_URI,
-      state: state
+      state: state,
     })}`
   );
 });
@@ -77,14 +96,14 @@ app.get('/callback', function (req, res) {
       form: {
         code: code,
         redirect_uri: REDIRECT_URI,
-        grant_type: 'authorization_code'
+        grant_type: 'authorization_code',
       },
       headers: {
         Authorization: `Basic ${new Buffer.from(
           `${CLIENT_ID}:${CLIENT_SECRET}`
-        ).toString('base64')}`
+        ).toString('base64')}`,
       },
-      json: true
+      json: true,
     };
 
     request.post(authOptions, function (error, response, body) {
@@ -96,7 +115,7 @@ app.get('/callback', function (req, res) {
         res.redirect(
           `${FRONTEND_URI}/#${querystring.stringify({
             access_token,
-            refresh_token
+            refresh_token,
           })}`
         );
       } else {
@@ -114,13 +133,13 @@ app.get('/refresh_token', function (req, res) {
     headers: {
       Authorization: `Basic ${new Buffer.from(
         `${CLIENT_ID}:${CLIENT_SECRET}`
-      ).toString('base64')}`
+      ).toString('base64')}`,
     },
     form: {
       grant_type: 'refresh_token',
-      refresh_token
+      refresh_token,
     },
-    json: true
+    json: true,
   };
 
   request.post(authOptions, function (error, response, body) {
@@ -132,8 +151,9 @@ app.get('/refresh_token', function (req, res) {
 });
 
 // React router
-app.get('*', function (request, response) {
-  response.sendFile(path.resolve(__dirname, '../client/src', 'index.html'));
+app.get('*', function (req, res) {
+  console.log(path.resolve(__dirname, '/build/index.html'));
+  res.sendFile(path.resolve(__dirname, '/build/index.html'));
 });
 
 app.listen(PORT, function () {

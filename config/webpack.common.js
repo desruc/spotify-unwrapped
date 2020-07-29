@@ -5,13 +5,20 @@ import paths from './paths';
 import rules from './rules';
 
 module.exports = {
-  entry: paths.entryPath,
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-hot-middleware/client',
+    paths.entryPath,
+  ],
+  node: {
+    __dirname: false
+  },
   module: {
-    rules
+    rules,
   },
   resolve: {
     modules: ['src', 'node_modules'],
-    extensions: ['*', '.js']
+    extensions: ['*', '.js'],
   },
   plugins: [
     new webpack.ProgressPlugin(),
@@ -23,8 +30,8 @@ module.exports = {
         preserveLineBreaks: true,
         minifyURLs: true,
         removeComments: true,
-        removeAttributeQuotes: true
-      }
-    })
-  ]
+        removeAttributeQuotes: true,
+      },
+    }),
+  ],
 };

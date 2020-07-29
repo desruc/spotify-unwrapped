@@ -1,5 +1,5 @@
 <h1 align="center">
-  Spotify Profile
+  Spotify Unwrapped
 </h1>
 <p align="center">
   A year round <i>Spotify Wrapped</i>!
