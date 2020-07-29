@@ -56,12 +56,6 @@ app
   .use(cors())
   .use(cookieParser());
 
-if (process.env.NODE_ENV === 'production') {
-  app.get('/', function (req, res) {
-    res.render(path.resolve(__dirname, '/build/index.html'));
-  });
-}
-
 app.get('/login', function (req, res) {
   const state = generateRandomString(16);
   res.cookie(stateKey, state);
@@ -152,8 +146,7 @@ app.get('/refresh_token', function (req, res) {
 
 // React router
 app.get('*', function (req, res) {
-  console.log(path.resolve(__dirname, '/build/index.html'));
-  res.sendFile(path.resolve(__dirname, '/build/index.html'));
+  res.sendFile(path.join(__dirname, '/build/index.html'));
 });
 
 app.listen(PORT, function () {

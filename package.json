@@ -10,7 +10,7 @@
     "test": "jest",
     "test:cover": "yarn run test --coverage",
     "start": "node server.js",
-    "dev": "concurrently --kill-others-on-fail \"node server.js\" \"cross-env NODE_ENV=development webpack-dev-server --open\"",
+    "dev": "rimraf build && cross-env NODE_ENV=development node server.js",
     "build": "cross-env NODE_ENV=production webpack",
     "lint": "eslint ./src/**/**.js",
     "lint:fix": "eslint ./src/**/**.js --fix"
@@ -41,6 +41,7 @@
     "prettier": "^2.0.5",
     "react-hot-loader": "^4.12.21",
     "react-testing-library": "^8.0.1",
+    "rimraf": "^3.0.2",
     "webpack": "^4.44.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-middleware": "^3.7.2",
