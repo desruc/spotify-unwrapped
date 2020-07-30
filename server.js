@@ -107,7 +107,7 @@ app.get('/callback', function (req, res) {
 
         // pass the token to the browser to make requests from there
         res.redirect(
-          `${FRONTEND_URI}/#${querystring.stringify({
+          `${process.env.FRONTEND_URI}/#${querystring.stringify({
             access_token,
             refresh_token,
           })}`
