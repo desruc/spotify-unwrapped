@@ -15,7 +15,8 @@ const GlobalStyle = createGlobalStyle`
   html, body {
     margin: 0;
     padding: 0;
-    background-color: ${(props) => props.theme.background}
+    background-color: ${(props) => props.theme.background};
+    font-family: Poppins;
   }
 `;
 
