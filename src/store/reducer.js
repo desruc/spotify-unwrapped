@@ -73,3 +73,6 @@ export const selectRange = (state) => state.app.range;
 export const selectTopAristsAllTime = (state) => state.app.topArtistsAllTime;
 export const selectTopArtistsHalfYear = (state) => state.app.topArtistsHalfYear;
 export const selectTopArtistsMonth = (state) => state.app.topArtistsMonth;
+export const selectTopTracksAllTime = (state) => state.app.topTracksAllTime;
+export const selectTopTracksHalfYear = (state) => state.app.topTracksHalfYear;
+export const selectTopTracksMonth = (state) => state.app.topTracksMonth;

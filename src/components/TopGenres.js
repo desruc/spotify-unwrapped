@@ -13,7 +13,7 @@ const TopGenres = () => {
   return (
     <div>
       <h2>Top Genres</h2>
-      {genres.slice(0, 9).map((g) => {
+      {genres && genres.slice(0, 9).map((g) => {
         const [key, value] = g;
         return <div>{`${key} - ${value}`}</div>;
       })}

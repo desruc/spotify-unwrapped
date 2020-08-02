@@ -37,3 +37,23 @@ export const getTopGenres = (data) => {
 
   return sortable.sort((a, b) => b[1] - a[1]);
 };
+
+export const getTopAlbums = (data) => {
+  if (!data) return null;
+
+  const albums = data.map((d) => d.album);
+
+  const counts = {};
+  albums.forEach((a) => {
+    const { id } = a;
+    counts[id] = (counts[id] || 0) + 1;
+  });
+
+  const sortable = [];
+  const keys = Object.keys(counts);
+  keys.forEach((k) => {
+    sortable.push([albums.find((a) => a.id === k), counts[k]]);
+  });
+
+  return sortable.sort((a, b) => b[1] - a[1]);
+};
