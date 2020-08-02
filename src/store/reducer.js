@@ -6,6 +6,9 @@ const initialState = {
   topArtistsAllTime: null,
   topArtistsHalfYear: null,
   topArtistsMonth: null,
+  topTracksAllTime: null,
+  topTracksHalfYear: null,
+  topTracksMonth: null,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -38,6 +41,24 @@ const appReducer = (state = initialState, action) => {
       return {
         ...state,
         topArtistsMonth: action.artists,
+      };
+
+    case types.GET_TOP_TRACKS_ALL_TIME_SUCCESS:
+      return {
+        ...state,
+        topTracksAllTime: action.tracks,
+      };
+
+    case types.GET_TOP_TRACKS_HALF_YEAR_SUCCESS:
+      return {
+        ...state,
+        topTracksHalfYear: action.tracks,
+      };
+
+    case types.GET_TOP_TRACKS_MONTH_SUCCESS:
+      return {
+        ...state,
+        topTracksMonth: action.tracks,
       };
 
     default:

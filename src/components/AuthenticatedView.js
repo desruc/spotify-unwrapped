@@ -21,6 +21,9 @@ const AuthenticatedView = () => {
     dispatch(actions.getAllTimeArtists());
     dispatch(actions.getHalfYearArtists());
     dispatch(actions.getMonthArtists());
+    dispatch(actions.getAllTimeTracks());
+    dispatch(actions.getHalfYearTracks());
+    dispatch(actions.getMonthTracks());
   }, []);
 
   return (
