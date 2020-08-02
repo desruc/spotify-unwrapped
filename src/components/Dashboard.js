@@ -1,13 +1,12 @@
 import React from 'react';
 
-import { clearTokens } from '../utils/tokenHelpers';
+import PageWrap from './PageWrap';
+import Menu from './Menu';
 
 const Dashbaord = () => (
-  <div>
-    <h1 onClick={clearTokens} role="presentation">
-      Logout
-    </h1>
-  </div>
+  <PageWrap>
+    <Menu />
+  </PageWrap>
 );
 
 export default Dashbaord;

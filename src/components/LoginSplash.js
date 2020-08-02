@@ -1,10 +1,12 @@
 import React from 'react';
 
+import PageWrap from './PageWrap';
+
 const LoginSplash = () => (
-  <div>
+  <PageWrap>
     <h1>Spotify Unwrapped</h1>
     <a href="http://localhost:3000/login">Login</a>
-  </div>
+  </PageWrap>
 );
 
 export default LoginSplash;
