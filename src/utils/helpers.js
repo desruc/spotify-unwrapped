@@ -13,3 +13,27 @@ export const getHashParams = () => {
   }
   return hashParams;
 };
+
+export const getTopGenres = (data) => {
+  if (!data) return null;
+
+  const genres = [];
+  data.forEach((d) => {
+    d.genres.forEach((g) => {
+      genres.push(g);
+    });
+  });
+
+  const counts = {};
+  genres.forEach((g) => {
+    counts[g] = (counts[g] || 0) + 1;
+  });
+
+  const sortable = [];
+  const keys = Object.keys(counts);
+  keys.forEach((k) => {
+    sortable.push([k, counts[k]]);
+  });
+
+  return sortable.sort((a, b) => b[1] - a[1]);
+};
