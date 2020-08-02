@@ -4,8 +4,8 @@ import { hot } from 'react-hot-loader/root';
 import { token } from '../utils/tokenHelpers';
 
 import LoginSplash from './LoginSplash';
-import Dashbaord from './Dashboard';
+import AuthenticatedView from './AuthenticatedView';
 
-const App = () => (token ? <Dashbaord /> : <LoginSplash />);
+const App = () => (token ? <AuthenticatedView /> : <LoginSplash />);
 
 export default hot(App);

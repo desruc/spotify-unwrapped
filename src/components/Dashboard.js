@@ -1,12 +1,9 @@
 import React from 'react';
 
-import PageWrap from './PageWrap';
-import Menu from './Menu';
+import TopArtists from './TopArtists';
 
-const Dashbaord = () => (
-  <PageWrap>
-    <Menu />
-  </PageWrap>
-);
+const Dashboard = () => {
+  return <TopArtists />;
+};
 
-export default Dashbaord;
+export default Dashboard;
