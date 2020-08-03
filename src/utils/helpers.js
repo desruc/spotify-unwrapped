@@ -14,6 +14,12 @@ export const getHashParams = () => {
   return hashParams;
 };
 
+export const capitalizeWords = (str) =>
+  str.replace(
+    /\w\S*/g,
+    (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+  );
+
 export const getTopGenres = (data) => {
   if (!data) return null;
 
@@ -32,7 +38,7 @@ export const getTopGenres = (data) => {
   const sortable = [];
   const keys = Object.keys(counts);
   keys.forEach((k) => {
-    sortable.push([k, counts[k]]);
+    sortable.push([capitalizeWords(k), counts[k]]);
   });
 
   return sortable.sort((a, b) => b[1] - a[1]);
@@ -56,4 +62,13 @@ export const getTopAlbums = (data) => {
   });
 
   return sortable.sort((a, b) => b[1] - a[1]);
+};
+
+export const getTrackWithArtist = (track) => {
+  const { artists } = track;
+  const computedArtists =
+    artists.length > 1
+      ? `${artists[0].name} (feat. ${artists.slice(1).map((a) => a.name)})`
+      : artists[0].name;
+  return `${computedArtists} - ${track.name}`;
 };

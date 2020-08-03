@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Dropdown from './Dropdown';
+
 import { CHANGE_DATE_RANGE } from '../store/types';
 import { selectRange } from '../store/reducer';
 
@@ -22,18 +24,30 @@ const AppBar = () => {
   const range = useSelector((state) => selectRange(state));
 
   // Event handlers
-  const onChange = (e) => {
-    const { value } = e.target;
+  const onChange = (value) => {
+    console.log("onChange -> value", value)
     dispatch({ type: CHANGE_DATE_RANGE, range: value });
   };
 
+  // Constants
+  const options = [
+    {
+      value: 'allTime',
+      label: 'All Time',
+    },
+    {
+      value: 'halfYear',
+      label: 'Last Six Months',
+    },
+    {
+      value: 'month',
+      label: 'Last 4 Weeks',
+    },
+  ];
+
   return (
     <Container>
-      <select onChange={onChange} value={range}>
-        <option>allTime</option>
-        <option>halfYear</option>
-        <option>month</option>
-      </select>
+      <Dropdown options={options} value={range} onSelect={onChange} />
     </Container>
   );
 };
