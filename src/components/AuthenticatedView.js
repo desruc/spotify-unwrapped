@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import PageWrap from './PageWrap';
 import Menu from './Menu';
-import AppBar from './AppBar';
+
 import Dashboard from './Dashboard';
 
 import * as actions from '../store/actions';
@@ -30,7 +30,6 @@ const AuthenticatedView = () => {
     <PageWrap>
       <Menu />
       <MainView>
-        <AppBar />
         <Switch>
           <Route path={['/', '/dashboard']} component={Dashboard} />
         </Switch>

@@ -16,6 +16,9 @@ const Container = styled.div`
   padding-left: 24px;
   padding-right: 24px;
   padding-bottom: 48px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const ImageWrap = styled.div`

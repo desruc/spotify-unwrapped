@@ -7,6 +7,7 @@ function Dropdown({ label, value, options, onSelect }) {
   // Hooks
   const referenceRef = useRef(null);
   const popperRef = useRef(null);
+
   const { styles, attributes } = usePopper(
     referenceRef.current,
     popperRef.current,
@@ -16,10 +17,16 @@ function Dropdown({ label, value, options, onSelect }) {
         {
           name: 'preventOverflow',
           options: {
-            padding: 8,
+            padding: 16,
             rootBoundary: 'document',
           },
         },
+        // {
+        //   name: 'offset',
+        //   options: {
+        //     offset: [-76, -60]
+        //   },
+        // },
       ],
     }
   );
@@ -59,6 +66,10 @@ function Dropdown({ label, value, options, onSelect }) {
 
   // Constants
   const computedLabel = label || options.find((o) => o.value === value).label;
+  const computedPopperStyles = {
+    ...styles.popper,
+    zIndex: 10,
+  };
 
   return (
     <>
@@ -82,7 +93,7 @@ function Dropdown({ label, value, options, onSelect }) {
           </g>
         </svg>
       </Button>
-      <div ref={popperRef} style={styles.popper} {...attributes.popper}>
+      <div ref={popperRef} style={computedPopperStyles} {...attributes.popper}>
         <DropdownContainer style={styles.offset} visible={visible}>
           {options.map((o) => {
             const disabled = o.value === value;
@@ -121,6 +132,7 @@ Dropdown.defaultProps = {
 const Button = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 8px 16px;
   border-radius: 25px;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -128,6 +140,7 @@ const Button = styled.div`
   font-weight: 600;
   text-decoration: none !important;
   user-select: none;
+  min-width: 150px;
   &:hover {
     background-color: #ffffff;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -139,12 +152,12 @@ const Button = styled.div`
 
 const DropdownContainer = styled.div`
   display: ${(props) => (props.visible ? 'flex' : 'none')};
-  width: '2px';
   flex-direction: column;
-  background-color: '#FFF';
+  background-color: #ffffff;
   border-radius: 4px;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.14);
   padding: 5px;
+  border-radius: 6px;
 `;
 
 const DropdownItem = styled.div`

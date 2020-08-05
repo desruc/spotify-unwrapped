@@ -2,18 +2,47 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import {
-  selectRange,
-  selectTopAristsAllTime,
-  selectTopArtistsHalfYear,
-  selectTopArtistsMonth,
-} from '../store/reducer';
+import { selectAristRange, selectTopArtists } from '../store/reducer';
+import { CHANGE_ARTIST_DATE_RANGE } from '../store/types';
 
 import SlideToggleContent from './SlideToggleContent';
 import Button from './Button';
 
-const Heading = styled.h2`
-  margin: 0;
+import { useWindowSize } from '../utils/hooks';
+import RangeSelector from './RangeSelector';
+
+const Heading = styled.h1`
+  font-size: 2rem;
+  margin: 0px;
+  flex: 1;
+`;
+
+const TopArtistWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 170px;
+  flex-basis: 50%;
+  @media (min-width: 768px) {
+    height: 330px;
+    flex-basis: 33.33333333333333%;
+  }
+  @media (min-width: 992px) {
+    flex-basis: 25%;
+  }
+`;
+
+const ArtistWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 170px;
+  flex-basis: 50%;
+  @media (min-width: 768px) {
+    flex-basis: 25%;
+  }
+  @media (min-width: 992px) {
+    height: 200px;
+    flex-basis: 14.28571428571429%;
+  }
 `;
 
 const ArtistImage = styled.div`
@@ -27,17 +56,26 @@ const ArtistImage = styled.div`
   position: relative;
   transition: all 0.2s ease-in-out;
   &:hover {
-    // transform: scale(1.05);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 6px;
+`;
+
+const ArtistNameHover = styled.div`
+  position: absolute;
+  top: 0;
+  height: calc(100% - 32px);
+  width: calc(100% - 32px);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 1;
+  padding: 16px;
+  display: flex;
+  align-items: flex-end;
+  min-width: 0;
+  &:hover {
+    opacity: 1;
   }
 `;
 
@@ -45,10 +83,9 @@ const ArtistName = styled.h1`
   user-select: none;
   z-index: 1;
   color: #ffffff;
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Flex = styled.div`
@@ -59,53 +96,22 @@ const Flex = styled.div`
   align-items: ${({ alignCenter }) => (alignCenter ? 'center' : 'flex-start')};
 `;
 
-const TopArtistWrap = styled.div`
-  height: 400px;
-  flex-basis: 20%;
-  display: flex;
-  justify-content: center;
-`;
-
-const TopArtistImage = styled.div`
-  height: 100%;
-  width: calc(100% - 10px);
-  border-radius: 6px;
-  background-size: cover;
-  background-position: center top;
-  background-image: url(${({ image }) => image});
-  margin: ${({ topArtist }) => (topArtist ? '0px' : '5px')};
-  position: relative;
-  transition: all 0.2s ease-in-out;
-  &:hover {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  }
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 6px;
-  }
-`;
-
-const ArtistWrap = styled.div`
-  height: 200px;
-  flex-basis: 10%;
-  display: flex;
-  justify-content: center;
-`;
+const getViewport = (width) => {
+  if (width < 768) return 'mobile';
+  if (width < 992) return 'tablet';
+  return 'desktop';
+};
 
 const TopArtists = () => {
+  // Hooks
+  const { width: viewportWidth } = useWindowSize();
+
   // Local
   const [showAll, setShowAll] = useState(false);
 
   // Redux
-  const range = useSelector((state) => selectRange(state));
-  const allTime = useSelector((state) => selectTopAristsAllTime(state));
-  const halfYear = useSelector((state) => selectTopArtistsHalfYear(state));
-  const month = useSelector((state) => selectTopArtistsMonth(state));
+  const range = useSelector((state) => selectAristRange(state));
+  const artists = useSelector((state) => selectTopArtists(state));
 
   // Event handlers
   const handleShowAll = () => {
@@ -113,34 +119,41 @@ const TopArtists = () => {
   };
 
   // Constants
-  const artists = {
-    allTime,
-    halfYear,
-    month,
+  const sliceRange = {
+    mobile: 4,
+    tablet: 6,
+    desktop: 8,
   };
-
   const computedArtists = artists[range];
+  const computedSlice = sliceRange[getViewport(viewportWidth)];
 
   return (
     <section>
-      <Heading>Top Artists</Heading>
+      <Flex alignCenter style={{ marginBottom: 20 }} id="topArtistsContainer">
+        <Heading>Top Artists</Heading>
+        <RangeSelector type={CHANGE_ARTIST_DATE_RANGE} value="allTime" />
+      </Flex>
       <Flex>
         {computedArtists &&
-          computedArtists.slice(0, 5).map((a) => (
+          computedArtists.slice(0, computedSlice).map((a) => (
             <TopArtistWrap>
-              <TopArtistImage key={a.id} image={a.images[0].url} topArtist>
-                <ArtistName>{a.name}</ArtistName>
-              </TopArtistImage>
+              <ArtistImage key={a.id} image={a.images[0].url} topArtist>
+                <ArtistNameHover>
+                  <ArtistName>{a.name}</ArtistName>
+                </ArtistNameHover>
+              </ArtistImage>
             </TopArtistWrap>
           ))}
       </Flex>
       <SlideToggleContent isVisible={showAll}>
         <Flex>
           {computedArtists &&
-            computedArtists.slice(5).map((a) => (
+            computedArtists.slice(computedSlice).map((a) => (
               <ArtistWrap>
                 <ArtistImage key={a.id} image={a.images[0].url}>
-                  <ArtistName>{a.name}</ArtistName>
+                  <ArtistNameHover>
+                    <ArtistName>{a.name}</ArtistName>
+                  </ArtistNameHover>
                 </ArtistImage>
               </ArtistWrap>
             ))}

@@ -3,6 +3,7 @@ import * as types from './types';
 const initialState = {
   profile: null,
   range: 'allTime',
+  artistDateRange: 'allTime',
   topArtistsAllTime: null,
   topArtistsHalfYear: null,
   topArtistsMonth: null,
@@ -17,6 +18,12 @@ const appReducer = (state = initialState, action) => {
       return {
         ...state,
         profile: action.profile,
+      };
+
+    case types.CHANGE_ARTIST_DATE_RANGE:
+      return {
+        ...state,
+        artistDateRange: action.range,
       };
 
     case types.CHANGE_DATE_RANGE:
@@ -69,7 +76,10 @@ const appReducer = (state = initialState, action) => {
 export default appReducer;
 
 export const selectProfile = (state) => state.app.profile;
+export const selectAristRange = (state) => state.app.artistDateRange;
+
 export const selectRange = (state) => state.app.range;
+
 export const selectTopAristsAllTime = (state) => state.app.topArtistsAllTime;
 export const selectTopArtistsHalfYear = (state) => state.app.topArtistsHalfYear;
 export const selectTopArtistsMonth = (state) => state.app.topArtistsMonth;
