@@ -7,10 +7,11 @@ import { CHANGE_ARTIST_DATE_RANGE } from '../store/types';
 
 import SlideToggleContent from './SlideToggleContent';
 import Button from './Button';
-
-import { useWindowSize } from '../utils/hooks';
 import RangeSelector from './RangeSelector';
 import TopImage from './TopImage';
+
+import { useWindowSize } from '../utils/hooks';
+import { getViewportName } from '../utils/helpers';
 
 const Heading = styled.h1`
   font-size: 2rem;
@@ -25,12 +26,6 @@ const Flex = styled.div`
     justifyCenter ? 'center' : 'flex-start'};
   align-items: ${({ alignCenter }) => (alignCenter ? 'center' : 'flex-start')};
 `;
-
-const getViewport = (width) => {
-  if (width < 768) return 'mobile';
-  if (width < 992) return 'tablet';
-  return 'desktop';
-};
 
 const TopArtists = () => {
   // Hooks
@@ -55,20 +50,25 @@ const TopArtists = () => {
     desktop: 8,
   };
   const computedArtists = artists[range];
-  const computedSlice = sliceRange[getViewport(viewportWidth)];
+  const computedSlice = sliceRange[getViewportName(viewportWidth)];
 
   return (
     <section>
       <Flex alignCenter style={{ marginBottom: 20 }} id="topArtistsContainer">
         <Heading>Top Artists</Heading>
-        <RangeSelector type={CHANGE_ARTIST_DATE_RANGE} value="allTime" />
+        <RangeSelector type={CHANGE_ARTIST_DATE_RANGE} value={range} />
       </Flex>
       <Flex>
         {computedArtists &&
           computedArtists
             .slice(0, computedSlice)
             .map((a) => (
-              <TopImage featured image={a.images[0].url} label={a.name} />
+              <TopImage
+                key={a.id}
+                featured
+                image={a.images[0].url}
+                label={a.name}
+              />
             ))}
       </Flex>
       <SlideToggleContent isVisible={showAll}>
@@ -76,7 +76,9 @@ const TopArtists = () => {
           {computedArtists &&
             computedArtists
               .slice(computedSlice)
-              .map((a) => <TopImage image={a.images[0].url} label={a.name} />)}
+              .map((a) => (
+                <TopImage key={a.id} image={a.images[0].url} label={a.name} />
+              ))}
         </Flex>
       </SlideToggleContent>
       <Flex justifyCenter alignCenter style={{ marginTop: 20 }}>

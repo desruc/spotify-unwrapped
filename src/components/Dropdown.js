@@ -99,6 +99,7 @@ function Dropdown({ label, value, options, onSelect }) {
             const disabled = o.value === value;
             return (
               <DropdownItem
+                key={o.value}
                 value={o.value}
                 onClick={disabled ? null : (e) => handleItemClick(e, o.value)}
                 disabled={disabled}
@@ -117,7 +118,7 @@ Dropdown.propTypes = {
   label: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   options: PropTypes.arrayOf(
-    PropTypes.objectOf({
+    PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     })

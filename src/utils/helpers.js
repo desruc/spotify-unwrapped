@@ -72,3 +72,27 @@ export const getTrackWithArtist = (track) => {
       : artists[0].name;
   return `${computedArtists} - ${track.name}`;
 };
+
+export const getArtist = (data) => {
+  const { artists } = data;
+
+  const hasMultiple = artists.length > 1;
+
+  if (hasMultiple) {
+    let artistString = '';
+    artists.forEach((a, idx) => {
+      const atFinalIdx = idx === artists.length - 1;
+      if (!atFinalIdx) artistString += `${a.name} / `;
+      else artistString += a.name;
+    });
+    return artistString;
+  }
+
+  return artists[0].name;
+};
+
+export const getViewportName = (width) => {
+  if (width < 768) return 'mobile';
+  if (width < 992) return 'tablet';
+  return 'desktop';
+};
