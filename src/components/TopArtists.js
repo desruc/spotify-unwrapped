@@ -13,6 +13,10 @@ import TopImage from './TopImage';
 import { useWindowSize } from '../utils/hooks';
 import { getViewportName } from '../utils/helpers';
 
+const Section = styled.section`
+  margin: 60px 0px;
+`;
+
 const Heading = styled.h1`
   font-size: 2rem;
   margin: 0px;
@@ -25,6 +29,8 @@ const Flex = styled.div`
   justify-content: ${({ justifyCenter }) =>
     justifyCenter ? 'center' : 'flex-start'};
   align-items: ${({ alignCenter }) => (alignCenter ? 'center' : 'flex-start')};
+  ${({ mb }) => mb && `margin-bottom: ${mb}px`}
+  ${({ mt }) => mt && `margin-top: ${mt}px`}
 `;
 
 const TopArtists = () => {
@@ -53,8 +59,8 @@ const TopArtists = () => {
   const computedSlice = sliceRange[getViewportName(viewportWidth)];
 
   return (
-    <section>
-      <Flex alignCenter style={{ marginBottom: 20 }} id="topArtistsContainer">
+    <Section>
+      <Flex alignCenter mb={20}>
         <Heading>Top Artists</Heading>
         <RangeSelector type={CHANGE_ARTIST_DATE_RANGE} value={range} />
       </Flex>
@@ -81,12 +87,12 @@ const TopArtists = () => {
               ))}
         </Flex>
       </SlideToggleContent>
-      <Flex justifyCenter alignCenter style={{ marginTop: 20 }}>
+      <Flex justifyCenter alignCenter mt={20}>
         <Button onClick={handleShowAll}>
           {showAll ? 'Show less' : 'Show more'}
         </Button>
       </Flex>
-    </section>
+    </Section>
   );
 };
 

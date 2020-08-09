@@ -20,24 +20,45 @@ const Heading = styled.h1`
   flex: 1;
 `;
 
-const Column = styled.div`
-  width: 50%;
+const TopFiveWrap = styled.div`
+  width: 33.33333333333333%;
+`;
+
+const GenreHeading = styled.h3`
+  margin-top: 0px;
+  margin-bottom: 8px;
+`;
+
+const MoreGenresWrap = styled.div`
+  padding-left: 16px;
+  padding-right: 16px;
+  width: calc(66.66666666666667% - 32px);
 `;
 
 const Bar = styled.div`
   border-radius: 6px;
-  border: 1px solid #000000;
-  height: 50px;
+  border: 1px solid #eaeaea;
+  height: 40px;
   width: 100%;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin-bottom: 16px;
 `;
 
 const BarFill = styled.div`
-  width: ${({ width }) => `${width}%`};
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  width: ${({ width }) => width}%;
   height: 100%;
   border-radius: 6px;
   background-color: ${({ theme }) => theme.main};
   transition: width 0.2s ease-in-out;
+`;
+
+const Chip = styled.div`
+  padding: 8px 16px;
+  border-radius: 25px;
+  margin: 5px;
+  background-color: #eaeaea;
+  display: inline-block;
+  font-size: 12px;
 `;
 
 const TopGenres = () => {
@@ -56,7 +77,7 @@ const TopGenres = () => {
         <RangeSelector type={CHANGE_GENRE_DATE_RANGE} value={range} />
       </Flex>
       <Flex>
-        <Column>
+        <TopFiveWrap width={25}>
           {genres &&
             genres.slice(0, 5).map((g, idx) => {
               const [key, value] = g;
@@ -64,21 +85,21 @@ const TopGenres = () => {
               const fillwidth = idx === 0 ? 100 : (value / highestValue) * 100;
               return (
                 <div>
+                  <GenreHeading>{key}</GenreHeading>
                   <Bar>
                     <BarFill width={fillwidth} />
                   </Bar>
-                  <span>{key}</span>
                 </div>
               );
             })}
-        </Column>
-        <Column>
+        </TopFiveWrap>
+        <MoreGenresWrap width={75}>
           {genres &&
             genres.slice(5).map((g) => {
               const [key] = g;
-              return <span>{key}</span>;
+              return <Chip>{key}</Chip>;
             })}
-        </Column>
+        </MoreGenresWrap>
       </Flex>
     </Section>
   );

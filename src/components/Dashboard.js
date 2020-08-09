@@ -2,7 +2,7 @@ import React from 'react';
 
 import Container from './Container';
 
-import Overview from './Overview';
+import PageHeader from './PageHeader';
 import TopArtists from './TopArtists';
 import TopGenres from './TopGenres';
 import TopAlbums from './TopAlbums';
@@ -10,7 +10,7 @@ import TopAlbums from './TopAlbums';
 const Dashboard = () => {
   return (
     <Container>
-      <Overview />
+      <PageHeader>Dashboard</PageHeader>
       <TopArtists />
       <TopAlbums />
       <TopGenres />
