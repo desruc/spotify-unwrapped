@@ -3,15 +3,24 @@ import { Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import PageWrap from './PageWrap';
-import Menu from './Menu';
+import Navigation from './Navigation';
 
 import Dashboard from './Dashboard';
 
 import * as actions from '../store/actions';
 
+const Wrap = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+`;
+
 const MainView = styled.div`
   width: 100%;
+  @media (min-width: 992px) {
+    width: calc(100% - 268px);
+    margin-left: 268px;
+  }
 `;
 
 const AuthenticatedView = () => {
@@ -28,14 +37,14 @@ const AuthenticatedView = () => {
   }, []);
 
   return (
-    <PageWrap>
-      <Menu />
+    <Wrap>
+      <Navigation />
       <MainView>
         <Switch>
           <Route path={['/', '/dashboard']} component={Dashboard} />
         </Switch>
       </MainView>
-    </PageWrap>
+    </Wrap>
   );
 };
 

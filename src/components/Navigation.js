@@ -1,5 +1,6 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled, { ThemeContext } from 'styled-components';
+import { animated, useSpring } from 'react-spring';
 import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,14 +10,22 @@ import { clearTokens } from '../utils/tokenHelpers';
 import { getUserProfile } from '../store/actions';
 import { selectProfile } from '../store/reducer';
 
-const Container = styled.div`
-  width: 300px;
+import { useWindowSize } from '../utils/hooks';
+
+const MobileDrawer = styled(animated.div)`
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  height: 100%;
+  width: 220px;
   display: flex;
   flex-direction: column;
   padding-left: 24px;
   padding-right: 24px;
   padding-bottom: 48px;
-  @media (max-width: 768px) {
+  background-color: #ffffff;
+  @media (min-width: 992px) {
     display: none;
   }
 `;
@@ -56,7 +65,7 @@ const NavLink = styled(Link)`
 
 const NavList = styled.ul`
   margin: 20px 0px;
-  padding: 0;
+  padding: 16px;
   flex: 1;
   li {
     &:not(:last-child) {
@@ -89,20 +98,73 @@ const Profile = styled.div`
   padding: 16px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
-const Menu = () => {
+const MobileNavBar = styled.div`
+  @media (min-width: 992px) {
+    display: none;
+  }
+  padding: 20px 16px;
+  color: white;
+  background-color: red;
+  position: fixed;
+  width: calc(100% - 32px);
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+const DesktopDrawer = styled.div`
+  display: none;
+  @media (min-width: 992px) {
+    background-color: #ffffff;
+    position: fixed;
+    height: 100vh;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+const Navigation = () => {
+  // Hooks
   const themeContext = useContext(ThemeContext);
   const dispatch = useDispatch();
 
+  // Viewport
+  const { width: windowWidth } = useWindowSize();
+  const isDesktop = windowWidth >= 768;
+
+  // Local state
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Get user profile on mount
   useEffect(() => {
     dispatch(getUserProfile());
   }, []);
 
+  // Redux
   const profile = useSelector((state) => selectProfile(state));
 
-  return (
-    <Container>
+  // Lock body from scrolling when mobile menu open
+  useEffect(() => {
+    if (!isDesktop && isOpen) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = '';
+  }, [isDesktop, isOpen]);
+
+  // Slide animation
+  const animatedProps = useSpring({ left: isOpen ? 0 : -300 });
+
+  // Event handlers
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const drawerLinks = (
+    <>
       <Profile>
         <h2>
           Unwrapped
@@ -114,7 +176,7 @@ const Menu = () => {
           </ImageWrap>
         )}
         {profile && profile.display_name && (
-          <h3 style={{ marginBottom: 0 }}>Hello, {profile.display_name}!</h3>
+          <h3 style={{ marginBottom: 0, textAlign: 'center' }}>Hello, {profile.display_name}!</h3>
         )}
         {profile && profile.email && <small>{profile.email}</small>}
       </Profile>
@@ -122,12 +184,30 @@ const Menu = () => {
         <NavItem>
           <NavLink to="/dashboard">Dashboard</NavLink>
         </NavItem>
+        <NavItem>
+          <NavLink to="/recommendations">Recommendations</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/playlists">Playlists</NavLink>
+        </NavItem>
       </NavList>
       <Logout onClick={clearTokens} role="presentation">
         Logout
       </Logout>
-    </Container>
+    </>
+  );
+
+  return (
+    <>
+      <MobileNavBar>
+        <button onClick={toggleMenu} type="button">
+          Toggle
+        </button>
+      </MobileNavBar>
+      <MobileDrawer id="mobile-drawer" style={animatedProps}>{drawerLinks}</MobileDrawer>
+      <DesktopDrawer id="desktop-drawer">{drawerLinks}</DesktopDrawer>
+    </>
   );
 };
 
-export default Menu;
+export default Navigation;
