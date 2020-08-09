@@ -5,6 +5,7 @@ const initialState = {
   artistDateRange: 'allTime',
   albumDateRange: 'allTime',
   genreDateRange: 'allTime',
+  trackDateRange: 'allTime',
   recentlyPlayed: null,
   topArtistsAllTime: null,
   topArtistsHalfYear: null,
@@ -38,6 +39,12 @@ const appReducer = (state = initialState, action) => {
       return {
         ...state,
         genreDateRange: action.range,
+      };
+
+    case types.CHANGE_TRACK_DATE_RANGE:
+      return {
+        ...state,
+        trackDateRange: action.range,
       };
 
     case types.GET_TOP_ARTISTS_ALL_TIME_SUCCESS:
@@ -94,6 +101,7 @@ export const selectProfile = (state) => state.app.profile;
 export const selectAristRange = (state) => state.app.artistDateRange;
 export const selectAlbumRange = (state) => state.app.albumDateRange;
 export const selectGenreRange = (state) => state.app.genreDateRange;
+export const selectTrackRange = (state) => state.app.trackDateRange;
 
 export const selectTopAristsAllTime = (state) => state.app.topArtistsAllTime;
 export const selectTopArtistsHalfYear = (state) => state.app.topArtistsHalfYear;

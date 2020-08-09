@@ -10,6 +10,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
+  min-height: 57px;
   img {
     width: 100%;
     max-width: 100%;
