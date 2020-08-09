@@ -5,6 +5,7 @@ const initialState = {
   artistDateRange: 'allTime',
   albumDateRange: 'allTime',
   genreDateRange: 'allTime',
+  recentlyPlayed: null,
   topArtistsAllTime: null,
   topArtistsHalfYear: null,
   topArtistsMonth: null,
@@ -75,6 +76,12 @@ const appReducer = (state = initialState, action) => {
         topTracksMonth: action.tracks,
       };
 
+    case types.GET_RECENTLY_PLAYED_SUCCESS:
+      return {
+        ...state,
+        recentlyPlayed: action.recentlyPlayed,
+      };
+
     default:
       return state;
   }
@@ -83,27 +90,27 @@ const appReducer = (state = initialState, action) => {
 export default appReducer;
 
 export const selectProfile = (state) => state.app.profile;
+
 export const selectAristRange = (state) => state.app.artistDateRange;
 export const selectAlbumRange = (state) => state.app.albumDateRange;
 export const selectGenreRange = (state) => state.app.genreDateRange;
 
-export const selectRange = (state) => state.app.range;
-
 export const selectTopAristsAllTime = (state) => state.app.topArtistsAllTime;
 export const selectTopArtistsHalfYear = (state) => state.app.topArtistsHalfYear;
 export const selectTopArtistsMonth = (state) => state.app.topArtistsMonth;
+export const selectTopArtists = (state) => ({
+  allTime: state.app.topArtistsAllTime,
+  halfYear: state.app.topArtistsHalfYear,
+  month: state.app.topArtistsMonth,
+});
+
 export const selectTopTracksAllTime = (state) => state.app.topTracksAllTime;
 export const selectTopTracksHalfYear = (state) => state.app.topTracksHalfYear;
 export const selectTopTracksMonth = (state) => state.app.topTracksMonth;
-
 export const selectTopTracks = (state) => ({
   allTime: state.app.topTracksAllTime,
   halfYear: state.app.topTracksHalfYear,
   month: state.app.topTracksMonth,
 });
 
-export const selectTopArtists = (state) => ({
-  allTime: state.app.topArtistsAllTime,
-  halfYear: state.app.topArtistsHalfYear,
-  month: state.app.topArtistsMonth,
-});
+export const selectRecentlyPlayed = (state) => state.app.recentlyPlayed;

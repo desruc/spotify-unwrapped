@@ -24,6 +24,7 @@ const AuthenticatedView = () => {
     dispatch(actions.getAllTimeTracks());
     dispatch(actions.getHalfYearTracks());
     dispatch(actions.getMonthTracks());
+    dispatch(actions.getRecentlyPlayed());
   }, []);
 
   return (
