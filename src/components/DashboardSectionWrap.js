@@ -24,7 +24,7 @@ const Heading = styled.h1`
   @media (min-width: 768px) {
     margin: 0px;
     flex: 1;
-    line-height: 1;
+    ${({ showRange }) => showRange && 'line-height: 1'};
   }
 `;
 
@@ -35,7 +35,7 @@ const Container = styled.div`
   ${({ showRange }) => showRange && 'border-top-left-radius: 0px'};
   @media (min-width: 768px) {
     ${({ showRange }) => showRange && 'border-top-left-radius: 6px'};
-  } 
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -65,7 +65,7 @@ const DashboardSectionWrap = ({
 }) => (
   <Section id={id}>
     <TitleWrap>
-      <Heading>{heading}</Heading>
+      <Heading showRange={showRange}>{heading}</Heading>
       {showRange && actionType && selectedRange && (
         <RangeTabs actionType={actionType} selected={selectedRange} />
       )}
@@ -92,7 +92,7 @@ DashboardSectionWrap.propTypes = {
 DashboardSectionWrap.defaultProps = {
   id: '',
   heading: '',
-  showRange: '',
+  showRange: false,
   actionType: '',
   selectedRange: '',
   seeMoreLink: '',

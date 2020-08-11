@@ -3,7 +3,7 @@ import React from 'react';
 import Container from './Container';
 
 import PageHeader from './PageHeader';
-import RecentlyListened from './RecentlyListened';
+import RecentlyPlayed from './RecentlyPlayed';
 import TopTracks from './TopTracks';
 import TopArtists from './TopArtists';
 import TopGenres from './TopGenres';
@@ -13,7 +13,7 @@ const Dashboard = () => {
   return (
     <Container>
       <PageHeader>Dashboard</PageHeader>
-      <RecentlyListened />
+      <RecentlyPlayed />
       <TopTracks />
       <TopArtists />
       <TopAlbums />

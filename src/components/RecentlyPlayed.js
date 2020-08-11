@@ -16,6 +16,10 @@ const List = styled.ul`
   }
 `;
 
+const Wrap = styled.div`
+  padding: 16px;
+`;
+
 const RecentlyPlayed = () => {
   // Redux
   const recentlyPlayed = useSelector((state) => selectRecentlyPlayed(state));
@@ -26,12 +30,14 @@ const RecentlyPlayed = () => {
       heading="Recently Played"
       seeMoreLink="/recently-played"
     >
-      <List>
-        {recentlyPlayed &&
-          recentlyPlayed
-            .slice(0, 10)
-            .map(({ track }) => <Track key={track.id} track={track} />)}
-      </List>
+      <Wrap>
+        <List>
+          {recentlyPlayed &&
+            recentlyPlayed
+              .slice(0, 10)
+              .map(({ track }) => <Track key={track.id} track={track} />)}
+        </List>
+      </Wrap>
     </DashboardSectionWrap>
   );
 };

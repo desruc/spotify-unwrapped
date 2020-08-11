@@ -3,22 +3,12 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import Flex from './Flex';
-import RangeSelector from './RangeSelector';
+import DashboardSectionWrap from './DashboardSectionWrap';
 
 import { CHANGE_GENRE_DATE_RANGE } from '../store/types';
 import { selectGenreRange, selectTopArtists } from '../store/reducer';
 
 import { getTopGenres } from '../utils/helpers';
-
-const Section = styled.section`
-  margin: 60px 0px;
-`;
-
-const Heading = styled.h1`
-  font-size: 2rem;
-  margin: 0px;
-  flex: 1;
-`;
 
 const TopFiveWrap = styled.div`
   width: 33.33333333333333%;
@@ -71,11 +61,13 @@ const TopGenres = () => {
   const genres = getTopGenres(computedArtists);
 
   return (
-    <Section>
-      <Flex alignCenter mb={20}>
-        <Heading>Top Genres</Heading>
-        <RangeSelector type={CHANGE_GENRE_DATE_RANGE} value={range} />
-      </Flex>
+    <DashboardSectionWrap
+      id="top-genres"
+      heading="Top Genres"
+      showRange
+      actionType={CHANGE_GENRE_DATE_RANGE}
+      selectedRange={range}
+    >
       <Flex>
         <TopFiveWrap width={25}>
           {genres &&
@@ -101,7 +93,7 @@ const TopGenres = () => {
             })}
         </MoreGenresWrap>
       </Flex>
-    </Section>
+    </DashboardSectionWrap>
   );
 };
 
