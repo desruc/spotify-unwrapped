@@ -16,11 +16,7 @@ const Wrap = styled.div`
 `;
 
 const MainView = styled.div`
-  width: 100%;
-  @media (min-width: 992px) {
-    width: calc(100% - 268px);
-    margin-left: 268px;
-  }
+  flex: 1;
 `;
 
 const AuthenticatedView = () => {

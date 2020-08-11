@@ -12,6 +12,8 @@ import { selectProfile } from '../store/reducer';
 
 import { useWindowSize } from '../utils/hooks';
 
+import mixins from '../styles/mixins';
+
 const MobileDrawer = styled(animated.div)`
   position: fixed;
   left: 0;
@@ -117,8 +119,22 @@ const MobileNavBar = styled.div`
   align-items: center;
 `;
 
+const Email = styled.h5`
+  ${mixins.overflowEllipsis}
+  font-size: 12px;
+`;
+
+const DesktopDrawerWrap = styled.div`
+  display: none;
+  width: 220px;
+  @media (min-width: 992px) {
+    display: block;
+  }
+`;
+
 const DesktopDrawer = styled.div`
   display: none;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   @media (min-width: 992px) {
     background-color: #ffffff;
     position: fixed;
@@ -176,9 +192,11 @@ const Navigation = () => {
           </ImageWrap>
         )}
         {profile && profile.display_name && (
-          <h3 style={{ marginBottom: 0, textAlign: 'center' }}>Hello, {profile.display_name}!</h3>
+          <h3 style={{ marginBottom: 0, textAlign: 'center' }}>
+            Hello, {profile.display_name}!
+          </h3>
         )}
-        {profile && profile.email && <small>{profile.email}</small>}
+        {profile && profile.email && <Email>{profile.email}</Email>}
       </Profile>
       <NavList>
         <NavItem>
@@ -204,8 +222,12 @@ const Navigation = () => {
           Toggle
         </button>
       </MobileNavBar>
-      <MobileDrawer id="mobile-drawer" style={animatedProps}>{drawerLinks}</MobileDrawer>
-      <DesktopDrawer id="desktop-drawer">{drawerLinks}</DesktopDrawer>
+      <MobileDrawer id="mobile-drawer" style={animatedProps}>
+        {drawerLinks}
+      </MobileDrawer>
+      <DesktopDrawerWrap>
+        <DesktopDrawer id="desktop-drawer">{drawerLinks}</DesktopDrawer>
+      </DesktopDrawerWrap>
     </>
   );
 };
