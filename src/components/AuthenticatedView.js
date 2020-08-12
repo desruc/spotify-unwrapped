@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import Navigation from './Navigation';
 
-import TopTracksPage from './TopTracksPage';
+import TopTracks from './TopTracks';
 import Dashboard from './Dashboard';
 
 import * as actions from '../store/actions';
@@ -38,7 +38,7 @@ const AuthenticatedView = () => {
       <Navigation />
       <MainView>
         <Switch>
-          <Route exact path="/top-tracks" component={TopTracksPage} />
+          <Route exact path="/top-tracks" component={TopTracks} />
           <Route path={['/', '/dashboard']} component={Dashboard} />
         </Switch>
       </MainView>

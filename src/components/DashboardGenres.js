@@ -51,7 +51,7 @@ const Chip = styled.div`
   font-size: 12px;
 `;
 
-const TopGenres = () => {
+const DashboardGenres = () => {
   // Redux
   const range = useSelector((state) => selectGenreRange(state));
   const artists = useSelector((state) => selectTopArtists(state));
@@ -97,4 +97,4 @@ const TopGenres = () => {
   );
 };
 
-export default TopGenres;
+export default DashboardGenres;

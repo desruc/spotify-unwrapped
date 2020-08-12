@@ -81,7 +81,7 @@ const MobileLabel = styled.div`
   }
 `;
 
-const TopImage = ({ image, label, featured }) => (
+const FeatureImage = ({ image, label, featured }) => (
   <ContentWrap featured={featured}>
     <ImageWrap featured={featured}>
       <Image image={image}>
@@ -94,14 +94,14 @@ const TopImage = ({ image, label, featured }) => (
   </ContentWrap>
 );
 
-TopImage.propTypes = {
+FeatureImage.propTypes = {
   image: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   featured: PropTypes.bool,
 };
 
-TopImage.defaultProps = {
+FeatureImage.defaultProps = {
   featured: false,
 };
 
-export default TopImage;
+export default FeatureImage;

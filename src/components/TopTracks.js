@@ -3,9 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { selectTopTracks, selectTrackRange } from '../store/reducer';
-import { CHANGE_TRACK_DATE_RANGE } from '../store/types';
 
-import DashboardSectionWrap from './DashboardSectionWrap';
 import Track from './Track';
 
 const List = styled.ul`
@@ -18,7 +16,7 @@ const List = styled.ul`
   }
 `;
 
-const TopTracks = () => {
+const TopTracksPage = () => {
   // Redux
   const range = useSelector((state) => selectTrackRange(state));
   const tracks = useSelector((state) => selectTopTracks(state));
@@ -27,22 +25,11 @@ const TopTracks = () => {
   const computedTracks = tracks[range];
 
   return (
-    <DashboardSectionWrap
-      id="top-tracks"
-      heading="Top Tracks"
-      showRange
-      actionType={CHANGE_TRACK_DATE_RANGE}
-      selectedRange={range}
-      seeMoreLink="/top-tracks"
-    >
-      <List>
-        {computedTracks &&
-          computedTracks
-            .slice(0, 10)
-            .map((track) => <Track key={track.id} track={track} />)}
-      </List>
-    </DashboardSectionWrap>
+    <List>
+      {computedTracks &&
+        computedTracks.map((track) => <Track key={track.id} track={track} />)}
+    </List>
   );
 };
 
-export default TopTracks;
+export default TopTracksPage;

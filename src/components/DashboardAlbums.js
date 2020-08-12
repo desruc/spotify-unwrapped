@@ -6,13 +6,13 @@ import { CHANGE_ALBUM_DATE_RANGE } from '../store/types';
 
 import DashboardSectionWrap from './DashboardSectionWrap';
 import Flex from './Flex';
-import TopImage from './TopImage';
+import FeatureImage from './FeatureImage';
 
 import { useWindowSize } from '../utils/hooks';
 
 import { getTopAlbums, getViewportName, getArtist } from '../utils/helpers';
 
-const TopAlbums = () => {
+const DashboardAlbums = () => {
   // Hooks
   const { width: viewportWidth } = useWindowSize();
 
@@ -44,7 +44,7 @@ const TopAlbums = () => {
             const artist = getArtist(a[0]);
             const albumTitle = a[0].name;
             return (
-              <TopImage
+              <FeatureImage
                 key={a[0].id}
                 featured
                 image={a[0].images[0].url}
@@ -57,4 +57,4 @@ const TopAlbums = () => {
   );
 };
 
-export default TopAlbums;
+export default DashboardAlbums;

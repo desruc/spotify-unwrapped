@@ -6,12 +6,12 @@ import { CHANGE_ARTIST_DATE_RANGE } from '../store/types';
 
 import DashboardSectionWrap from './DashboardSectionWrap';
 import Flex from './Flex';
-import TopImage from './TopImage';
+import FeatureImage from './FeatureImage';
 
 import { useWindowSize } from '../utils/hooks';
 import { getViewportName } from '../utils/helpers';
 
-const TopArtists = () => {
+const DashboardArtists = () => {
   // Hooks
   const { width: viewportWidth } = useWindowSize();
 
@@ -42,7 +42,7 @@ const TopArtists = () => {
           computedArtists
             .slice(0, computedSlice)
             .map((a) => (
-              <TopImage
+              <FeatureImage
                 key={a.id}
                 featured
                 image={a.images[0].url}
@@ -54,4 +54,4 @@ const TopArtists = () => {
   );
 };
 
-export default TopArtists;
+export default DashboardArtists;
