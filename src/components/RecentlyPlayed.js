@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { selectTopTracks, selectTrackRange } from '../store/reducer';
+import { selectRecentlyPlayed } from '../store/reducer';
 
 import Container from './Container';
 import PageHeader from './PageHeader';
@@ -18,25 +18,21 @@ const List = styled.ul`
   }
 `;
 
-const TopTracksPage = () => {
+const RecentlyPlayed = () => {
   // Redux
-  const range = useSelector((state) => selectTrackRange(state));
-  const tracks = useSelector((state) => selectTopTracks(state));
-
-  // Constants
-  const computedTracks = tracks[range];
+  const tracks = useSelector((state) => selectRecentlyPlayed(state));
 
   return (
     <main>
       <Container>
-        <PageHeader>Top Tracks</PageHeader>
+        <PageHeader>Recently Played</PageHeader>
       </Container>
       <List>
-        {computedTracks &&
-          computedTracks.map((track) => <Track key={track.id} track={track} />)}
+        {tracks &&
+          tracks.map(({ track }) => <Track key={track.id} track={track} />)}
       </List>
     </main>
   );
 };
 
-export default TopTracksPage;
+export default RecentlyPlayed;
