@@ -5,7 +5,13 @@ import styled from 'styled-components';
 
 import { formatDuration } from '../utils/helpers';
 
+const ListItem = styled.li`
+  display: flex;
+  justify-content: center;
+`;
+
 const Container = styled.div`
+  flex: 1;
   max-width: 700px;
   display: grid;
   grid-template-columns: auto 1fr;
@@ -31,7 +37,7 @@ const MetaLeft = styled.span`
 `;
 
 const Artwork = styled.div`
-  display: inline-block;
+  display: flex;
   position: relative;
   width: 50px;
   min-width: 50px;
@@ -57,7 +63,7 @@ const Album = styled.div`
 
 const Track = ({ track }) => {
   return (
-    <li>
+    <ListItem>
       <Container>
         <div>
           <Artwork>
@@ -94,7 +100,7 @@ const Track = ({ track }) => {
           </span>
         </Meta>
       </Container>
-    </li>
+    </ListItem>
   );
 };
 
