@@ -203,10 +203,19 @@ const Navigation = () => {
           <NavLink to="/dashboard">Dashboard</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/recommendations">Recommendations</NavLink>
+          <NavLink to="/top-artists">Top Artists</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/top-albums">Top Albums</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/top-tracks">Top Tracks</NavLink>
         </NavItem>
         <NavItem>
           <NavLink to="/playlists">Playlists</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/recommendations">Recommendations</NavLink>
         </NavItem>
       </NavList>
       <Logout onClick={clearTokens} role="presentation">

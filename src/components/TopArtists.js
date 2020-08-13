@@ -1,22 +1,24 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectTopArtists, selectTrackRange } from '../store/reducer';
+import { selectTopArtists, selectAristRange } from '../store/reducer';
 
 import Container from './Container';
 import PageHeader from './PageHeader';
+import RangeTabs from './RangeTabs';
 import Flex from './Flex';
 import FeatureImage from './FeatureImage';
 
 import { useWindowSize } from '../utils/hooks';
 import { getViewportName } from '../utils/helpers';
+import { CHANGE_ARTIST_DATE_RANGE } from '../store/types';
 
 const TopArtists = () => {
   // Hooks
   const { width: viewportWidth } = useWindowSize();
 
   // Redux
-  const range = useSelector((state) => selectTrackRange(state));
+  const range = useSelector((state) => selectAristRange(state));
   const artists = useSelector((state) => selectTopArtists(state));
 
   // Constants
@@ -28,10 +30,14 @@ const TopArtists = () => {
   const computedArtists = artists[range];
   const computedSlice = sliceRange[getViewportName(viewportWidth)];
 
+  const headerActions = (
+    <RangeTabs actionType={CHANGE_ARTIST_DATE_RANGE} selected={range} />
+  );
+
   return (
     <main>
       <Container>
-        <PageHeader>Top Artists</PageHeader>
+        <PageHeader heading="Top Artists" actions={headerActions} />
         <Flex>
           {computedArtists &&
             computedArtists

@@ -11,7 +11,7 @@ import DashboardAlbums from './DashboardAlbums';
 const Dashboard = () => {
   return (
     <Container>
-      <PageHeader>Dashboard</PageHeader>
+      <PageHeader heading="Dashboard" />
       <DashboardTracks />
       <DashboardArtists />
       <DashboardAlbums />

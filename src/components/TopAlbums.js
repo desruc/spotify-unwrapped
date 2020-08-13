@@ -6,6 +6,7 @@ import { CHANGE_ALBUM_DATE_RANGE } from '../store/types';
 
 import Container from './Container';
 import PageHeader from './PageHeader';
+import RangeTabs from './RangeTabs';
 import Flex from './Flex';
 import FeatureImage from './FeatureImage';
 
@@ -29,10 +30,14 @@ const TopAlbums = () => {
   const computedAlbums = getTopAlbums(tracks[range]);
   const computedSlice = sliceRange[getViewportName(viewportWidth)];
 
+  const headerActions = (
+    <RangeTabs actionType={CHANGE_ALBUM_DATE_RANGE} selected={range} />
+  );
+
   return (
     <main>
       <Container>
-        <PageHeader>Top Albums</PageHeader>
+        <PageHeader heading="Top Albums" actions={headerActions} />
         <Flex>
           {computedAlbums &&
             computedAlbums.slice(0, computedSlice).map((a) => {

@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { selectTopTracks, selectTrackRange } from '../store/reducer';
+import { CHANGE_TRACK_DATE_RANGE } from '../store/types';
 
 import Container from './Container';
 import PageHeader from './PageHeader';
+import RangeTabs from './RangeTabs';
 import Track from './Track';
 
 const List = styled.ul`
@@ -26,10 +28,14 @@ const TopTracksPage = () => {
   // Constants
   const computedTracks = tracks[range];
 
+  const headerActions = (
+    <RangeTabs actionType={CHANGE_TRACK_DATE_RANGE} selected={range} />
+  );
+
   return (
     <main>
       <Container>
-        <PageHeader>Top Tracks</PageHeader>
+        <PageHeader heading="Top Tracks" actions={headerActions} />
       </Container>
       <List>
         {computedTracks &&

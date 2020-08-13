@@ -67,7 +67,7 @@ const DashboardSectionWrap = ({
     <TitleWrap>
       <Heading showRange={showRange}>{heading}</Heading>
       {showRange && actionType && selectedRange && (
-        <RangeTabs actionType={actionType} selected={selectedRange} />
+        <RangeTabs actionType={actionType} selected={selectedRange} folderStyle />
       )}
     </TitleWrap>
     <Container showRange={showRange}>{children}</Container>
