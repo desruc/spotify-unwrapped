@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 
 import { selectTopArtists, selectAristRange } from '../store/reducer';
 
-import Container from './Container';
-import PageHeader from './PageHeader';
-import RangeTabs from './RangeTabs';
-import Flex from './Flex';
-import FeatureImage from './FeatureImage';
+import Container from '../components/Container';
+import PageHeader from '../components/PageHeader';
+import RangeTabs from '../components/RangeTabs';
+import Flex from '../components/Flex';
+import FeatureImage from '../components/FeatureImage';
 
 import { useWindowSize } from '../utils/hooks';
 import { getViewportName } from '../utils/helpers';

@@ -3,10 +3,10 @@ import { Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import Flex from './Flex';
-import Navigation from './Navigation';
+import Flex from '../components/Flex';
+import Navigation from '../components/Navigation';
 
-import RecentlyPlayed from './RecentlyPlayed';
+import RecentlyPlayed from '../components/RecentlyPlayed';
 import TopArtists from './TopArtists';
 import TopAlbums from './TopAlbums';
 import TopTracks from './TopTracks';
