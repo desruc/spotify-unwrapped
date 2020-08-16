@@ -10,7 +10,7 @@ const Heading = styled.h1`
 `;
 
 const PageHeader = ({ heading, actions }) => (
-  <Flex mt={40} mb={40} alignCenter>
+  <Flex mt={40} mb={40} align="center">
     <Heading>{heading}</Heading>
     {actions}
   </Flex>

@@ -16,8 +16,12 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     background-color: ${(props) => props.theme.background};
+    color: ${(props) => props.theme.text};
     font-family: Poppins;
-  }
+    h1, h2, h3, h4, h5, h6 {
+      color: ${(props) => props.theme.heading};
+    }
+  },
 `;
 
 ReactDOM.render(

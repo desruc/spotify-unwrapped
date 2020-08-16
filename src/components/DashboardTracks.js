@@ -13,17 +13,23 @@ import {
 import { CHANGE_TRACK_DATE_RANGE } from '../store/types';
 
 const Section = styled.section`
-  margin: 60px 0px;
   display: flex;
+  flex-wrap: wrap;
 `;
 
 const RecentlyPlayedWrap = styled.div`
-  width: 25%;
+  width: 100%;
   padding-right: 16px;
+  @media (min-width: 992px) {
+    width: calc(25% - 16px);
+  }
 `;
 
 const TopTracksWrap = styled.div`
-  width: 75%;
+  width: 100%;
+  @media (min-width: 992px) {
+    width: 75%
+  }
 `;
 
 const List = styled.ul`
@@ -74,12 +80,14 @@ const DashboardTracks = () => {
           selectedRange={range}
           seeMoreLink="/top-tracks"
         >
-          <List twoColumns>
-            {computedTracks &&
-              computedTracks
-                .slice(0, 10)
-                .map((track) => <Track key={track.id} track={track} />)}
-          </List>
+          <Wrap>
+            <List twoColumns>
+              {computedTracks &&
+                computedTracks
+                  .slice(0, 10)
+                  .map((track) => <Track key={track.id} track={track} />)}
+            </List>
+          </Wrap>
         </DashboardSectionWrap>
       </TopTracksWrap>
     </Section>

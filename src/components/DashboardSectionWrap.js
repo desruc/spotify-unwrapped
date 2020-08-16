@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { MdTrendingFlat } from 'react-icons/md';
 
 import Flex from './Flex';
 import RangeTabs from './RangeTabs';
@@ -11,25 +12,26 @@ const Section = styled.section`
 `;
 
 const TitleWrap = styled.div`
+  margin-bottom: 16px;
   @media (min-width: 768px) {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
   }
 `;
 
-const Heading = styled.h1`
+const Heading = styled.h2`
   font-size: 2rem;
   margin: 0px;
   margin-bottom: 16px;
   @media (min-width: 768px) {
-    margin: 0px;
     flex: 1;
-    ${({ showRange }) => showRange && 'line-height: 1'};
+    margin: 0;
   }
 `;
 
 const Container = styled.div`
-  background-color: #eaeaea;
+  background-color: ${({ theme }) => theme.cardBackground};
   border-radius: 6px;
   ${({ showRange }) => showRange && 'border-top-right-radius: 0px'};
   ${({ showRange }) => showRange && 'border-top-left-radius: 0px'};
@@ -39,18 +41,19 @@ const Container = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  text-decoration: none;
   width: fit-content;
-  padding: 8px 16px;
-  border-radius: 25px;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.2s ease-in-out;
   cursor: pointer;
   font-weight: 600;
-  display: block;
+  display: flex;
   text-decoration: none !important;
+  align-items: center;
+  color: ${({ theme }) => theme.text};
   &:hover {
-    background-color: #ffffff;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    color: ${({ theme }) => theme.main};
+  }
+  svg {
+    margin-left: 5px;
   }
 `;
 
@@ -67,13 +70,15 @@ const DashboardSectionWrap = ({
     <TitleWrap>
       <Heading showRange={showRange}>{heading}</Heading>
       {showRange && actionType && selectedRange && (
-        <RangeTabs actionType={actionType} selected={selectedRange} folderStyle />
+        <RangeTabs actionType={actionType} selected={selectedRange} />
       )}
     </TitleWrap>
     <Container showRange={showRange}>{children}</Container>
     {seeMoreLink && (
-      <Flex justifyCenter alignCenter mt={20}>
-        <StyledLink to={seeMoreLink}>See more</StyledLink>
+      <Flex align="center" justify="flex-end" mt={20}>
+        <StyledLink to={seeMoreLink}>
+          See more <MdTrendingFlat />
+        </StyledLink>
       </Flex>
     )}
   </Section>

@@ -47,9 +47,12 @@ const Artwork = styled.div`
 const TrackName = styled.span`
   margin-bottom: 5px;
   border-bottom: 1px solid transparent;
+  color: ${({ theme }) => theme.heading};
+  user-select: none;
+  cursor: pointer;
   &:hover,
   &:focus {
-    border-bottom: 1px solid #ffffff;
+    border-bottom: 1px solid ${({ theme }) => theme.tertiary};
   }
 `;
 
@@ -58,6 +61,12 @@ const Album = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   padding-right: 1px;
+  font-size: 12px;
+`;
+
+const Duration = styled.span`
+  display: flex;
+  align-items: center;
   font-size: 12px;
 `;
 
@@ -93,11 +102,11 @@ const Track = ({ track }) => {
               </Album>
             )}
           </MetaLeft>
-          <span>
+          <Duration>
             {track.duration_ms && (
               <span>{formatDuration(track.duration_ms)}</span>
             )}
-          </span>
+          </Duration>
         </Meta>
       </Container>
     </ListItem>

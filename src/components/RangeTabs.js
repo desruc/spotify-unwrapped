@@ -5,43 +5,20 @@ import styled from 'styled-components';
 
 import Flex from './Flex';
 
-const FolderTab = styled.div`
-  cursor: pointer;
-  padding: 10px;
-  background-color: #eaeaea;
-  border-top-right-radius: 6px;
-  border-top-left-radius: 6px;
-  user-select: none;
-  color: ${({ selected, theme }) => (selected ? theme.main : '#000000')};
-  font-weight: ${({ selected }) => (selected ? '600' : '400')};
-  background-color: ${({ selected }) => (selected ? 'orange' : '#eaeaea')};
-  font-size: 14px;
-  flex-basis: calc(33.33333333333333% - 20px);
-  height: 42px;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  @media (min-width: 768px) {
-    height: auto;
-    flex-basis: auto;
-    font-size: 16px;
-  }
-`;
-
 const Tab = styled.div`
   cursor: pointer;
   margin: 5px;
   user-select: none;
-  height: 42px;
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
-  color: ${({ selected, theme }) => (selected ? theme.main : '#000000')};
+  transition: all 0.2s ease-in-out;
+  color: ${({ selected, theme }) => (selected ? theme.heading : theme.text)};
+  ${({ selected, theme }) => selected && `border-bottom: 1px solid ${theme.tertiary};`};
 `;
 
-const RangeTabs = ({ actionType, selected, folderStyle }) => {
+const RangeTabs = ({ actionType, selected }) => {
   // Hooks
   const dispatch = useDispatch();
 
@@ -58,40 +35,24 @@ const RangeTabs = ({ actionType, selected, folderStyle }) => {
   const isSixMonths = selected === 'halfYear';
   const isMonth = selected === 'month';
 
-  const ComputedComponent = folderStyle ? FolderTab : Tab;
-
   return (
     <Flex>
-      <ComputedComponent
-        onClick={() => handleClick('allTime')}
-        selected={isAllTime}
-      >
+      <Tab onClick={() => handleClick('allTime')} selected={isAllTime}>
         All Time
-      </ComputedComponent>
-      <ComputedComponent
-        onClick={() => handleClick('halfYear')}
-        selected={isSixMonths}
-      >
+      </Tab>
+      <Tab onClick={() => handleClick('halfYear')} selected={isSixMonths}>
         Past Six Months
-      </ComputedComponent>
-      <ComputedComponent
-        onClick={() => handleClick('month')}
-        selected={isMonth}
-      >
+      </Tab>
+      <Tab onClick={() => handleClick('month')} selected={isMonth}>
         Past Month
-      </ComputedComponent>
+      </Tab>
     </Flex>
   );
 };
 
 RangeTabs.propTypes = {
   actionType: PropTypes.string.isRequired,
-  selected: PropTypes.string.isRequired,
-  folderStyle: PropTypes.bool,
-};
-
-RangeTabs.defaultProps = {
-  folderStyle: false,
+  selected: PropTypes.string.isRequired
 };
 
 export default RangeTabs;
