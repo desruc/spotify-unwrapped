@@ -15,6 +15,7 @@ const ListItem = styled.li`
 `;
 
 const Container = styled.div`
+  cursor: pointer;
   flex: 1;
   max-width: 700px;
   display: grid;
@@ -48,10 +49,21 @@ const Artwork = styled.div`
   margin-right: 20px;
 `;
 
-const TrackName = styled.a`
+const TrackName = styled.span`
   margin-bottom: 5px;
   border-bottom: 1px solid transparent;
   color: ${({ theme }) => theme.heading};
+  user-select: none;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    border-bottom: 1px solid ${({ theme }) => theme.tertiary};
+  }
+`;
+
+const MetaText = styled.span`
+  border-bottom: 1px solid transparent;
+  color: ${({ theme }) => theme.text};
   user-select: none;
   cursor: pointer;
   &:hover,
@@ -75,19 +87,33 @@ const Duration = styled.span`
 `;
 
 const Track = ({ track }) => {
+  console.log('Track -> track', track);
   // Hooks
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const onClickTrack = (selectedTrack) => {
-    const { id } = selectedTrack;
-    dispatch({ type: SET_SELECTED_TRACK, track: selectedTrack });
+  const onClickTrack = (e) => {
+    e.stopPropagation();
+    const { id } = track;
+    dispatch({ type: SET_SELECTED_TRACK, track });
     history.push(`/track/${id}`);
+  };
+
+  const onClickArtist = (e, artist) => {
+    e.stopPropagation();
+    const { id } = artist;
+    history.push(`/artist/${id}`);
+  };
+
+  const onClickAlbum = (e) => {
+    e.stopPropagation();
+    const { album: { id } } = track;
+    history.push(`/album/${id}`);
   };
 
   return (
     <ListItem>
-      <Container>
+      <Container onClick={onClickTrack}>
         <div>
           <Artwork>
             {track.album.images.length && (
@@ -98,25 +124,26 @@ const Track = ({ track }) => {
         <Meta>
           <MetaLeft>
             {track.name && (
-              <TrackName onClick={() => onClickTrack(track)}>
-                {track.name}
-              </TrackName>
+              <TrackName onClick={onClickTrack}>{track.name}</TrackName>
             )}
             {track.artists && track.album && (
               <Album>
                 {track.artists &&
-                  track.artists.map(({ name, id }, i) => (
-                    <span key={id}>
-                      {name}
+                  track.artists.map((artist, i) => (
+                    <MetaText
+                      key={artist.id}
+                      onClick={(e) => onClickArtist(e, artist)}
+                    >
+                      {artist.name}
                       {track.artists.length > 0 &&
                       i === track.artists.length - 1
                         ? ''
                         : ','}
                       &nbsp;
-                    </span>
+                    </MetaText>
                   ))}
                 &nbsp;&middot;&nbsp;&nbsp;
-                {track.album.name}
+                <MetaText onClick={onClickAlbum}>{track.album.name}</MetaText>
               </Album>
             )}
           </MetaLeft>

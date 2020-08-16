@@ -21,7 +21,7 @@ const TrackDetails = () => {
     }
   }, [trackId]);
 
-  return <PageHeader />;
+  return <PageHeader heading="Track details" />;
 };
 
 export default TrackDetails;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { selectAristRange, selectTopArtists } from '../store/reducer';
 import { CHANGE_ARTIST_DATE_RANGE } from '../store/types';
@@ -14,10 +15,17 @@ import { getViewportName } from '../utils/helpers';
 const DashboardArtists = () => {
   // Hooks
   const { width: viewportWidth } = useWindowSize();
+  const history = useHistory();
 
   // Redux
   const range = useSelector((state) => selectAristRange(state));
   const artists = useSelector((state) => selectTopArtists(state));
+
+  // Event handlers
+  const onArtistClick = (artist) => {
+    const { id } = artist;
+    history.push(`/artist/${id}`);
+  };
 
   // Constants
   const sliceRange = {
@@ -46,7 +54,8 @@ const DashboardArtists = () => {
                 key={a.id}
                 featured
                 image={a.images[0].url}
-                label={a.name}
+                artist={a.name}
+                onClick={() => onArtistClick(a)}
               />
             ))}
       </Flex>

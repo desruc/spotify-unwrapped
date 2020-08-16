@@ -7,12 +7,23 @@ import Flex from './Flex';
 const Heading = styled.h1`
   flex: 1;
   font-size: 3.5rem;
+  margin-bottom: 16px;
+  @media (min-width: 992px) {
+    margin-bottom: 0.67em;
+  }
+`;
+
+const ActionsWrap = styled.div`
+  margin-bottom: 16px;
+  @media (min-width: 992px) {
+    margin-bottom: 0;
+  }
 `;
 
 const PageHeader = ({ heading, actions }) => (
   <Flex mt={40} mb={40} align="center">
     <Heading>{heading}</Heading>
-    {actions}
+    <ActionsWrap>{actions}</ActionsWrap>
   </Flex>
 );
 

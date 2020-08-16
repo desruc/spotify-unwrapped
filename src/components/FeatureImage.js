@@ -28,6 +28,7 @@ const ImageWrap = styled.div`
 `;
 
 const Image = styled.div`
+  cursor: pointer;
   height: calc(100% - 10px);
   width: calc(100% - 10px);
   border-radius: 6px;
@@ -45,7 +46,6 @@ const Image = styled.div`
 const HoverContent = styled.div`
   display: none;
   @media (min-width: 992px) {
-    display: block;
     position: absolute;
     top: 0;
     height: calc(100% - 32px);
@@ -57,51 +57,96 @@ const HoverContent = styled.div`
     z-index: 1;
     padding: 16px;
     display: flex;
-    align-items: flex-end;
+    justify-content: flex-end;
     min-width: 0;
+    flex-direction: column;
     &:hover {
       opacity: 1;
     }
   }
 `;
 
-const Label = styled.h1`
+const Title = styled.h2`
   user-select: none;
   z-index: 1;
-  color: #ffffff;
+  color: ${({ theme }) => theme.heading};
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
 
-const MobileLabel = styled.div`
+const SubTitle = styled.h3`
+  user-select: none;
+  z-index: 1;
+  color: ${({ theme }) => theme.tertiary};
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const ArtistMobileLabel = styled.h6`
   text-align: center;
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: ${({ isArtist }) => (isArtist ? 16 : 12)}px;
+  padding: 0px 8px;
+  color: ${({ theme, isArtist }) =>
+    isArtist ? theme.heading : theme.secondary};
   @media (min-width: 992px) {
     display: none;
   }
 `;
 
-const FeatureImage = ({ image, label, featured }) => (
+const AlbumMobileLabel = styled.h6`
+  text-align: center;
+  font-size: 16px;
+  margin: 0;
+  color: ${({ theme }) => theme.heading};
+  padding: 0px 8px;
+  @media (min-width: 992px) {
+    display: none;
+  }
+`;
+
+const FeatureImage = ({ image, featured, onClick, artist, album }) => (
   <ContentWrap featured={featured}>
     <ImageWrap featured={featured}>
-      <Image image={image}>
+      <Image image={image} onClick={onClick}>
         <HoverContent>
-          <Label>{label}</Label>
+          {album ? (
+            <>
+              <Title>{album}</Title>
+              <SubTitle>{artist}</SubTitle>
+            </>
+          ) : (
+            <Title isArtist>{artist}</Title>
+          )}
         </HoverContent>
       </Image>
     </ImageWrap>
-    <MobileLabel>{label}</MobileLabel>
+    {album ? (
+      <>
+        <AlbumMobileLabel>{album}</AlbumMobileLabel>
+        <ArtistMobileLabel>{artist}</ArtistMobileLabel>
+      </>
+    ) : (
+      <ArtistMobileLabel isArtist>{artist}</ArtistMobileLabel>
+    )}
   </ContentWrap>
 );
 
 FeatureImage.propTypes = {
   image: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
   featured: PropTypes.bool,
+  onClick: PropTypes.func,
+  artist: PropTypes.string.isRequired,
+  album: PropTypes.string,
 };
 
 FeatureImage.defaultProps = {
   featured: false,
+  onClick: null,
+  album: '',
 };
 
 export default FeatureImage;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 import { animated, useSpring } from 'react-spring';
+import { Link } from 'react-router-dom';
 
 import Headroom from 'react-headroom';
 import SlideBurger from '@animated-burgers/burger-slide';
@@ -68,7 +69,10 @@ const Backdrop = styled.div`
   z-index: ${({ open }) => (open ? 10 : -5)};
 `;
 
-const MobileHeading = styled.h3`
+const MobileHeading = styled(Link)`
+  font-size: 1.5em;
+  color: ${({ theme }) => theme.heading};
+  text-decoration: none;
   flex: 1;
 `;
 
@@ -130,7 +134,7 @@ const Navigation = () => {
     <>
       <Backdrop open={isOpen} />
       <MobileNavBar>
-        <MobileHeading>
+        <MobileHeading to="/">
           Unwrapped
           <span style={{ color: themeContext.main }}>.</span>
         </MobileHeading>

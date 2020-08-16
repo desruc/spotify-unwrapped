@@ -102,3 +102,10 @@ export const formatDuration = (millis) => {
   const seconds = ((millis % 60000) / 1000).toFixed(0);
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 };
+
+export function truncateString(str, num) {
+  if (str.length <= num) {
+    return str;
+  }
+  return `${str.slice(0, num)}...`;
+}
