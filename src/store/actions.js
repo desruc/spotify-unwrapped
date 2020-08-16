@@ -138,13 +138,18 @@ export const getMonthTracks = () => async (dispatch) => {
 export const getRecentlyPlayed = () => async (dispatch) => {
   try {
     dispatch({ type: types.RECENTLY_PLAYED_LOADING_STATE, state: true });
-    const { data: { items } } = await axios.get(
+    const {
+      data: { items },
+    } = await axios.get(
       'https://api.spotify.com/v1/me/player/recently-played?limit=50',
       {
         headers,
       }
     );
-    dispatch({ type: types.GET_RECENTLY_PLAYED_SUCCESS, recentlyPlayed: items });
+    dispatch({
+      type: types.GET_RECENTLY_PLAYED_SUCCESS,
+      recentlyPlayed: items,
+    });
   } catch (error) {
     await dispatch({ type: types.GET_RECENTLY_PLAYED_ERROR });
     await dispatch({ type: types.RECENTLY_PLAYED_LOADING_STATE, state: false });

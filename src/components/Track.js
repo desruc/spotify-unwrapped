@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
+
+import { SET_SELECTED_TRACK } from '../store/types';
 
 import { formatDuration } from '../utils/helpers';
 
@@ -44,7 +48,7 @@ const Artwork = styled.div`
   margin-right: 20px;
 `;
 
-const TrackName = styled.span`
+const TrackName = styled.a`
   margin-bottom: 5px;
   border-bottom: 1px solid transparent;
   color: ${({ theme }) => theme.heading};
@@ -71,6 +75,16 @@ const Duration = styled.span`
 `;
 
 const Track = ({ track }) => {
+  // Hooks
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const onClickTrack = (selectedTrack) => {
+    const { id } = selectedTrack;
+    dispatch({ type: SET_SELECTED_TRACK, track: selectedTrack });
+    history.push(`/track/${id}`);
+  };
+
   return (
     <ListItem>
       <Container>
@@ -83,7 +97,11 @@ const Track = ({ track }) => {
         </div>
         <Meta>
           <MetaLeft>
-            {track.name && <TrackName>{track.name}</TrackName>}
+            {track.name && (
+              <TrackName onClick={() => onClickTrack(track)}>
+                {track.name}
+              </TrackName>
+            )}
             {track.artists && track.album && (
               <Album>
                 {track.artists &&

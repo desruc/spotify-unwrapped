@@ -143,7 +143,7 @@ const DrawerInner = () => {
           const isActive = pathname.includes(to);
           return (
             <NavItem key={key}>
-              <NavLink to={to} active={isActive}>
+              <NavLink to={to} active={isActive ? 1 : 0}>
                 <Icon />
                 {label}
               </NavLink>

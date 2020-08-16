@@ -11,6 +11,7 @@ import TopArtists from './TopArtists';
 import TopAlbums from './TopAlbums';
 import TopTracks from './TopTracks';
 import Dashboard from './Dashboard';
+import TrackDetails from './TrackDetails';
 
 import * as actions from '../store/actions';
 
@@ -46,6 +47,7 @@ const AuthenticatedView = () => {
             <Route exact path="/top-artists" component={TopArtists} />
             <Route exact path="/top-albums" component={TopAlbums} />
             <Route exact path="/top-tracks" component={TopTracks} />
+            <Route exact path="/track/:trackId" component={TrackDetails} />
             <Route path={['/', '/dashboard']} component={Dashboard} />
           </Switch>
         </MainView>

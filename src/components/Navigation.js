@@ -129,7 +129,7 @@ const Navigation = () => {
   return (
     <>
       <Backdrop open={isOpen} />
-      <MobileNavBar isOpen={isOpen}>
+      <MobileNavBar>
         <MobileHeading>
           Unwrapped
           <span style={{ color: themeContext.main }}>.</span>
