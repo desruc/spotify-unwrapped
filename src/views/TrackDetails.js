@@ -5,6 +5,8 @@ import styled from 'styled-components';
 
 import Container from '../components/Container';
 import PageHeader from '../components/PageHeader';
+import Flex from '../components/Flex';
+import AudioAnalysis from '../components/AudioAnalysis';
 import AudioFeatures from '../components/AudioFeatures';
 
 import { getTrackFeatures, getTrackAnalysis } from '../utils/spotify';
@@ -13,14 +15,20 @@ import { selectSelectedTrack } from '../store/reducer';
 
 import { getTrack } from '../store/actions';
 
-import { getArtist, getAlbumYear } from '../utils/helpers';
+import {
+  getArtist,
+  getAlbumYear,
+  formatDuration,
+  parseAnalysis,
+} from '../utils/helpers';
 
 const ImageWrap = styled.div`
-  width: 400px;
-  display: inline-block;
+  width: 300px;
   margin-right: 24px;
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
+  display: flex;
+  align-items: flex-start;
 `;
 
 const Image = styled.img`
@@ -36,6 +44,7 @@ const MetaWrap = styled.div`
 `;
 
 const TrackTitle = styled.h2`
+  line-height: 1;
   font-size: 42px;
   margin-bottom: 5px;
   margin-top: 0;
@@ -63,6 +72,11 @@ const Button = styled.a`
   font-weight: 700;
   border-radius: 6px;
   padding: 0.5rem 1.2rem;
+  width: fit-content;
+`;
+
+const Column = styled.div`
+  width: 33.33333333333333%;
 `;
 
 const TrackDetails = () => {
@@ -137,30 +151,44 @@ const TrackDetails = () => {
     <main>
       <Container>
         <PageHeader heading="Track details" />
-        <ImageWrap>
-          {selectedTrack && <Image src={selectedTrack.album.images[0].url} />}
-        </ImageWrap>
-        <MetaWrap>
-          {selectedTrack && <TrackTitle>{selectedTrack.name}</TrackTitle>}
-          {selectedTrack && (
-            <TrackAritst>{getArtist(selectedTrack)}</TrackAritst>
-          )}
-          {selectedTrack && (
-            <TrackAlbum>{`${selectedTrack.album.name} . ${getAlbumYear(
-              selectedTrack.album
-            )}`}</TrackAlbum>
-          )}
-          {selectedTrack && (
-            <Button
-              href={selectedTrack.external_urls.spotify}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Play on Spotify
-            </Button>
-          )}
-        </MetaWrap>
-        {features && <AudioFeatures data={features} />}
+        <Flex>
+          <ImageWrap>
+            {selectedTrack && <Image src={selectedTrack.album.images[0].url} />}
+          </ImageWrap>
+          <MetaWrap>
+            {selectedTrack && <TrackTitle>{selectedTrack.name}</TrackTitle>}
+            {selectedTrack && (
+              <TrackAritst>{getArtist(selectedTrack)}</TrackAritst>
+            )}
+            {selectedTrack && (
+              <TrackAlbum>{`${selectedTrack.album.name} . ${getAlbumYear(
+                selectedTrack.album
+              )}`}</TrackAlbum>
+            )}
+            {selectedTrack && (
+              <Button
+                href={selectedTrack.external_urls.spotify}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Play on Spotify
+              </Button>
+            )}
+          </MetaWrap>
+        </Flex>
+        <Flex>
+          <Column>{features && <AudioFeatures data={features} />}</Column>
+          <Column>
+            {analysis && (
+              <AudioAnalysis
+                duration={formatDuration(selectedTrack.duration_ms)}
+                popularity={selectedTrack.popularity}
+                {...parseAnalysis(analysis)} /* eslint-disable-line */
+              />
+            )}
+          </Column>
+          <Column>Recommendations</Column>
+        </Flex>
       </Container>
     </main>
   );
