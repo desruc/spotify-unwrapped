@@ -86,7 +86,26 @@ const AudioFeatures = ({ data }) => {
 };
 
 AudioFeatures.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.shape({
+    acousticness: PropTypes.number,
+    analysis_url: PropTypes.string,
+    danceability: PropTypes.number,
+    duration_ms: PropTypes.number,
+    energy: PropTypes.number,
+    id: PropTypes.string,
+    instrumentalness: PropTypes.number,
+    key: PropTypes.number,
+    liveness: PropTypes.number,
+    loudness: PropTypes.number,
+    mode: PropTypes.number,
+    speechniess: PropTypes.number,
+    tempo: PropTypes.number,
+    time_signature: PropTypes.number,
+    track_href: PropTypes.string,
+    type: PropTypes.string,
+    uri: PropTypes.string,
+    valence: PropTypes.number,
+  }),
 };
 
 AudioFeatures.defaultProps = {

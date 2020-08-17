@@ -82,7 +82,7 @@ export const getArtist = (data) => {
     let artistString = '';
     artists.forEach((a, idx) => {
       const atFinalIdx = idx === artists.length - 1;
-      if (!atFinalIdx) artistString += `${a.name} / `;
+      if (!atFinalIdx) artistString += `${a.name}, `;
       else artistString += a.name;
     });
     return artistString;
@@ -109,3 +109,50 @@ export function truncateString(str, num) {
   }
   return `${str.slice(0, num)}...`;
 }
+
+export const parseAudioFeatures = (data) => [
+  {
+    id: 'Acousticness',
+    label: 'Acousticness',
+    value: data.acousticness,
+    color: 'hsl(254.8,83.3%,64.7%)',
+  },
+  {
+    id: 'Danceability',
+    label: 'Danceability',
+    value: data.danceability,
+    color: 'hsl(155.2,61.1%,44.3%)',
+  },
+  {
+    id: 'Energy',
+    label: 'Energy',
+    value: data.energy,
+    color: 'hsl(275.4,100%,73.7%)',
+  },
+  {
+    id: 'Instrumentalness',
+    label: 'Instrumentalness',
+    value: data.instrumentalness,
+    color: 'hsl(354.2,79.4%,62%)',
+  },
+  {
+    id: 'Liveness',
+    label: 'Liveness',
+    value: data.liveness,
+    color: 'hsl(200,53.8%,92.4%)',
+  },
+  {
+    id: 'Speechiness',
+    label: 'Speechiness',
+    value: data.speechiness,
+    color: 'hsl(199.8,100%,61.4%)',
+  },
+  {
+    id: 'Valence',
+    label: 'Valence',
+    value: data.valence,
+    color: 'hsl(60.3,92%,61%)',
+  },
+];
+
+export const getAlbumYear = (album) => new Date(album.release_date).getFullYear();

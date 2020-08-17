@@ -155,3 +155,21 @@ export const getRecentlyPlayed = () => async (dispatch) => {
     await dispatch({ type: types.RECENTLY_PLAYED_LOADING_STATE, state: false });
   }
 };
+
+export const getTrack = (trackId) => async (dispatch) => {
+  try {
+    dispatch({ type: types.TRACK_LOADING_STATE, state: true });
+    const { data } = await axios.get(
+      `https://api.spotify.com/v1/tracks/${trackId}`,
+      {
+        headers,
+      }
+    );
+    dispatch({
+      type: types.GET_TRACK_SUCCESS,
+      track: data,
+    });
+  } catch (error) {
+    dispatch({ type: types.TRACK_LOADING_STATE, state: false });
+  }
+};

@@ -14,8 +14,7 @@ const initialState = {
   topTracksHalfYear: null,
   topTracksMonth: null,
   selectedTrack: null,
-  trackAnalysis: null,
-  trackFeatures: null,
+  trackLoading: false,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -92,22 +91,11 @@ const appReducer = (state = initialState, action) => {
         recentlyPlayed: action.recentlyPlayed,
       };
 
+    case types.GET_TRACK_SUCCESS:
     case types.SET_SELECTED_TRACK:
       return {
         ...state,
         selectedTrack: action.track,
-      };
-
-    case types.GET_TRACK_ANALYSIS_SUCCESS:
-      return {
-        ...state,
-        trackAnalysis: action.analysis,
-      };
-
-    case types.GET_TRACK_FEATURES_SUCCESS:
-      return {
-        ...state,
-        trackFeatures: action.features,
       };
 
     default:
