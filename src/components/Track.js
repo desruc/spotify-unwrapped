@@ -10,8 +10,12 @@ import { SET_SELECTED_TRACK } from '../store/types';
 import { formatDuration } from '../utils/helpers';
 
 const ListItem = styled.li`
+  flex: 1;
   display: flex;
   justify-content: center;
+  border-radius: 6px;
+  position: relative;
+  margin: 5px auto;
 `;
 
 const Container = styled.div`
@@ -22,9 +26,16 @@ const Container = styled.div`
   grid-template-columns: auto 1fr;
   align-items: center;
   min-height: 57px;
+  background-color: ${({ theme }) => theme.cardBackground};
+  border-radius: 0px;
+  transition: all 0.1s ease-in-out;
+  border-bottom: 1px solid transparent;
   img {
     width: 100%;
     max-width: 100%;
+  }
+  &:hover {
+    border-bottom: 1px solid ${({ theme }) => theme.tertiary};
   }
 `;
 
@@ -55,10 +66,7 @@ const TrackName = styled.span`
   color: ${({ theme }) => theme.heading};
   user-select: none;
   cursor: pointer;
-  &:hover,
-  &:focus {
-    border-bottom: 1px solid ${({ theme }) => theme.tertiary};
-  }
+  transition: all 0.2s ease-in-out;
 `;
 
 const MetaText = styled.span`
@@ -66,9 +74,10 @@ const MetaText = styled.span`
   color: ${({ theme }) => theme.text};
   user-select: none;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
   &:hover,
   &:focus {
-    border-bottom: 1px solid ${({ theme }) => theme.tertiary};
+    color: ${({ theme }) => theme.main};
   }
 `;
 
@@ -87,7 +96,6 @@ const Duration = styled.span`
 `;
 
 const Track = ({ track }) => {
-  console.log('Track -> track', track);
   // Hooks
   const dispatch = useDispatch();
   const history = useHistory();
@@ -107,20 +115,22 @@ const Track = ({ track }) => {
 
   const onClickAlbum = (e) => {
     e.stopPropagation();
-    const { album: { id } } = track;
+    const {
+      album: { id },
+    } = track;
     history.push(`/album/${id}`);
   };
 
   return (
     <ListItem>
       <Container onClick={onClickTrack}>
-        <div>
+        {/* <div> */}
           <Artwork>
             {track.album.images.length && (
               <img src={track.album.images[2].url} alt="Album Artwork" />
             )}
           </Artwork>
-        </div>
+        {/* </div> */}
         <Meta>
           <MetaLeft>
             {track.name && (

@@ -8,6 +8,7 @@ import PageHeader from '../components/PageHeader';
 import Flex from '../components/Flex';
 import AudioAnalysis from '../components/AudioAnalysis';
 import AudioFeatures from '../components/AudioFeatures';
+import TrackRecommendations from '../components/TrackRecommendations';
 
 import { getTrackFeatures, getTrackAnalysis } from '../utils/spotify';
 
@@ -75,8 +76,16 @@ const Button = styled.a`
   width: fit-content;
 `;
 
+const TrackInfo = styled.div`
+  margin-right: -16px;
+  margin-left: -16px;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
 const Column = styled.div`
-  width: 33.33333333333333%;
+  width: 25%;
+  padding: 0px 16px;
 `;
 
 const TrackDetails = () => {
@@ -97,6 +106,11 @@ const TrackDetails = () => {
     let isSubscribed = true;
 
     async function fetchAudioFeatures() {
+      if (isSubscribed) {
+        setFeaturesError(false);
+        setFeaturesLoading(true);
+      }
+
       getTrackFeatures(trackId)
         .then((data) => {
           if (isSubscribed) {
@@ -112,6 +126,11 @@ const TrackDetails = () => {
     }
 
     async function fetchAudioAnalysis() {
+      if (isSubscribed) {
+        setAnalysisError(false);
+        setAnalysisLoading(true);
+      }
+
       getTrackAnalysis(trackId)
         .then((data) => {
           if (isSubscribed) {
@@ -132,7 +151,7 @@ const TrackDetails = () => {
     return () => {
       isSubscribed = false;
     };
-  }, []);
+  }, [trackId]);
 
   // Redux
   const selectedTrack = useSelector((state) => selectSelectedTrack(state));
@@ -151,7 +170,7 @@ const TrackDetails = () => {
     <main>
       <Container>
         <PageHeader heading="Track details" />
-        <Flex>
+        <Flex mb={40}>
           <ImageWrap>
             {selectedTrack && <Image src={selectedTrack.album.images[0].url} />}
           </ImageWrap>
@@ -176,19 +195,29 @@ const TrackDetails = () => {
             )}
           </MetaWrap>
         </Flex>
-        <Flex>
-          <Column>{features && <AudioFeatures data={features} />}</Column>
+        <TrackInfo>
           <Column>
-            {analysis && (
-              <AudioAnalysis
-                duration={formatDuration(selectedTrack.duration_ms)}
-                popularity={selectedTrack.popularity}
-                {...parseAnalysis(analysis)} /* eslint-disable-line */
-              />
-            )}
+            <AudioFeatures
+              loading={featuresLoading}
+              data={features}
+              error={featuresError}
+            />
           </Column>
-          <Column>Recommendations</Column>
-        </Flex>
+          <Column>
+            <AudioAnalysis
+              loading={analysisLoading}
+              error={analysisError}
+              duration={
+                selectedTrack ? formatDuration(selectedTrack.duration_ms) : ''
+              }
+              popularity={selectedTrack ? selectedTrack.popularity : 0}
+              {...parseAnalysis(analysis)} /* eslint-disable-line */
+            />
+          </Column>
+          <Column>
+            <TrackRecommendations trackId={trackId} />
+          </Column>
+        </TrackInfo>
       </Container>
     </main>
   );

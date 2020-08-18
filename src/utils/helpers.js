@@ -205,13 +205,16 @@ export const parsePitch = (note) => {
   return key;
 };
 
-export const parseAnalysis = (analysis) => ({
-  pitch: parsePitch(analysis.track.key),
-  modality: analysis.track.mode === 1 ? 'Major' : 'Minor',
-  timeSignature: analysis.track.time_signature,
-  tempo: Math.round(analysis.track.tempo),
-  bars: analysis.bars.length,
-  beats: analysis.beats.length,
-  sections: analysis.sections.length,
-  segments: analysis.segments.length,
-});
+export const parseAnalysis = (analysis) => {
+  if (!analysis) return null;
+  return {
+    pitch: parsePitch(analysis.track.key),
+    modality: analysis.track.mode === 1 ? 'Major' : 'Minor',
+    timeSignature: analysis.track.time_signature,
+    tempo: Math.round(analysis.track.tempo),
+    bars: analysis.bars.length,
+    beats: analysis.beats.length,
+    sections: analysis.sections.length,
+    segments: analysis.segments.length,
+  };
+};

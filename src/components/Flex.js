@@ -5,8 +5,9 @@ const Flex = styled.div`
   flex-wrap: wrap;
   justify-content: ${({ justify }) => justify || 'flex-start'};
   align-items: ${({ align }) => align || 'flex-start'};
-  ${({ mb }) => mb && `margin-bottom: ${mb}px`}
-  ${({ mt }) => mt && `margin-top: ${mt}px`}
+  ${({ mb }) => mb && `margin-bottom: ${mb}px;`}
+  ${({ mt }) => mt && `margin-top: ${mt}px;`}
+  width: 100%;
 `;
 
 export default Flex;
