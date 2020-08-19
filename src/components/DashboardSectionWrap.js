@@ -33,11 +33,7 @@ const Heading = styled.h2`
 const Container = styled.div`
   background-color: ${({ theme }) => theme.cardBackground};
   border-radius: 6px;
-  ${({ showRange }) => showRange && 'border-top-right-radius: 0px'};
-  ${({ showRange }) => showRange && 'border-top-left-radius: 0px'};
-  @media (min-width: 768px) {
-    ${({ showRange }) => showRange && 'border-top-left-radius: 6px'};
-  }
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
 `;
 
 const StyledLink = styled(Link)`

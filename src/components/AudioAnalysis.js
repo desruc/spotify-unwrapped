@@ -4,6 +4,13 @@ import styled from 'styled-components';
 
 import keyframes from '../styles/keyframes';
 
+const Section = styled.section`
+  margin-top: 40px;
+  @media (min-height: 768px) {
+    margin-top: 0px;
+  }
+`;
+
 const Loading = styled.span`
   border-radius: 6px;
   background-color: ${({ theme }) => theme.secondary};
@@ -17,9 +24,8 @@ const Heading = styled.h2`
 
 const Card = styled.div`
   width: 100%;
-  height: 100%;
   max-width: 100%;
-  height: 500px;
+  height: 544px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,7 +77,7 @@ const AudioAnalysis = ({
   sections,
   segments,
 }) => (
-  <section>
+  <Section>
     <Heading>Audio Analysis</Heading>
     <Card>
       {error ? (
@@ -121,7 +127,7 @@ const AudioAnalysis = ({
         </Grid>
       )}
     </Card>
-  </section>
+  </Section>
 );
 
 AudioAnalysis.propTypes = {

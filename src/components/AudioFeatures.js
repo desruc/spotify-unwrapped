@@ -65,11 +65,17 @@ const CustomTick = (tick) => {
   );
 };
 
+const Section = styled.section`
+  margin-top: 40px;
+  @media (min-height: 768px) {
+    margin-top: 0px;
+  }
+`;
+
 const Card = styled.div`
   width: 100%;
-  height: 100%;
   max-width: 100%;
-  height: 500px;
+  height: 544px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -93,7 +99,7 @@ const AudioFeatures = ({ loading, error, data }) => {
   const getColor = (bar) => bar.data.color;
 
   return (
-    <section id="audio-features">
+    <Section id="audio-features">
       <Heading>Audio Features</Heading>
       <Card>
         {error ? (
@@ -138,7 +144,7 @@ const AudioFeatures = ({ loading, error, data }) => {
           />
         )}
       </Card>
-    </section>
+    </Section>
   );
 };
 

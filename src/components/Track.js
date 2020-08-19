@@ -26,7 +26,7 @@ const Container = styled.div`
   grid-template-columns: auto 1fr;
   align-items: center;
   min-height: 57px;
-  background-color: ${({ theme }) => theme.cardBackground};
+  background-color: transparent;
   border-radius: 0px;
   transition: all 0.1s ease-in-out;
   border-bottom: 1px solid transparent;

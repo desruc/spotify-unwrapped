@@ -54,7 +54,7 @@ const DashboardAlbums = () => {
       selectedRange={range}
       seeMoreLink="/top-albums"
     >
-      <Flex>
+      <Flex wrap>
         {computedAlbums &&
           computedAlbums.slice(0, computedSlice).map((a) => {
             const artist = getArtist(a[0]);

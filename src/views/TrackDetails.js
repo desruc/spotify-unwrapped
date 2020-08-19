@@ -84,8 +84,22 @@ const TrackInfo = styled.div`
 `;
 
 const Column = styled.div`
-  width: 25%;
+  width: 100%;
   padding: 0px 16px;
+  @media (min-width: 768px) {
+    width: calc(50% - 32px);
+  }
+  @media (min-width: 992px) {
+    width: calc(25% - 32px);
+  }
+`;
+
+const RelatedTracksColumn = styled.div`
+  width: 100%;
+  padding: 0px 16px;
+  @media (min-width: 992px) {
+    width: calc(50% - 32px)
+  }
 `;
 
 const TrackDetails = () => {
@@ -170,7 +184,7 @@ const TrackDetails = () => {
     <main>
       <Container>
         <PageHeader heading="Track details" />
-        <Flex mb={40}>
+        <Flex mb={40} wrap>
           <ImageWrap>
             {selectedTrack && <Image src={selectedTrack.album.images[0].url} />}
           </ImageWrap>
@@ -214,9 +228,9 @@ const TrackDetails = () => {
               {...parseAnalysis(analysis)} /* eslint-disable-line */
             />
           </Column>
-          <Column>
+          <RelatedTracksColumn>
             <TrackRecommendations trackId={trackId} />
-          </Column>
+          </RelatedTracksColumn>
         </TrackInfo>
       </Container>
     </main>

@@ -31,7 +31,7 @@ export const getTrackRecommendations = async (trackId) => {
   const {
     data,
   } = await axios.get(
-    `https://api.spotify.com/v1/recommendations?seed_tracks=${trackId}&limit=8`,
+    `https://api.spotify.com/v1/recommendations?seed_tracks=${trackId}&limit=16`,
     { headers }
   );
   return data;
