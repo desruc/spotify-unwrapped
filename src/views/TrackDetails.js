@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Container from '../components/Container';
@@ -12,16 +12,11 @@ import TrackRecommendations from '../components/TrackRecommendations';
 
 import { getTrackFeatures, getTrackAnalysis } from '../utils/spotify';
 
-import { selectSelectedTrack } from '../store/reducer';
+import { selectSelectedTrack, selectTrackLoading } from '../store/reducer';
 
 import { getTrack } from '../store/actions';
 
-import {
-  getArtist,
-  getAlbumYear,
-  formatDuration,
-  parseAnalysis,
-} from '../utils/helpers';
+import { getAlbumYear, formatDuration, parseAnalysis } from '../utils/helpers';
 
 const ImageWrap = styled.div`
   width: 300px;
@@ -51,16 +46,26 @@ const TrackTitle = styled.h2`
   margin-top: 0;
 `;
 
-const TrackAritst = styled.h3`
+const TrackArtist = styled.h3`
+  display: inline-block;
+  cursor: pointer;
   margin-top: 0;
   margin-bottom: 10px;
   color: ${({ theme }) => theme.secondary};
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    color: ${({ theme }) => theme.main};
+  }
 `;
 
 const TrackAlbum = styled.h4`
+  display: inline-block;
   margin-top: 0;
   margin-bottom: 10px;
   color: ${({ theme }) => theme.tertiary};
+  & span {
+    cursor: pointer;
+  }
 `;
 
 const Button = styled.a`
@@ -98,13 +103,14 @@ const RelatedTracksColumn = styled.div`
   width: 100%;
   padding: 0px 16px;
   @media (min-width: 992px) {
-    width: calc(50% - 32px)
+    width: calc(50% - 32px);
   }
 `;
 
 const TrackDetails = () => {
   // Hooks
   const dispatch = useDispatch();
+  const history = useHistory();
   const { trackId } = useParams();
 
   // Local state
@@ -114,6 +120,10 @@ const TrackDetails = () => {
   const [analysis, setAnalysis] = useState(null);
   const [analysisLoading, setAnalysisLoading] = useState(true);
   const [analysisError, setAnalysisError] = useState(false);
+
+  // Redux
+  const trackLoading = useSelector((state) => selectTrackLoading(state));
+  const selectedTrack = useSelector((state) => selectSelectedTrack(state));
 
   // Get audio features & analysis on mount
   useEffect(() => {
@@ -167,9 +177,6 @@ const TrackDetails = () => {
     };
   }, [trackId]);
 
-  // Redux
-  const selectedTrack = useSelector((state) => selectSelectedTrack(state));
-
   // Get track if not in redux state
   useEffect(() => {
     if (
@@ -180,23 +187,50 @@ const TrackDetails = () => {
     }
   }, [trackId]);
 
+  // Redirect to artist page
+  const onArtistClick = (artistId) => history.push(`/artist/${artistId}`);
+
+  // Redirect to album page
+  const onAlbumClick = (albumId) => history.push(`/album/${albumId}`);
+
   return (
     <main>
       <Container>
         <PageHeader heading="Track details" />
         <Flex mb={40} wrap>
-          <ImageWrap>
+          <ImageWrap loading={trackLoading ? 1 : 0}>
             {selectedTrack && <Image src={selectedTrack.album.images[0].url} />}
           </ImageWrap>
           <MetaWrap>
             {selectedTrack && <TrackTitle>{selectedTrack.name}</TrackTitle>}
+            <div>
+              {selectedTrack &&
+                selectedTrack.artists.map(
+                  ({ id: artistId, name: artistName }, i) => (
+                    <TrackArtist
+                      key={artistId}
+                      onClick={() => onArtistClick(artistId)}
+                    >
+                      {artistName}
+                      {selectedTrack.artists.length > 0 &&
+                      i === selectedTrack.artists.length - 1
+                        ? ''
+                        : ','}
+                      &nbsp;
+                    </TrackArtist>
+                  )
+                )}
+            </div>
             {selectedTrack && (
-              <TrackAritst>{getArtist(selectedTrack)}</TrackAritst>
-            )}
-            {selectedTrack && (
-              <TrackAlbum>{`${selectedTrack.album.name} . ${getAlbumYear(
-                selectedTrack.album
-              )}`}</TrackAlbum>
+              <TrackAlbum>
+                <span
+                  onClick={() => onAlbumClick(selectedTrack.album.id)}
+                  role="presentation"
+                >
+                  {selectedTrack.album.name}
+                </span>
+                {` . ${getAlbumYear(selectedTrack.album)}`}
+              </TrackAlbum>
             )}
             {selectedTrack && (
               <Button

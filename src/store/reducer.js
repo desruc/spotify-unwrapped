@@ -98,6 +98,12 @@ const appReducer = (state = initialState, action) => {
         selectedTrack: action.track,
       };
 
+    case types.TRACK_LOADING_STATE:
+      return {
+        ...state,
+        trackLoading: action.state,
+      };
+
     default:
       return state;
   }
@@ -130,5 +136,6 @@ export const selectTopTracks = (state) => ({
   month: state.app.topTracksMonth,
 });
 
+export const selectTrackLoading = (state) => state.app.trackLoading;
 export const selectRecentlyPlayed = (state) => state.app.recentlyPlayed;
 export const selectSelectedTrack = (state) => state.app.selectedTrack;

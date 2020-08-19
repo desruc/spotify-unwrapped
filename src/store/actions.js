@@ -169,6 +169,7 @@ export const getTrack = (trackId) => async (dispatch) => {
       type: types.GET_TRACK_SUCCESS,
       track: data,
     });
+    dispatch({ type: types.TRACK_LOADING_STATE, state: false });
   } catch (error) {
     dispatch({ type: types.TRACK_LOADING_STATE, state: false });
   }
