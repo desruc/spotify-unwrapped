@@ -15,48 +15,55 @@ import TrackDetails from './TrackDetails';
 import ArtistDetails from './ArtistDetails';
 import AlbumDetails from './AlbumDetails';
 
-import * as actions from '../store/actions';
+import { bootstrapArtists, bootstrapTracks } from '../store/actions';
 
-const Wrap = styled.div`
+const PageWrap = styled.div`
   width: 100%;
   min-height: 100vh;
 `;
 
-const MainView = styled.div`
+const ContentWrap = styled.div`
   flex: 1;
+`;
+
+const Container = styled.div`
+  margin: 80px auto;
+  max-width: 1800px;
+  padding: 0px 16px;
+  width: calc(100% - 32px);
+  @media (min-width: 992px) {
+    margin: 40px auto 80px auto;
+  }
 `;
 
 const AuthenticatedView = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(actions.getAllTimeArtists());
-    dispatch(actions.getHalfYearArtists());
-    dispatch(actions.getMonthArtists());
-    dispatch(actions.getAllTimeTracks());
-    dispatch(actions.getHalfYearTracks());
-    dispatch(actions.getMonthTracks());
-    dispatch(actions.getRecentlyPlayed());
+    dispatch(bootstrapArtists());
+    dispatch(bootstrapTracks());
   }, []);
 
   return (
-    <Wrap id="page-wrap">
+    <PageWrap id="page-wrap">
       <Flex>
         <Navigation />
-        <MainView>
-          <Switch>
-            <Route exact path="/recently-played" component={RecentlyPlayed} />
-            <Route exact path="/top-artists" component={TopArtists} />
-            <Route exact path="/top-albums" component={TopAlbums} />
-            <Route exact path="/top-tracks" component={TopTracks} />
-            <Route exact path="/track/:trackId" component={TrackDetails} />
-            <Route exact path="/artist/:artistId" component={ArtistDetails} />
-            <Route exact path="/album/:albumId" component={AlbumDetails} />
-            <Route path={['/', '/dashboard']} component={Dashboard} />
-          </Switch>
-        </MainView>
+        <ContentWrap>
+          <Container>
+            <Switch>
+              <Route exact path="/recently-played" component={RecentlyPlayed} />
+              <Route exact path="/top-artists" component={TopArtists} />
+              <Route exact path="/top-albums" component={TopAlbums} />
+              <Route exact path="/top-tracks" component={TopTracks} />
+              <Route exact path="/track/:trackId" component={TrackDetails} />
+              <Route exact path="/artist/:artistId" component={ArtistDetails} />
+              <Route exact path="/album/:albumId" component={AlbumDetails} />
+              <Route path={['/', '/dashboard']} component={Dashboard} />
+            </Switch>
+          </Container>
+        </ContentWrap>
       </Flex>
-    </Wrap>
+    </PageWrap>
   );
 };
 
