@@ -80,7 +80,7 @@ export const getAllTimeTracks = async () => {
 /**
  * Get the authorized users top tracks from the past six months
  */
-export const getSixMonthsTracks = async () => {
+export const getSixMonthTracks = async () => {
   const { data: { items } } = await axios.get(
     'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term',
     {
