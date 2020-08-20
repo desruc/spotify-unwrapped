@@ -207,13 +207,13 @@ export const getArtist = async (artistId) => {
  * @param {String} artistId
  */
 export const getArtistAlbums = async (artistId) => {
-  const { data } = await axios.get(
-    `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album,single`,
+  const { data: { items } } = await axios.get(
+    `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album&limit=50`,
     {
       headers,
     }
   );
-  return data;
+  return items;
 };
 
 /**
@@ -221,25 +221,25 @@ export const getArtistAlbums = async (artistId) => {
  * @param {String} artistId
  */
 export const getArtistTopTracks = async (artistId) => {
-  const { data } = await axios.get(
-    `https://api.spotify.com/v1/artists/${artistId}/top-tracks`,
+  const { data: { tracks } } = await axios.get(
+    `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=from_token`,
     {
       headers,
     }
   );
-  return data;
+  return tracks;
 };
 
 /**
  * Get artists related to the supplied artist
  * @param {String} artistId
  */
-export const getRelatedArtist = async (artistId) => {
-  const { data } = await axios.get(
+export const getRelatedArtists = async (artistId) => {
+  const { data: { artists } } = await axios.get(
     `https://api.spotify.com/v1/artists/${artistId}/related-artists`,
     {
       headers,
     }
   );
-  return data;
+  return artists;
 };
