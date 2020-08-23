@@ -48,8 +48,8 @@ const HoverContent = styled.div`
   @media (min-width: 992px) {
     position: absolute;
     top: 0;
-    height: calc(100% - 32px);
-    width: calc(100% - 32px);
+    height: 100%;
+    width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 6px;
     opacity: 0;

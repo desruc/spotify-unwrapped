@@ -10,7 +10,7 @@ const Heading = styled.h1`
   margin-bottom: 16px;
   margin-top: 0px;
   @media (min-width: 992px) {
-    margin-bottom: 0.67em;
+    margin-bottom: 0;
   }
 `;
 

@@ -59,7 +59,7 @@ const NavItem = styled.li`
 `;
 
 const NavLink = styled(Link)`
-  width: calc(100% - 32px);
+  width: 100%;
   padding: 8px 16px;
   border-radius: 25px;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
