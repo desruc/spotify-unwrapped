@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Flex from './Flex';
 
-const ArtistImage = styled.div`
+const AlbumImage = styled.div`
   width: 300px;
   height: 300px;
   margin-right: 24px;
@@ -22,22 +22,6 @@ const Heading = styled.h2`
   margin-top: 0;
 `;
 
-const Followers = styled.h4`
-  margin-top: 0;
-  margin-bottom: 10px;
-  color: ${({ theme }) => theme.secondary};
-`;
-
-const Popularity = styled.h3`
-  margin-top: 0;
-  margin-bottom: 10px;
-  color: ${({ theme }) => theme.tertiary};
-`;
-
-const Genres = styled.h5`
-  margin-top: 0;
-`;
-
 const Button = styled.a`
   text-decoration: none;
   cursor: pointer;
@@ -51,22 +35,12 @@ const Button = styled.a`
   width: fit-content;
 `;
 
-const ArtistDetails = ({
-  name,
-  image,
-  popularity,
-  genres,
-  totalFollowers,
-  spotifyLink,
-}) => {
+const AlbumDetails = ({ name, image, spotifyLink }) => {
   return (
     <Flex mb={40}>
-      <ArtistImage image={image} />
+      <AlbumImage image={image} />
       <div>
         <Heading>{name}</Heading>
-        <Popularity>Popularity: {popularity}</Popularity>
-        <Followers>Followers: {totalFollowers}</Followers>
-        <Genres>{genres && genres.map((g) => <span key={g}>{g}</span>)}</Genres>
         <Button href={spotifyLink} target="_blank" rel="noopener noreferrer">
           Open in Spotify
         </Button>
@@ -75,13 +49,10 @@ const ArtistDetails = ({
   );
 };
 
-ArtistDetails.propTypes = {
+AlbumDetails.propTypes = {
   name: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  popularity: PropTypes.number.isRequired,
-  totalFollowers: PropTypes.number.isRequired,
   spotifyLink: PropTypes.string.isRequired,
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default ArtistDetails;
+export default AlbumDetails;

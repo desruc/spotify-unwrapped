@@ -13,7 +13,7 @@ import TopTracks from './TopTracks';
 import Dashboard from './Dashboard';
 import TrackDetails from './TrackDetails';
 import ArtistOverview from './ArtistOverview';
-import AlbumDetails from './AlbumDetails';
+import AlbumOverview from './AlbumOverview';
 
 import { bootstrapArtists, bootstrapTracks } from '../store/actions';
 
@@ -57,7 +57,7 @@ const AuthenticatedView = () => {
               <Route exact path="/top-tracks" component={TopTracks} />
               <Route exact path="/track/:trackId" component={TrackDetails} />
               <Route exact path="/artist/:artistId" component={ArtistOverview} />
-              <Route exact path="/album/:albumId" component={AlbumDetails} />
+              <Route exact path="/album/:albumId" component={AlbumOverview} />
               <Route path={['/', '/dashboard']} component={Dashboard} />
             </Switch>
           </Container>
