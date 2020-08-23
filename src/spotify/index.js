@@ -208,7 +208,7 @@ export const getArtist = async (artistId) => {
  */
 export const getArtistAlbums = async (artistId) => {
   const { data: { items } } = await axios.get(
-    `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album&limit=50`,
+    `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album&limit=50&country=from_token`,
     {
       headers,
     }

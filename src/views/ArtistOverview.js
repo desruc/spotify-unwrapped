@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 
 import PageHeader from '../components/PageHeader';
+import ArtistDetails from '../components/ArtistDetails';
+import ArtistTopTracks from '../components/ArtistTopTracks';
+import RelatedArtists from '../components/RelatedArtists';
+import ArtistAlbums from '../components/ArtistAlbums';
+
+const PopularTracksWrap = styled.div`
+  display: inline-block;
+  width: 50%;
+`;
 
 import {
   getArtist,
@@ -11,7 +21,7 @@ import {
   getArtistTopTracks,
 } from '../spotify';
 
-const ArtistDetails = () => {
+const ArtistOverview = () => {
   // Hooks
   const { artistId } = useParams();
 
@@ -21,19 +31,18 @@ const ArtistDetails = () => {
   const [artistError, setArtistError] = useState(false);
 
   // Artist albums state
-  const [albums, setAlbums] = useState(null);
+  const [albums, setAlbums] = useState([]);
   const [albumsLoading, setAlbumsLoading] = useState(true);
   const [albumsError, setAlbumsError] = useState(false);
 
   // Artist top tracks state
-  const [topTracks, setTopTracks] = useState(null);
-  console.log("ArtistDetails -> topTracks", topTracks)
+  const [topTracks, setTopTracks] = useState([]);
   const [topTracksLoading, setTopTracksLoading] = useState(true);
-  const [tropTracksError, setTopTracksError] = useState(false);
+  const [topTracksError, setTopTracksError] = useState(false);
 
   // Related artists state
-  const [relatedArtists, setRelatedArtists] = useState(null);
-  console.log("ArtistDetails -> relatedArtists", relatedArtists)
+  const [relatedArtists, setRelatedArtists] = useState([]);
+  console.log('ArtistDetails -> relatedArtists', relatedArtists);
   const [relatedArtistsLoading, setRelatedArtistsLoading] = useState(true);
   const [relatedArtistsError, setRelatedArtistsError] = useState(false);
 
@@ -138,8 +147,26 @@ const ArtistDetails = () => {
   return (
     <main>
       <PageHeader heading="Artist details" />
+      <ArtistDetails
+        name={artist?.name}
+        image={artist?.images[0].url}
+        popularity={artist?.popularity}
+        genres={artist?.genres}
+        spotifyLink={artist?.external_links?.spotify}
+      />
+      <PopularTracksWrap>
+        <ArtistTopTracks
+          loading={topTracksLoading}
+          error={topTracksError}
+          topTracks={topTracks}
+        />
+      </PopularTracksWrap>
+      <PopularTracksWrap>
+        <RelatedArtists artists={relatedArtists} />
+      </PopularTracksWrap>
+      <ArtistAlbums albums={albums} />
     </main>
   );
 };
 
-export default ArtistDetails;
+export default ArtistOverview;
