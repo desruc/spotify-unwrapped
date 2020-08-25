@@ -148,16 +148,29 @@ const AudioAnalysis = ({
 AudioAnalysis.propTypes = {
   loading: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
-  duration: PropTypes.string.isRequired,
-  pitch: PropTypes.string.isRequired,
-  modality: PropTypes.string.isRequired,
-  timeSignature: PropTypes.string.isRequired,
-  tempo: PropTypes.string.isRequired,
-  popularity: PropTypes.string.isRequired,
-  bars: PropTypes.number.isRequired,
-  beats: PropTypes.number.isRequired,
-  sections: PropTypes.number.isRequired,
-  segments: PropTypes.number.isRequired,
+  duration: PropTypes.string,
+  pitch: PropTypes.string,
+  modality: PropTypes.string,
+  timeSignature: PropTypes.number,
+  tempo: PropTypes.number,
+  popularity: PropTypes.number,
+  bars: PropTypes.number,
+  beats: PropTypes.number,
+  sections: PropTypes.number,
+  segments: PropTypes.number,
+};
+
+AudioAnalysis.defaultProps = {
+  duration: '',
+  pitch: '',
+  modality: '',
+  timeSignature: 0,
+  tempo: 0,
+  popularity: 0,
+  bars: 0,
+  beats: 0,
+  sections: 0,
+  segments: 0,
 };
 
 export default AudioAnalysis;

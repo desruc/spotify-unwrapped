@@ -3,6 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import PageHeader from '../components/PageHeader';
+import OverviewDetails from '../components/OverviewDetails';
 import AudioAnalysis from '../components/AudioAnalysis';
 import AudioFeatures from '../components/AudioFeatures';
 import TrackRecommendations from '../components/TrackRecommendations';
@@ -10,7 +11,6 @@ import TrackRecommendations from '../components/TrackRecommendations';
 import { getTrack, getTrackFeatures, getTrackAnalysis } from '../spotify';
 
 import { getAlbumYear, formatDuration, parseAnalysis } from '../utils/helpers';
-import OverviewDetails from '../components/OverviewDetails';
 
 const TrackArtist = styled.h3`
   display: inline-block;
@@ -176,6 +176,7 @@ const TrackDetails = () => {
     <main>
       <PageHeader heading="Track details" />
       <OverviewDetails
+        loading={trackLoading}
         imageSrc={track?.album.images[0].url}
         heading={track?.name}
         spotifyUrl={track?.external_urls.spotify}
@@ -183,16 +184,18 @@ const TrackDetails = () => {
         <div>
           {track &&
             track.artists.map(({ id: artistId, name: artistName }, i) => (
-              <TrackArtist
-                key={artistId}
-                onClick={() => onArtistClick(artistId)}
-              >
-                {artistName}
+              <>
+                <TrackArtist
+                  key={artistId}
+                  onClick={() => onArtistClick(artistId)}
+                >
+                  {artistName}
+                </TrackArtist>
                 {track.artists.length > 0 && i === track.artists.length - 1
                   ? ''
                   : ','}
                 &nbsp;
-              </TrackArtist>
+              </>
             ))}
         </div>
         {track && (

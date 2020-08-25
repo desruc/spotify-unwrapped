@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import OverviewDetailsLoading from './OverviewDetailsLoading';
 import ButtonLink from './ButtonLink';
 
 const Wrap = styled.div`
@@ -50,29 +51,47 @@ const Heading = styled.h2`
   margin-top: 0;
 `;
 
-const OverviewDetails = ({ imageSrc, heading, spotifyUrl, children }) => (
-  <Wrap>
-    <Image image={imageSrc} />
-    <Inner>
-      <Heading>{heading}</Heading>
-      {children}
-      {spotifyUrl && (
-        <ButtonLink href={spotifyUrl} target="_blank" rel="noopener noreferrer">
-          Open in Spotify
-        </ButtonLink>
-      )}
-    </Inner>
-  </Wrap>
-);
+const OverviewDetails = ({
+  imageSrc,
+  heading,
+  spotifyUrl,
+  children,
+  loading,
+}) => {
+  if (loading) return <OverviewDetailsLoading />;
+
+  return (
+    <Wrap>
+      <Image image={imageSrc} />
+      <Inner>
+        <Heading>{heading}</Heading>
+        {children}
+        {spotifyUrl && (
+          <ButtonLink
+            href={spotifyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open in Spotify
+          </ButtonLink>
+        )}
+      </Inner>
+    </Wrap>
+  );
+};
 
 OverviewDetails.propTypes = {
-  imageSrc: PropTypes.string.isRequired,
-  heading: PropTypes.string.isRequired,
+  loading: PropTypes.bool,
+  imageSrc: PropTypes.string,
+  heading: PropTypes.string,
   spotifyUrl: PropTypes.string,
   children: PropTypes.node,
 };
 
 OverviewDetails.defaultProps = {
+  loading: false,
+  imageSrc: '',
+  heading: '',
   spotifyUrl: '',
   children: null,
 };
