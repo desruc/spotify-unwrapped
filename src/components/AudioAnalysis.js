@@ -25,13 +25,22 @@ const Heading = styled.h2`
 const Card = styled.div`
   width: 100%;
   max-width: 100%;
-  height: 544px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.cardBackground};
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
+  padding: 16px;
+  @media (min-width: 758px) {
+    height: 552px;
+  }
+  @media (min-width: 992px) {
+    height: auto;
+  }
+  @media (min-width: 1500px) {
+    height: 552px;
+  }
 `;
 
 const Error = styled.h4`
@@ -44,6 +53,12 @@ const Grid = styled.div`
   grid-template-columns: repeat(2, minmax(100px, 1fr));
   width: 100%;
   text-align: center;
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(5, minmax(100px, 1fr));
+  }
+  @media (min-width: 1500px) {
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+  }
 `;
 
 const AnalysisWrap = styled.div`

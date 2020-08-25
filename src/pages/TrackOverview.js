@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Container from '../components/Container';
 import PageHeader from '../components/PageHeader';
-import Flex from '../components/Flex';
 import AudioAnalysis from '../components/AudioAnalysis';
 import AudioFeatures from '../components/AudioFeatures';
 import TrackRecommendations from '../components/TrackRecommendations';
@@ -12,34 +10,7 @@ import TrackRecommendations from '../components/TrackRecommendations';
 import { getTrack, getTrackFeatures, getTrackAnalysis } from '../spotify';
 
 import { getAlbumYear, formatDuration, parseAnalysis } from '../utils/helpers';
-
-const ImageWrap = styled.div`
-  width: 300px;
-  margin-right: 24px;
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
-  display: flex;
-  align-items: flex-start;
-`;
-
-const Image = styled.img`
-  height: auto;
-  width: 100%;
-  max-width: 100%;
-  vertical-align: middle;
-  border-radius: 6px;
-`;
-
-const MetaWrap = styled.div`
-  display: inline-block;
-`;
-
-const TrackTitle = styled.h2`
-  line-height: 1;
-  font-size: 42px;
-  margin-bottom: 5px;
-  margin-top: 0;
-`;
+import OverviewDetails from '../components/OverviewDetails';
 
 const TrackArtist = styled.h3`
   display: inline-block;
@@ -63,19 +34,6 @@ const TrackAlbum = styled.h4`
   }
 `;
 
-const Button = styled.a`
-  text-decoration: none;
-  cursor: pointer;
-  text-align: center;
-  display: block;
-  background-color: ${({ theme }) => theme.main};
-  color: #ffffff;
-  font-weight: 700;
-  border-radius: 6px;
-  padding: 0.5rem 1.2rem;
-  width: fit-content;
-`;
-
 const TrackInfo = styled.div`
   margin-right: -16px;
   margin-left: -16px;
@@ -86,19 +44,28 @@ const TrackInfo = styled.div`
 const Column = styled.div`
   width: 100%;
   padding: 0px 16px;
+  ${({ isAnalysis }) => isAnalysis && `margin-top: 40px;`}
   @media (min-width: 768px) {
-    width: calc(50% - 32px);
+    ${({ isAnalysis }) => isAnalysis && `margin-top: 0px;`}
+    width: 50%;
   }
   @media (min-width: 992px) {
-    width: calc(25% - 32px);
+    ${({ isAnalysis }) => isAnalysis && `margin-top: 40px;`}
+    width: 100%;
+  }
+  @media (min-width: 1500px) {
+    margin-top: 0px;
+    width: 25%;
   }
 `;
 
 const RelatedTracksColumn = styled.div`
   width: 100%;
   padding: 0px 16px;
-  @media (min-width: 992px) {
-    width: calc(50% - 32px);
+  margin-top: 40px;
+  @media (min-width: 1500px) {
+    margin-top: 0px;
+    width: 50%;
   }
 `;
 
@@ -207,73 +174,60 @@ const TrackDetails = () => {
 
   return (
     <main>
-      <Container>
-        <PageHeader heading="Track details" />
-        <Flex mb={40} wrap>
-          <ImageWrap loading={trackLoading ? 1 : 0}>
-            {track && <Image src={track.album.images[0].url} />}
-          </ImageWrap>
-          <MetaWrap>
-            {track && <TrackTitle>{track.name}</TrackTitle>}
-            <div>
-              {track &&
-                track.artists.map(({ id: artistId, name: artistName }, i) => (
-                  <TrackArtist
-                    key={artistId}
-                    onClick={() => onArtistClick(artistId)}
-                  >
-                    {artistName}
-                    {track.artists.length > 0 && i === track.artists.length - 1
-                      ? ''
-                      : ','}
-                    &nbsp;
-                  </TrackArtist>
-                ))}
-            </div>
-            {track && (
-              <TrackAlbum>
-                <span
-                  onClick={() => onAlbumClick(track.album.id)}
-                  role="presentation"
-                >
-                  {track.album.name}
-                </span>
-                {` . ${getAlbumYear(track.album)}`}
-              </TrackAlbum>
-            )}
-            {track && (
-              <Button
-                href={track.external_urls.spotify}
-                target="_blank"
-                rel="noopener noreferrer"
+      <PageHeader heading="Track details" />
+      <OverviewDetails
+        imageSrc={track?.album.images[0].url}
+        heading={track?.name}
+        spotifyUrl={track?.external_urls.spotify}
+      >
+        <div>
+          {track &&
+            track.artists.map(({ id: artistId, name: artistName }, i) => (
+              <TrackArtist
+                key={artistId}
+                onClick={() => onArtistClick(artistId)}
               >
-                Play on Spotify
-              </Button>
-            )}
-          </MetaWrap>
-        </Flex>
-        <TrackInfo>
-          <Column>
-            <AudioFeatures
-              loading={featuresLoading}
-              data={features}
-              error={featuresError}
-            />
-          </Column>
-          <Column>
-            <AudioAnalysis
-              loading={analysisLoading}
-              error={analysisError}
-              duration={track ? formatDuration(track.duration_ms) : ''}
-              popularity={track ? track.popularity : 0}
-              {...parseAnalysis(analysis)} /* eslint-disable-line */
-            />
-          </Column>
-          <RelatedTracksColumn>
-            <TrackRecommendations trackId={trackId} />
-          </RelatedTracksColumn>
-        </TrackInfo>
-      </Container>
+                {artistName}
+                {track.artists.length > 0 && i === track.artists.length - 1
+                  ? ''
+                  : ','}
+                &nbsp;
+              </TrackArtist>
+            ))}
+        </div>
+        {track && (
+          <TrackAlbum>
+            <span
+              onClick={() => onAlbumClick(track.album.id)}
+              role="presentation"
+            >
+              {track.album.name}
+            </span>
+            {` . ${getAlbumYear(track.album)}`}
+          </TrackAlbum>
+        )}
+      </OverviewDetails>
+      <TrackInfo>
+        <Column>
+          <AudioFeatures
+            loading={featuresLoading}
+            data={features}
+            error={featuresError}
+          />
+        </Column>
+        <Column isAnalysis>
+          <AudioAnalysis
+            loading={analysisLoading}
+            error={analysisError}
+            duration={track ? formatDuration(track.duration_ms) : ''}
+            popularity={track ? track.popularity : 0}
+            {...parseAnalysis(analysis)} /* eslint-disable-line */
+          />
+        </Column>
+        <RelatedTracksColumn>
+          <TrackRecommendations trackId={trackId} />
+        </RelatedTracksColumn>
+      </TrackInfo>
     </main>
   );
 };

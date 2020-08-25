@@ -8,6 +8,7 @@ const Wrap = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 40px;
   @media (min-width: 768px) {
     flex-wrap: no-wrap;
     justify-content: flex-start;
@@ -15,13 +16,15 @@ const Wrap = styled.div`
 `;
 
 const Inner = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin: 20px 0px 40px 0px;
+  margin-top: 20px;
   @media (min-width: 768px) {
-    margin: 0;
+    text-align: start;
+    margin-top: 0px;
     justify-content: flex-start;
     align-items: start;
   }

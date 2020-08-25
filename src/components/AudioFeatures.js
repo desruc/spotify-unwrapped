@@ -75,7 +75,7 @@ const Section = styled.section`
 const Card = styled.div`
   width: 100%;
   max-width: 100%;
-  height: 544px;
+  height: 552px;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -11,7 +11,7 @@ import TopArtists from './TopArtists';
 import TopAlbums from './TopAlbums';
 import TopTracks from './TopTracks';
 import Dashboard from './Dashboard';
-import TrackDetails from './TrackDetails';
+import TrackOverview from './TrackOverview';
 import ArtistOverview from './ArtistOverview';
 import AlbumOverview from './AlbumOverview';
 
@@ -55,7 +55,7 @@ const AuthenticatedView = () => {
               <Route exact path="/top-artists" component={TopArtists} />
               <Route exact path="/top-albums" component={TopAlbums} />
               <Route exact path="/top-tracks" component={TopTracks} />
-              <Route exact path="/track/:trackId" component={TrackDetails} />
+              <Route exact path="/track/:trackId" component={TrackOverview} />
               <Route exact path="/artist/:artistId" component={ArtistOverview} />
               <Route exact path="/album/:albumId" component={AlbumOverview} />
               <Route path={['/', '/dashboard']} component={Dashboard} />

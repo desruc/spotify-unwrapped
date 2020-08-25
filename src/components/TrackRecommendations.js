@@ -10,17 +10,12 @@ import { getTrackRecommendations } from '../spotify';
 import { randomId } from '../utils/helpers';
 
 const Section = styled.section`
-  margin-top: 40px;
   flex: 1;
-  @media (min-width: 992px) {
-    margin-top: 0px;
-  }
 `;
 
 const Card = styled.div`
   height: 100%;
   max-width: 100%;
-  height: 1088px;
   display: flex;
   justify-content: center;
   background-color: ${({ theme }) => theme.cardBackground};
@@ -29,7 +24,7 @@ const Card = styled.div`
   padding: 16px;
   @media (min-width: 768px) {
     height: auto;
-    min-height: calc(544px - 32px);
+    min-height: 544px;
   }
 `;
 

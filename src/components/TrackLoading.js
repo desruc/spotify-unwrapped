@@ -7,9 +7,7 @@ const ListItem = styled.li`
   flex: 1;
   display: flex;
   justify-content: center;
-  border-radius: 6px;
   position: relative;
-  margin: 5px auto;
 `;
 
 const Container = styled.div`
@@ -18,11 +16,12 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
-  min-height: 57px;
+  min-height: 55px;
   background-color: transparent;
   border-radius: 0px;
   transition: all 0.1s ease-in-out;
   border-bottom: 1px solid transparent;
+  margin: 5px;
   img {
     width: 100%;
     max-width: 100%;

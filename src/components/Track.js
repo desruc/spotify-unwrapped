@@ -15,7 +15,6 @@ const ListItem = styled.li`
   justify-content: center;
   border-radius: 6px;
   position: relative;
-  margin: 5px auto;
 `;
 
 const Container = styled.div`
@@ -25,11 +24,12 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
-  min-height: 57px;
+  min-height: 55px;
   background-color: transparent;
   border-radius: 0px;
   transition: all 0.1s ease-in-out;
   border-bottom: 1px solid transparent;
+  margin: 5px;
   img {
     width: 100%;
     max-width: 100%;
@@ -56,17 +56,19 @@ const Artwork = styled.div`
   display: flex;
   position: relative;
   width: 50px;
+  height: 50px;
   min-width: 50px;
   margin-right: 20px;
+  background-position: center center;
+  background-size: contain;
+  background-image: url(${({ image }) => image});
 `;
 
 const TrackName = styled.span`
   margin-bottom: 5px;
-  border-bottom: 1px solid transparent;
   color: ${({ theme }) => theme.heading};
   user-select: none;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
 `;
 
 const MetaText = styled.span`
@@ -124,13 +126,7 @@ const Track = ({ track }) => {
   return (
     <ListItem>
       <Container onClick={onClickTrack}>
-        {/* <div> */}
-          <Artwork>
-            {track.album.images.length && (
-              <img src={track.album.images[2].url} alt="Album Artwork" />
-            )}
-          </Artwork>
-        {/* </div> */}
+        <Artwork image={track.album.images[2].url} />
         <Meta>
           <MetaLeft>
             {track.name && (
