@@ -17,6 +17,8 @@ import AlbumOverview from './AlbumOverview';
 
 import { bootstrapArtists, bootstrapTracks } from '../store/actions';
 import Playlists from './Playlists';
+import Footer from '../components/Footer';
+import ScrollToTop from '../components/ScrollToTop';
 
 const PageWrap = styled.div`
   width: 100%;
@@ -66,9 +68,11 @@ const AuthenticatedView = () => {
               <Route exact path="/playlists" component={Playlists} />
               <Route path={['/', '/dashboard']} component={Dashboard} />
             </Switch>
+            <Footer />
           </Container>
         </ContentWrap>
       </Flex>
+      <ScrollToTop />
     </PageWrap>
   );
 };
