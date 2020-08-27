@@ -81,7 +81,9 @@ export const getAllTimeTracks = async () => {
  * Get the authorized users top tracks from the past six months
  */
 export const getSixMonthTracks = async () => {
-  const { data: { items } } = await axios.get(
+  const {
+    data: { items },
+  } = await axios.get(
     'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term',
     {
       headers,
@@ -94,7 +96,9 @@ export const getSixMonthTracks = async () => {
  * Get the authorized users top tracks from the past month
  */
 export const getMonthTracks = async () => {
-  const { data: { items } } = await axios.get(
+  const {
+    data: { items },
+  } = await axios.get(
     'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term',
     {
       headers,
@@ -207,7 +211,9 @@ export const getArtist = async (artistId) => {
  * @param {String} artistId
  */
 export const getArtistAlbums = async (artistId) => {
-  const { data: { items } } = await axios.get(
+  const {
+    data: { items },
+  } = await axios.get(
     `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album&limit=50&country=from_token`,
     {
       headers,
@@ -221,7 +227,9 @@ export const getArtistAlbums = async (artistId) => {
  * @param {String} artistId
  */
 export const getArtistTopTracks = async (artistId) => {
-  const { data: { tracks } } = await axios.get(
+  const {
+    data: { tracks },
+  } = await axios.get(
     `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=from_token`,
     {
       headers,
@@ -235,11 +243,25 @@ export const getArtistTopTracks = async (artistId) => {
  * @param {String} artistId
  */
 export const getRelatedArtists = async (artistId) => {
-  const { data: { artists } } = await axios.get(
+  const {
+    data: { artists },
+  } = await axios.get(
     `https://api.spotify.com/v1/artists/${artistId}/related-artists`,
     {
       headers,
     }
   );
   return artists;
+};
+
+/**
+ * Get the auth users playlists
+ */
+export const getPlaylists = async () => {
+  const {
+    data: { items },
+  } = await axios.get('https://api.spotify.com/v1/me/playlists?limit=50', {
+    headers,
+  });
+  return items;
 };

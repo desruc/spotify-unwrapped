@@ -16,6 +16,7 @@ import ArtistOverview from './ArtistOverview';
 import AlbumOverview from './AlbumOverview';
 
 import { bootstrapArtists, bootstrapTracks } from '../store/actions';
+import Playlists from './Playlists';
 
 const PageWrap = styled.div`
   width: 100%;
@@ -56,8 +57,13 @@ const AuthenticatedView = () => {
               <Route exact path="/top-albums" component={TopAlbums} />
               <Route exact path="/top-tracks" component={TopTracks} />
               <Route exact path="/track/:trackId" component={TrackOverview} />
-              <Route exact path="/artist/:artistId" component={ArtistOverview} />
+              <Route
+                exact
+                path="/artist/:artistId"
+                component={ArtistOverview}
+              />
               <Route exact path="/album/:albumId" component={AlbumOverview} />
+              <Route exact path="/playlists" component={Playlists} />
               <Route path={['/', '/dashboard']} component={Dashboard} />
             </Switch>
           </Container>
