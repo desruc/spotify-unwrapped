@@ -222,3 +222,27 @@ export const parseAnalysis = (analysis) => {
 export const randomId = () =>
   Math.random().toString(36).substring(2, 15) +
   Math.random().toString(36).substring(2, 15);
+
+export const getAlbumDuration = (album) => {
+  if (!album) return null;
+  const {
+    tracks: { items },
+  } = album;
+  let ms = 0;
+
+  items.forEach((track) => {
+    ms += track.duration_ms;
+  });
+
+  const s = Math.floor(ms / 1000);
+  const m = Math.floor(s / 60);
+  const h = Math.floor(m / 60);
+
+  const seconds = s % 60;
+  const minutes = m % 60;
+  const hours = h % 24;
+
+  return `${hours > 0 ? `${hours}h ` : ''}${minutes > 1 ? `${minutes}m ` : ''}${
+    seconds > 1 ? `${seconds}s` : ''
+  }`;
+};

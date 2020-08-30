@@ -1,11 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import styled from 'styled-components';
 
 import PageHeader from '../components/PageHeader';
-import AlbumDetails from '../components/AlbumDetails';
+import OverviewDetails from '../components/OverviewDetails';
 import AlbumTracks from '../components/AlbumTracks';
 
 import { getAlbum } from '../spotify';
+import { getAlbumYear, getAlbumDuration } from '../utils/helpers';
+
+const TrackArtist = styled(Link)`
+  display: inline-block;
+  font-size: 1.17em;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: ${({ theme }) => theme.secondary};
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    color: ${({ theme }) => theme.main};
+  }
+`;
+
+const AlbumMeta = styled.h4`
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: ${({ theme }) => theme.tertiary};
+`;
 
 const AlbumOverview = () => {
   // Hooks
@@ -15,7 +39,6 @@ const AlbumOverview = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [album, setAlbum] = useState(null);
-  console.log('AlbumOverview -> album', album);
 
   // Get the album on mount
   useEffect(() => {
@@ -51,8 +74,38 @@ const AlbumOverview = () => {
   return (
     <main>
       <PageHeader heading="Album details" />
-      <AlbumDetails name={album?.name} image={album?.images[0]?.url} />
-      <AlbumTracks tracks={album?.tracks?.items} />
+      <OverviewDetails
+        loading={loading}
+        imageSrc={album?.images[0]?.url}
+        heading={album?.name}
+        spotifyUrl={album?.external_urls.spotify}
+      >
+        <>
+          {album && album.artists.length > 0 && (
+            <span>
+              {album.artists.map(({ id: artistId, name: artistName }, idx) => (
+                <>
+                  <TrackArtist to={`/artist/${artistId}`}>
+                    {artistName}
+                  </TrackArtist>
+                  {album.artists.length > 0 && idx === album.artists.length - 1
+                    ? ''
+                    : ','}
+                </>
+              ))}
+            </span>
+          )}
+        </>
+        {album && (
+          <AlbumMeta>
+            {getAlbumYear(album)} . {getAlbumDuration(album)}
+          </AlbumMeta>
+        )}
+      </OverviewDetails>
+      <AlbumTracks
+        tracks={album?.tracks?.items}
+        albumArtists={album?.artists}
+      />
     </main>
   );
 };
