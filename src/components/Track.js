@@ -13,14 +13,12 @@ const ListItem = styled.li`
   flex: 1;
   display: flex;
   justify-content: center;
-  border-radius: 6px;
   position: relative;
 `;
 
 const Container = styled.div`
   cursor: pointer;
   flex: 1;
-  max-width: 700px;
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
@@ -30,10 +28,6 @@ const Container = styled.div`
   transition: all 0.1s ease-in-out;
   border-bottom: 1px solid transparent;
   margin: 5px;
-  img {
-    width: 100%;
-    max-width: 100%;
-  }
   &:hover {
     border-bottom: 1px solid ${({ theme }) => theme.tertiary};
   }
@@ -59,6 +53,7 @@ const Artwork = styled.div`
   height: 50px;
   min-width: 50px;
   margin-right: 20px;
+  border-radius: 6px;
   background-position: center center;
   background-size: contain;
   background-image: url(${({ image }) => image});
@@ -126,7 +121,7 @@ const Track = ({ track }) => {
   return (
     <ListItem>
       <Container onClick={onClickTrack}>
-        <Artwork image={track.album.images[2].url} />
+        <Artwork image={track?.album?.images[1]?.url} />
         <Meta>
           <MetaLeft>
             {track.name && (

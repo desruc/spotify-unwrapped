@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 
 import { selectTopArtists, selectAristRange } from '../store/reducer';
 
-import Container from '../components/Container';
 import PageHeader from '../components/PageHeader';
 import RangeTabs from '../components/RangeTabs';
 import Flex from '../components/Flex';
@@ -44,36 +43,34 @@ const TopArtists = () => {
 
   return (
     <main>
-      <Container>
-        <PageHeader heading="Top Artists" actions={headerActions} />
-        <Flex wrap>
-          {computedArtists &&
-            computedArtists
-              .slice(0, computedSlice)
-              .map((a) => (
-                <FeatureImage
-                  key={a.id}
-                  featured
-                  image={a.images[0].url}
-                  artist={a.name}
-                  onClick={() => onArtistClick(a)}
-                />
-              ))}
-        </Flex>
-        <Flex wrap>
-          {computedArtists &&
-            computedArtists
-              .slice(computedSlice)
-              .map((a) => (
-                <FeatureImage
-                  key={a.id}
-                  image={a.images[0].url}
-                  artist={a.name}
-                  onClick={() => onArtistClick(a)}
-                />
-              ))}
-        </Flex>
-      </Container>
+      <PageHeader heading="Top Artists" actions={headerActions} />
+      <Flex wrap>
+        {computedArtists &&
+          computedArtists
+            .slice(0, computedSlice)
+            .map((a) => (
+              <FeatureImage
+                key={a.id}
+                featured
+                image={a.images[0].url}
+                artist={a.name}
+                onClick={() => onArtistClick(a)}
+              />
+            ))}
+      </Flex>
+      <Flex wrap>
+        {computedArtists &&
+          computedArtists
+            .slice(computedSlice)
+            .map((a) => (
+              <FeatureImage
+                key={a.id}
+                image={a.images[0].url}
+                artist={a.name}
+                onClick={() => onArtistClick(a)}
+              />
+            ))}
+      </Flex>
     </main>
   );
 };

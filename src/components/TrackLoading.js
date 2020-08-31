@@ -12,7 +12,6 @@ const ListItem = styled.li`
 
 const Container = styled.div`
   flex: 1;
-  max-width: 700px;
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;

@@ -5,14 +5,18 @@ import { useHistory } from 'react-router-dom';
 import { selectTopTracks, selectAlbumRange } from '../store/reducer';
 import { CHANGE_ALBUM_DATE_RANGE } from '../store/types';
 
-import Container from '../components/Container';
 import PageHeader from '../components/PageHeader';
 import RangeTabs from '../components/RangeTabs';
 import Flex from '../components/Flex';
 import FeatureImage from '../components/FeatureImage';
 
 import { useWindowSize } from '../utils/hooks';
-import { getViewportName, getTopAlbums, getArtist, truncateString } from '../utils/helpers';
+import {
+  getViewportName,
+  getTopAlbums,
+  getArtist,
+  truncateString,
+} from '../utils/helpers';
 
 const TopAlbums = () => {
   // Hooks
@@ -47,42 +51,40 @@ const TopAlbums = () => {
 
   return (
     <main>
-      <Container>
-        <PageHeader heading="Top Albums" actions={headerActions} />
-        <Flex wrap>
-          {computedAlbums &&
-            computedAlbums.slice(0, computedSlice).map((a) => {
-              const artist = getArtist(a[0]);
-              const albumTitle = a[0].name;
-              return (
-                <FeatureImage
-                  key={a[0].id}
-                  featured
-                  image={a[0].images[0].url}
-                  artist={artist}
-                  album={isDesktop ? truncateString(albumTitle, 45) : albumTitle}
-                  onClick={() => onAlbumClick(a[0])}
-                />
-              );
-            })}
-        </Flex>
-        <Flex wrap>
-          {computedAlbums &&
-            computedAlbums.slice(computedSlice).map((a) => {
-              const artist = getArtist(a[0]);
-              const albumTitle = a[0].name;
-              return (
-                <FeatureImage
-                  key={a[0].id}
-                  image={a[0].images[0].url}
-                  artist={artist}
-                  album={isDesktop ? truncateString(albumTitle, 45) : albumTitle}
-                  onClick={() => onAlbumClick(a[0])}
-                />
-              );
-            })}
-        </Flex>
-      </Container>
+      <PageHeader heading="Top Albums" actions={headerActions} />
+      <Flex wrap>
+        {computedAlbums &&
+          computedAlbums.slice(0, computedSlice).map((a) => {
+            const artist = getArtist(a[0]);
+            const albumTitle = a[0].name;
+            return (
+              <FeatureImage
+                key={a[0].id}
+                featured
+                image={a[0].images[0].url}
+                artist={artist}
+                album={isDesktop ? truncateString(albumTitle, 45) : albumTitle}
+                onClick={() => onAlbumClick(a[0])}
+              />
+            );
+          })}
+      </Flex>
+      <Flex wrap>
+        {computedAlbums &&
+          computedAlbums.slice(computedSlice).map((a) => {
+            const artist = getArtist(a[0]);
+            const albumTitle = a[0].name;
+            return (
+              <FeatureImage
+                key={a[0].id}
+                image={a[0].images[0].url}
+                artist={artist}
+                album={isDesktop ? truncateString(albumTitle, 45) : albumTitle}
+                onClick={() => onAlbumClick(a[0])}
+              />
+            );
+          })}
+      </Flex>
     </main>
   );
 };
