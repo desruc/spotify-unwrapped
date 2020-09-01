@@ -104,6 +104,7 @@ const AlbumOverview = () => {
         )}
       </OverviewDetails>
       <AlbumTracks
+        loading={loading}
         tracks={album?.tracks?.items}
         albumArtists={album?.artists}
       />

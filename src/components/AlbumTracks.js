@@ -4,12 +4,29 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
 import mixins from '../styles/mixins';
+import keyframes from '../styles/keyframes';
 import { formatDuration } from '../utils/helpers';
 
 const List = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+`;
+
+const LoadingListItem = styled.li`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: 1px solid ${({ theme }) => theme.secondary};
+  min-height: 0px;
+  padding: 8px;
+`;
+
+const LoadingText = styled.span`
+  font-size: 14px;
+  background-color: ${({ theme }) => theme.secondary};
+  color: ${({ theme }) => theme.secondary};
+  animation: ${keyframes.glow} 1.5s ease-in-out infinite;
 `;
 
 const ListItem = styled.li`
@@ -49,7 +66,7 @@ const Duration = styled.span`
   font-size: 12px;
 `;
 
-const AlbumTracks = ({ tracks, albumArtists }) => {
+const AlbumTracks = ({ loading, tracks, albumArtists }) => {
   // Hooks
   const history = useHistory();
 
@@ -63,54 +80,57 @@ const AlbumTracks = ({ tracks, albumArtists }) => {
     history.push(`/artist/${artistId}`);
   };
 
-  return (
-    <List>
-      {tracks.map((track) => {
-        const featuredArtists = track.artists.filter(
-          (artist) => !albumArtists.some((a) => a.id === artist.id)
-        );
+  const loadingJsx = [...new Array(10)].map((e, idx) => (
+    <LoadingListItem key={`loadingAlbumTrack-${idx}`}>
+      <LoadingText>Loading</LoadingText>
+    </LoadingListItem>
+  ));
 
-        return (
-          <ListItem
-            key={track.id}
-            onClick={(e) => {
-              e.stopPropagation();
-              onTrackClick(track.id);
-            }}
-            role="presentation"
-          >
-            <TrackName>
-              {track.name}
-              {featuredArtists.length > 0 && (
-                <>
-                  <span> - </span>
-                  {featuredArtists.map(
-                    ({ id: artistId, name: artistName }, idx) => (
-                      <>
-                        <FeatureArtist
-                          onClick={(e) => onArtistClick(e, artistId)}
-                        >
-                          {artistName}
-                        </FeatureArtist>
-                        {featuredArtists.length > 0 &&
-                        idx === featuredArtists.length - 1
-                          ? ''
-                          : ', '}
-                      </>
-                    )
-                  )}
-                </>
+  const tracksJsx = tracks.map((track) => {
+    const featuredArtists = track.artists.filter(
+      (artist) => !albumArtists.some((a) => a.id === artist.id)
+    );
+
+    return (
+      <ListItem
+        key={track.id}
+        onClick={(e) => {
+          e.stopPropagation();
+          onTrackClick(track.id);
+        }}
+        role="presentation"
+      >
+        <TrackName>
+          {track.name}
+          {featuredArtists.length > 0 && (
+            <>
+              <span> - </span>
+              {featuredArtists.map(
+                ({ id: artistId, name: artistName }, idx) => (
+                  <>
+                    <FeatureArtist onClick={(e) => onArtistClick(e, artistId)}>
+                      {artistName}
+                    </FeatureArtist>
+                    {featuredArtists.length > 0 &&
+                    idx === featuredArtists.length - 1
+                      ? ''
+                      : ', '}
+                  </>
+                )
               )}
-            </TrackName>
-            <Duration>{formatDuration(track.duration_ms)}</Duration>
-          </ListItem>
-        );
-      })}
-    </List>
-  );
+            </>
+          )}
+        </TrackName>
+        <Duration>{formatDuration(track.duration_ms)}</Duration>
+      </ListItem>
+    );
+  });
+
+  return <List>{loading ? loadingJsx : tracksJsx}</List>;
 };
 
 AlbumTracks.propTypes = {
+  loading: PropTypes.bool.isRequired,
   tracks: PropTypes.array,
   albumArtists: PropTypes.array,
 };
