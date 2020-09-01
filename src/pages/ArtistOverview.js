@@ -3,23 +3,50 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import PageHeader from '../components/PageHeader';
-import ArtistDetails from '../components/ArtistDetails';
+import OverviewDetails from '../components/OverviewDetails';
 import ArtistTopTracks from '../components/ArtistTopTracks';
 import RelatedArtists from '../components/RelatedArtists';
 import ArtistAlbums from '../components/ArtistAlbums';
 
-const PopularTracksWrap = styled.div`
-  display: inline-block;
-  width: 50%;
-`;
-
 import {
   getArtist,
   getArtistAlbums,
-  getAllTimeTracks,
   getRelatedArtists,
   getArtistTopTracks,
 } from '../spotify';
+
+import { capitalizeWords } from '../utils/helpers';
+
+const ArtistInfo = styled.div`
+  margin-right: -16px;
+  margin-left: -16px;
+`;
+
+const Column = styled.div`
+  display: inline-block;
+  width: 100%;
+  padding: 0px 16px;
+  margin-bottom: 40px;
+  @media (min-width: 1200px) {
+    ${({ albumWrap }) => !albumWrap && `width: 50%`}
+  }
+`;
+
+const Followers = styled.h4`
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: ${({ theme }) => theme.secondary};
+`;
+
+const Popularity = styled.h3`
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: ${({ theme }) => theme.tertiary};
+`;
+
+const Genres = styled.h5`
+  margin-top: 0;
+`;
 
 const ArtistOverview = () => {
   // Hooks
@@ -42,7 +69,6 @@ const ArtistOverview = () => {
 
   // Related artists state
   const [relatedArtists, setRelatedArtists] = useState([]);
-  console.log('ArtistDetails -> relatedArtists', relatedArtists);
   const [relatedArtistsLoading, setRelatedArtistsLoading] = useState(true);
   const [relatedArtistsError, setRelatedArtistsError] = useState(false);
 
@@ -147,24 +173,43 @@ const ArtistOverview = () => {
   return (
     <main>
       <PageHeader heading="Artist details" />
-      <ArtistDetails
-        name={artist?.name}
-        image={artist?.images[0].url}
-        popularity={artist?.popularity}
-        genres={artist?.genres}
-        spotifyLink={artist?.external_links?.spotify}
-      />
-      <PopularTracksWrap>
-        <ArtistTopTracks
-          loading={topTracksLoading}
-          error={topTracksError}
-          topTracks={topTracks}
-        />
-      </PopularTracksWrap>
-      <PopularTracksWrap>
-        <RelatedArtists artists={relatedArtists} />
-      </PopularTracksWrap>
-      <ArtistAlbums albums={albums} />
+      <OverviewDetails
+        loading={artistLoading}
+        imageSrc={artist?.images[0]?.url}
+        heading={artist?.name}
+        spotifyUrl={artist?.external_links?.spotify}
+      >
+        <Popularity>Popularity: {artist?.popularity}</Popularity>
+        <Followers>Followers: {artist?.followers?.total}</Followers>
+        <Genres>
+          {artist?.genres?.map((g, idx) => (
+            <span key={g}>
+              {capitalizeWords(g)}
+              {artist.genres.length > 0 && idx === artist.genres.length - 1
+                ? ''
+                : ', '}
+            </span>
+          ))}
+        </Genres>
+      </OverviewDetails>
+      <ArtistInfo>
+        <Column>
+          <ArtistTopTracks
+            loading={topTracksLoading}
+            error={topTracksError}
+            topTracks={topTracks}
+          />
+        </Column>
+        <Column>
+          <RelatedArtists
+            loading={relatedArtistsLoading}
+            artists={relatedArtists}
+          />
+        </Column>
+        <Column albumWrap>
+          <ArtistAlbums loading={albumsLoading} albums={albums} />
+        </Column>
+      </ArtistInfo>
     </main>
   );
 };

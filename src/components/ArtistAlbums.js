@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
+import ArtistAlbumsLoading from './ArtistAlbumsLoading';
+
 import { getAlbumYear } from '../utils/helpers';
 
 const Heading = styled.h2`
@@ -22,8 +24,11 @@ const Card = styled.div`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
 `;
 
 const AlbumWrap = styled.div`
@@ -35,8 +40,8 @@ const AlbumWrap = styled.div`
 
 const AlbumImage = styled.div`
   cursor: pointer;
-  height: 180px;
-  width: 180px;
+  height: 140px;
+  width: 140px;
   background-size: cover;
   background-position: center center;
   background-image: url(${({ image }) => image});
@@ -45,6 +50,10 @@ const AlbumImage = styled.div`
   border-radius: 6px;
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 25px;
+  }
+  @media (min-width: 768px) {
+    height: 180px;
+    width: 180px;
   }
 `;
 
@@ -67,36 +76,39 @@ const AlbumYear = styled.h6`
   user-select: none;
 `;
 
-const ArtistAlbums = ({ albums }) => {
+const ArtistAlbums = ({ loading, albums }) => {
   const history = useHistory();
 
   const goToAlbum = (albumId) => history.push(`/album/${albumId}`);
+
+  const loadingJsx = [...new Array(10)].map(() => <ArtistAlbumsLoading />);
+
+  const albumJsx = albums.map((a) => (
+    <AlbumWrap key={a.id}>
+      <AlbumImage
+        image={a.images[0]?.url}
+        title="Go to Album"
+        onClick={() => goToAlbum(a.id)}
+      />
+      <AlbumTitle title="Go to Album" onClick={() => goToAlbum(a.id)}>
+        {a.name}
+      </AlbumTitle>
+      <AlbumYear>{getAlbumYear(a)}</AlbumYear>
+    </AlbumWrap>
+  ));
 
   return (
     <>
       <Heading>Albums</Heading>
       <Card>
-        <Grid>
-          {albums.map((a) => (
-            <AlbumWrap key={a.id}>
-              <AlbumImage
-                image={a.images[0]?.url}
-                title="Go to Album"
-                onClick={() => goToAlbum(a.id)}
-              />
-              <AlbumTitle title="Go to Album" onClick={() => goToAlbum(a.id)}>
-                {a.name}
-              </AlbumTitle>
-              <AlbumYear>{getAlbumYear(a)}</AlbumYear>
-            </AlbumWrap>
-          ))}
-        </Grid>
+        <Grid>{loading ? loadingJsx : albumJsx}</Grid>
       </Card>
     </>
   );
 };
 
 ArtistAlbums.propTypes = {
+  loading: PropTypes.bool.isRequired,
   albums: PropTypes.array,
 };
 

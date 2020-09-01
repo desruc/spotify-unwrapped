@@ -90,7 +90,7 @@ const AlbumOverview = () => {
                   </TrackArtist>
                   {album.artists.length > 0 && idx === album.artists.length - 1
                     ? ''
-                    : ','}
+                    : ', '}
                 </>
               ))}
             </span>
@@ -98,7 +98,8 @@ const AlbumOverview = () => {
         </>
         {album && (
           <AlbumMeta>
-            {getAlbumYear(album)} . {getAlbumDuration(album)}
+            {getAlbumYear(album)} . {album?.tracks?.items.length} songs .{' '}
+            {getAlbumDuration(album)}
           </AlbumMeta>
         )}
       </OverviewDetails>

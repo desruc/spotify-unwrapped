@@ -22,7 +22,7 @@ const ActionsWrap = styled.div`
 `;
 
 const PageHeader = ({ heading, actions }) => (
-  <Flex mt={40} mb={40} align="center">
+  <Flex mt={40} mb={40} align="center" wrap>
     <Heading>{heading}</Heading>
     <ActionsWrap>{actions}</ActionsWrap>
   </Flex>

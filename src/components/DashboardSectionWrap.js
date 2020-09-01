@@ -13,9 +13,9 @@ const Section = styled.section`
 
 const TitleWrap = styled.div`
   margin-bottom: 16px;
+  flex-wrap: wrap;
+  display: flex;
   @media (min-width: 768px) {
-    display: flex;
-    flex-wrap: wrap;
     align-items: center;
   }
 `;

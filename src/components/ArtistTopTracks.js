@@ -40,7 +40,7 @@ const Error = styled.h4`
 `;
 
 const ArtistTopTracks = ({ loading, error, topTracks }) => {
-  const loadingJsx = [...new Array(16)].map(() => (
+  const loadingJsx = [...new Array(10)].map(() => (
     <TrackLoading key={randomId()} />
   ));
 
