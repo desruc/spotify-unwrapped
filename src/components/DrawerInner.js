@@ -44,7 +44,7 @@ const UserImage = styled.div`
 
 const NavList = styled.ul`
   margin: 20px 0px;
-  padding: 16px;
+  padding: 0px;
   flex: 1;
   li {
     &:not(:last-child) {
@@ -60,7 +60,7 @@ const NavItem = styled.li`
 
 const NavLink = styled(Link)`
   width: 100%;
-  padding: 8px 16px;
+  padding: 8px 24px;
   border-radius: 25px;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
