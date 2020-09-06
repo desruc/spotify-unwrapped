@@ -9,6 +9,7 @@ const Flex = styled.div`
   ${({ mt }) => mt && `margin-top: ${mt}px;`}
   ${({ fullWidth }) => fullWidth && `width: 100%;`}
   ${({ flexOne }) => flexOne && `flex: 1;`}
+  flex-direction: ${({ flexDirection }) => flexDirection || 'row'};
 `;
 
 export default Flex;
