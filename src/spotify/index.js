@@ -265,3 +265,30 @@ export const getPlaylists = async () => {
   });
   return items;
 };
+
+/**
+ * Get a playlists details (name, owner, etc)
+ * @param {String} playlistId
+ */
+export const getPlaylistDetails = async (playlistId) => {
+  const {
+    data,
+  } = await axios.get(`https://api.spotify.com/v1/playlists/${playlistId}`, {
+    headers,
+  });
+  return data;
+};
+
+/**
+ * Get a playlists tracks
+ * @param {String} playlistId
+ */
+export const getPlaylistTracks = async (playlistId) => {
+  const {
+    data: { items },
+  } = await axios.get(
+    `https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=100`,
+    { headers }
+  );
+  return items;
+};

@@ -3,9 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import Flex from '../components/Flex';
-import Navigation from '../components/Navigation';
-
 import RecentlyPlayed from './RecentlyPlayed';
 import TopArtists from './TopArtists';
 import TopAlbums from './TopAlbums';
@@ -14,11 +11,15 @@ import Dashboard from './Dashboard';
 import TrackOverview from './TrackOverview';
 import ArtistOverview from './ArtistOverview';
 import AlbumOverview from './AlbumOverview';
-
-import { bootstrapArtists, bootstrapTracks } from '../store/actions';
 import Playlists from './Playlists';
+import PlaylistTracks from './PlaylistDetails';
+
+import Flex from '../components/Flex';
+import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import ScrollToTop from '../components/ScrollToTop';
+
+import { bootstrapArtists, bootstrapTracks } from '../store/actions';
 
 const PageWrap = styled.div`
   width: 100%;
@@ -66,6 +67,7 @@ const AuthenticatedView = () => {
               />
               <Route exact path="/album/:albumId" component={AlbumOverview} />
               <Route exact path="/playlists" component={Playlists} />
+              <Route exact path="/playlist/:playlistId" component={PlaylistTracks} />
               <Route path={['/', '/dashboard']} component={Dashboard} />
             </Switch>
             <Footer />
