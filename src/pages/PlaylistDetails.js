@@ -1,9 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 
 import PageHeader from '../components/PageHeader';
+import OverviewDetails from '../components/OverviewDetails';
+import Track from '../components/Track';
 
 import { getPlaylistDetails, getPlaylistTracks } from '../spotify';
+
+const List = styled.ul`
+  flex: 1;
+  transition: width 0.2s ease-in-out;
+  margin: 0;
+  padding: 0px;
+  list-style: none;
+`;
+
+const TotalTracks = styled.h3`
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: ${({ theme }) => theme.tertiary};
+`;
+
+const Followers = styled.h4`
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: ${({ theme }) => theme.secondary};
+`;
 
 const PlaylistTracks = () => {
   // Hooks
@@ -75,7 +98,18 @@ const PlaylistTracks = () => {
   return (
     <main>
       <PageHeader heading="Playlist" />
-      {playlist && playlist.name}
+      <OverviewDetails
+        loading={playlistLoading}
+        heading={playlist?.name}
+        spotifyUrl={playlist?.external_urls?.spotify}
+        imageSrc={playlist?.images[0].url}
+      >
+        <TotalTracks>{playlist && playlist.tracks.total} songs</TotalTracks>
+        <Followers>{playlist && playlist.followers.total} followers</Followers>
+      </OverviewDetails>
+      <List>
+        {playlistTracks && playlistTracks.map((t) => <Track track={t.track} />)}
+      </List>
     </main>
   );
 };
