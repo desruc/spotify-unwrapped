@@ -2,21 +2,21 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { selectTopTracks, selectAlbumRange } from '../store/reducer';
-import { CHANGE_ALBUM_DATE_RANGE } from '../store/types';
+import { selectTopTracks, selectAlbumRange } from '../../store/reducer';
+import { CHANGE_ALBUM_DATE_RANGE } from '../../store/types';
 
 import DashboardSectionWrap from './DashboardSectionWrap';
-import Flex from './Flex';
-import FeatureImage from './FeatureImage';
+import Flex from '../Flex';
+import FeatureImage from '../FeatureImage';
 
-import { useWindowSize } from '../utils/hooks';
+import { useWindowSize } from '../../utils/hooks';
 
 import {
   getTopAlbums,
   getViewportName,
   getArtist,
   truncateString,
-} from '../utils/helpers';
+} from '../../utils/helpers';
 
 const DashboardAlbums = () => {
   // Hooks

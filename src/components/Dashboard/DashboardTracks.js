@@ -3,14 +3,15 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
 import DashboardSectionWrap from './DashboardSectionWrap';
-import Track from './Track';
+import List from '../Elements/List';
+import Track from '../Track';
 
 import {
   selectTrackRange,
   selectRecentlyPlayed,
   selectTopTracks,
-} from '../store/reducer';
-import { CHANGE_TRACK_DATE_RANGE } from '../store/types';
+} from '../../store/reducer';
+import { CHANGE_TRACK_DATE_RANGE } from '../../store/types';
 
 const Section = styled.section`
   display: flex;
@@ -19,25 +20,17 @@ const Section = styled.section`
 
 const RecentlyPlayedWrap = styled.div`
   width: 100%;
-  padding-right: 16px;
-  @media (min-width: 992px) {
-    width: calc(25% - 16px);
+  @media (min-width: 1200px) {
+    padding-right: 16px;
+    width: 25%;
   }
 `;
 
 const TopTracksWrap = styled.div`
   width: 100%;
-  @media (min-width: 992px) {
-    width: 75%
+  @media (min-width: 1200px) {
+    width: 75%;
   }
-`;
-
-const List = styled.ul`
-  transition: width 0.2s ease-in-out;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  ${({ twoColumns }) => twoColumns && 'columns: 2;'}
 `;
 
 const Wrap = styled.div`

@@ -1,22 +1,21 @@
 import React from 'react';
-
-import Container from '../components/Container';
+import { useSelector } from 'react-redux';
 
 import PageHeader from '../components/PageHeader';
-import DashboardTracks from '../components/DashboardTracks';
-import DashboardArtists from '../components/DashboardArtists';
-import DashboardGenres from '../components/DashboardGenres';
-import DashboardAlbums from '../components/DashboardAlbums';
+import DashboardTracks from '../components/Dashboard/DashboardTracks';
+import DashboardArtists from '../components/Dashboard/DashboardArtists';
+import DashboardGenres from '../components/Dashboard/DashboardGenres';
+import DashboardAlbums from '../components/Dashboard/DashboardAlbums';
 
 const Dashboard = () => {
   return (
-    <Container>
+    <main>
       <PageHeader heading="Dashboard" />
       <DashboardTracks />
       <DashboardArtists />
       <DashboardAlbums />
       <DashboardGenres />
-    </Container>
+    </main>
   );
 };
 

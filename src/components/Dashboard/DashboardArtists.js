@@ -2,15 +2,15 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { selectAristRange, selectTopArtists } from '../store/reducer';
-import { CHANGE_ARTIST_DATE_RANGE } from '../store/types';
+import { selectAristRange, selectTopArtists } from '../../store/reducer';
+import { CHANGE_ARTIST_DATE_RANGE } from '../../store/types';
 
 import DashboardSectionWrap from './DashboardSectionWrap';
-import Flex from './Flex';
-import FeatureImage from './FeatureImage';
+import Flex from '../Flex';
+import FeatureImage from '../FeatureImage';
 
-import { useWindowSize } from '../utils/hooks';
-import { getViewportName } from '../utils/helpers';
+import { useWindowSize } from '../../utils/hooks';
+import { getViewportName } from '../../utils/helpers';
 
 const DashboardArtists = () => {
   // Hooks

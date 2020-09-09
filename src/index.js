@@ -9,7 +9,7 @@ import App from './pages/App';
 
 import store from './store';
 
-import theme from './constants/theme';
+import theme from './styles/theme';
 
 const GlobalStyle = createGlobalStyle`
   * {

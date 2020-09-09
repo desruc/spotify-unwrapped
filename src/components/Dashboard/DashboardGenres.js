@@ -2,13 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import Flex from './Flex';
+import Flex from '../Flex';
 import DashboardSectionWrap from './DashboardSectionWrap';
 
-import { CHANGE_GENRE_DATE_RANGE } from '../store/types';
-import { selectGenreRange, selectTopArtists } from '../store/reducer';
+import { CHANGE_GENRE_DATE_RANGE } from '../../store/types';
+import { selectGenreRange, selectTopArtists } from '../../store/reducer';
 
-import { getTopGenres } from '../utils/helpers';
+import { getTopGenres } from '../../utils/helpers';
 
 const TopFiveWrap = styled.div`
   width: 33.33333333333333%;
