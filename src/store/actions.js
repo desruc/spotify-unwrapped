@@ -134,7 +134,7 @@ export const getAllTimeTracks = () => async (dispatch) => {
 export const getHalfYearTracks = () => async (dispatch) => {
   try {
     dispatch({ type: types.TOP_TRACKS_LOADING_STATE, state: true });
-    const tracks = await spotify.getSixMonthsTracks();
+    const tracks = await spotify.getSixMonthTracks();
     dispatch({
       type: types.GET_TOP_TRACKS_HALF_YEAR_SUCCESS,
       tracks,

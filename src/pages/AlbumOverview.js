@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import PageHeader from '../components/PageHeader';
 import OverviewDetails from '../components/OverviewDetails';
-import AlbumTracks from '../components/AlbumTracks';
+import AlbumTracks from '../components/AlbumOverview/AlbumTracks';
 
 import { getAlbum } from '../spotify';
 import { getAlbumYear, getAlbumDuration } from '../utils/helpers';

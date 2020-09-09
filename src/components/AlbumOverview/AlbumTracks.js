@@ -3,15 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
-import mixins from '../styles/mixins';
-import keyframes from '../styles/keyframes';
-import { formatDuration } from '../utils/helpers';
+import List from '../Elements/List';
 
-const List = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-`;
+import mixins from '../../styles/mixins';
+import keyframes from '../../styles/keyframes';
+import { formatDuration } from '../../utils/helpers';
 
 const LoadingListItem = styled.li`
   display: flex;

@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import ArtistAlbumsLoading from './ArtistAlbumsLoading';
 
-import { getAlbumYear } from '../utils/helpers';
+import { getAlbumYear } from '../../utils/helpers';
 
 const Heading = styled.h2`
   margin-top: 0px;

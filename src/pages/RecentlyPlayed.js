@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import { selectRecentlyPlayed } from '../store/reducer';
 
-import Container from '../components/Container';
 import PageHeader from '../components/PageHeader';
 import Track from '../components/Track';
 
@@ -24,13 +23,11 @@ const RecentlyPlayed = () => {
 
   return (
     <main>
-      <Container>
-        <PageHeader heading="Recently Played" />
-        <List>
-          {tracks &&
-            tracks.map(({ track }) => <Track key={track.id} track={track} />)}
-        </List>
-      </Container>
+      <PageHeader heading="Recently Played" />
+      <List>
+        {tracks &&
+          tracks.map(({ track }) => <Track key={track.id} track={track} />)}
+      </List>
     </main>
   );
 };

@@ -6,7 +6,7 @@ import PageHeader from '../components/PageHeader';
 import OverviewDetails from '../components/OverviewDetails';
 import AudioAnalysis from '../components/AudioAnalysis';
 import AudioFeatures from '../components/AudioFeatures';
-import TrackRecommendations from '../components/TrackRecommendations';
+import TrackRecommendations from '../components/TrackOverview/TrackRecommendations';
 
 import { getTrack, getTrackFeatures, getTrackAnalysis } from '../spotify';
 

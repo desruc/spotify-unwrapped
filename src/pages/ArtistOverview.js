@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 import PageHeader from '../components/PageHeader';
 import OverviewDetails from '../components/OverviewDetails';
-import ArtistTopTracks from '../components/ArtistTopTracks';
-import RelatedArtists from '../components/RelatedArtists';
-import ArtistAlbums from '../components/ArtistAlbums';
+import ArtistTopTracks from '../components/ArtistOverview/ArtistTopTracks';
+import RelatedArtists from '../components/ArtistOverview/RelatedArtists';
+import ArtistAlbums from '../components/ArtistOverview/ArtistAlbums';
 
 import {
   getArtist,

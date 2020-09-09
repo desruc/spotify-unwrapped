@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Flex from './Flex';
-import TrackLoading from './TrackLoading';
-import Track from './Track';
+import Flex from '../Flex';
+import TrackLoading from '../TrackLoading';
+import Track from '../Track';
 
-import { randomId } from '../utils/helpers';
+import { randomId } from '../../utils/helpers';
 
 const Card = styled.div`
   height: 100%;

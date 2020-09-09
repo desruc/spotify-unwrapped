@@ -15,9 +15,9 @@ import Playlists from './Playlists';
 import PlaylistTracks from './PlaylistDetails';
 
 import Flex from '../components/Flex';
-import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
-import ScrollToTop from '../components/ScrollToTop';
+import Navigation from '../components/Navigation/Navigation';
+import Footer from '../components/Elements/Footer';
+import ScrollToTop from '../components/Elements/ScrollToTop';
 
 import { bootstrapArtists, bootstrapTracks } from '../store/actions';
 

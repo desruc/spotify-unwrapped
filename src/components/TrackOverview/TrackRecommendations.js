@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Flex from './Flex';
-import TrackLoading from './TrackLoading';
-import Track from './Track';
+import Flex from '../Flex';
+import TrackLoading from '../TrackLoading';
+import Track from '../Track';
 
-import { getTrackRecommendations } from '../spotify';
-import { randomId } from '../utils/helpers';
+import { getTrackRecommendations } from '../../spotify';
+import { randomId } from '../../utils/helpers';
 
 const Section = styled.section`
   flex: 1;

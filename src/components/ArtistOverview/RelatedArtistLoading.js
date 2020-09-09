@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import keyframes from '../styles/keyframes';
+import keyframes from '../../styles/keyframes';
 
 const ListItem = styled.li`
   flex: 1;

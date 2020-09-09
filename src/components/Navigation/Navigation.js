@@ -9,9 +9,9 @@ import '@animated-burgers/burger-slide/dist/styles.css';
 
 import { useDispatch } from 'react-redux';
 
-import { getUserProfile } from '../store/actions';
+import { getUserProfile } from '../../store/actions';
 
-import { useWindowSize } from '../utils/hooks';
+import { useWindowSize } from '../../utils/hooks';
 
 import DrawerInner from './DrawerInner';
 

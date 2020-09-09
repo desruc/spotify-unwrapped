@@ -11,7 +11,7 @@ import {
   MdTagFaces,
 } from 'react-icons/md';
 
-import { selectProfile } from '../store/reducer';
+import { selectProfile } from '../../store/reducer';
 
 const Heading = styled.h2`
   margin-bottom: 60px;
