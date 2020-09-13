@@ -10,6 +10,7 @@ const Flex = styled.div`
   ${({ fullWidth }) => fullWidth && `width: 100%;`}
   ${({ flexOne }) => flexOne && `flex: 1;`}
   flex-direction: ${({ flexDirection }) => flexDirection || 'row'};
+  padding-right: ${({ paddingRight }) => paddingRight || '0px'};
 `;
 
 export default Flex;

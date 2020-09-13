@@ -15,6 +15,8 @@ const initialState = {
   topTracksMonth: null,
   selectedTrack: null,
   trackLoading: false,
+  topTracksLoading: true,
+  topArtistsLoading: true,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -23,6 +25,18 @@ const appReducer = (state = initialState, action) => {
       return {
         ...state,
         profile: action.profile,
+      };
+
+    case types.TOP_TRACKS_LOADING_STATE:
+      return {
+        ...state,
+        topTracksLoading: action.state,
+      };
+
+    case types.TOP_ARTISTS_LOADING_STATE:
+      return {
+        ...state,
+        topArtistsLoading: action.state,
       };
 
     case types.CHANGE_ARTIST_DATE_RANGE:
@@ -112,6 +126,9 @@ const appReducer = (state = initialState, action) => {
 export default appReducer;
 
 export const selectProfile = (state) => state.app.profile;
+
+export const selectTopTracksLoading = (state) => state.app.topTracksLoading;
+export const selectTopArtistsLoading = (state) => state.app.topArtistsLoading;
 
 export const selectAristRange = (state) => state.app.artistDateRange;
 export const selectAlbumRange = (state) => state.app.albumDateRange;

@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Flex from './Flex';
+
 import keyframes from '../styles/keyframes';
+import mixins from '../styles/mixins';
 
 const ListItem = styled.li`
   flex: 1;
@@ -30,6 +33,7 @@ const Container = styled.div`
 const Meta = styled.div`
   display: grid;
   grid-template-columns: 1fr max-content;
+  min-height: 55px;
   grid-gap: 10px;
 `;
 
@@ -43,11 +47,15 @@ const Image = styled.div`
   border-radius: 6px;
 `;
 
-const Text = styled.span`
+const Text = styled.div`
+  height: 12px;
   font-size: 12px;
   background-color: ${({ theme }) => theme.secondary};
   animation: ${keyframes.glow} 1.5s ease-in-out infinite;
   color: ${({ theme }) => theme.secondary};
+  width: 100%;
+  margin-bottom: ${({ mb }) => mb || 0};
+  ${mixins.overflowEllipsis}
 `;
 
 const TrackLoading = () => (
@@ -55,15 +63,13 @@ const TrackLoading = () => (
     <Container>
       <Image />
       <Meta>
-        <div>
-          <Text>Loading</Text>
-          <div>
-            <Text>Loading... Loading... Loading...</Text>
-          </div>
-        </div>
-        <div>
-          <Text>Loading</Text>
-        </div>
+        <Flex flexDirection="column" justify="center">
+          <Text mb="5px" />
+          <Text />
+        </Flex>
+        <Flex flexDirection="column" justify="center">
+          <Text justify>0:00</Text>
+        </Flex>
       </Meta>
     </Container>
   </ListItem>

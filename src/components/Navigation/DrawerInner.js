@@ -33,13 +33,10 @@ const ImageWrap = styled.div`
   padding: 3px;
 `;
 
-const UserImage = styled.div`
+const UserImage = styled.img`
   height: 100%;
   width: 100%;
   border-radius: 50%;
-  background-size: cover;
-  background-position: center center;
-  background-image: url(${({ image }) => image});
 `;
 
 const NavList = styled.ul`
@@ -129,7 +126,7 @@ const DrawerInner = () => {
         </Heading>
         {profile && profile.images && profile.images.length > 0 && (
           <ImageWrap>
-            <UserImage image={profile.images[0].url} />
+            <UserImage src={profile.images[0].url} />
           </ImageWrap>
         )}
         {profile && profile.display_name && (
