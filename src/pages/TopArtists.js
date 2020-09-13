@@ -44,7 +44,7 @@ const TopArtists = () => {
   return (
     <main>
       <PageHeader heading="Top Artists" actions={headerActions} />
-      <Flex wrap>
+      <Flex flexWrap="wrap">
         {computedArtists &&
           computedArtists
             .slice(0, computedSlice)
@@ -58,7 +58,7 @@ const TopArtists = () => {
               />
             ))}
       </Flex>
-      <Flex wrap>
+      <Flex flexWrap="wrap">
         {computedArtists &&
           computedArtists
             .slice(computedSlice)

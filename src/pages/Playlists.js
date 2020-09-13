@@ -119,7 +119,7 @@ const Playlists = () => {
             <Flex
               key={`loading-playlists-${idx}`} // eslint-disable-line
               flexDirection="column"
-              align="center"
+              alignItems="center"
             >
               <LoadingBox />
               <LoadingText>Loading playlists</LoadingText>
@@ -130,7 +130,7 @@ const Playlists = () => {
       {!playlistsLoading && (
         <Grid id="playlist-grid">
           {playlists.map(({ id, name, images, tracks }) => (
-            <Flex key={id} flexDirection="column" align="center">
+            <Flex key={id} flexDirection="column" alignItems="center">
               <PlaylistImageLink to={`/playlist/${id}`}>
                 <PlaylistImage src={images[0].url} alt="Playlist Cover" />
               </PlaylistImageLink>

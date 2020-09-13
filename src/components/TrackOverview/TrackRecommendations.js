@@ -97,7 +97,7 @@ const TrackRecommendations = ({ trackId }) => {
     <Section>
       <Heading>Similar Tracks</Heading>
       <Card>
-        <Flex align="center" justify="center" flexOne>
+        <Flex alignItems="center" justifyContent="center" flex={1}>
           {error ? (
             <Error>There was an error retrieving similar tracks.</Error>
           ) : (

@@ -52,7 +52,7 @@ const ArtistTopTracks = ({ loading, error, topTracks }) => {
     <>
       <Heading>Popular Tracks</Heading>
       <Card>
-        <Flex fullWidth>
+        <Flex>
           {error ? (
             <Error>
               There was an error retrieving the artists popular tracks.

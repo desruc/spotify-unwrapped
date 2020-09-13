@@ -52,7 +52,7 @@ const TopAlbums = () => {
   return (
     <main>
       <PageHeader heading="Top Albums" actions={headerActions} />
-      <Flex wrap>
+      <Flex flexWrap="wrap">
         {computedAlbums &&
           computedAlbums.slice(0, computedSlice).map((a) => {
             const artist = getArtist(a[0]);
@@ -69,7 +69,7 @@ const TopAlbums = () => {
             );
           })}
       </Flex>
-      <Flex wrap>
+      <Flex flexWrap="wrap">
         {computedAlbums &&
           computedAlbums.slice(computedSlice).map((a) => {
             const artist = getArtist(a[0]);

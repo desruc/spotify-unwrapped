@@ -80,7 +80,7 @@ const DashboardLoading = () => {
     <main>
       <PageHeader heading="Dashboard" />
       <Section>
-        <Flex wrap>
+        <Flex flexWrap="wrap">
           <RecentlyPlayedWrap>
             <Section>
               <Heading>Recently Played</Heading>
@@ -110,7 +110,7 @@ const DashboardLoading = () => {
       <Section>
         <Heading>Top Artists</Heading>
         <Card padding="5px">
-          <Flex wrap>
+          <Flex flexWrap="wrap">
             {[...new Array(sliceRange[getViewportName(viewportWidth)])].map(
               (e, idx) => (
                 <TopArtistAlbumWrap key={`artist-loading-${idx}`}>
@@ -129,7 +129,7 @@ const DashboardLoading = () => {
       <Section>
         <Heading>Top Albums</Heading>
         <Card padding="5px">
-          <Flex wrap>
+          <Flex flexWrap="wrap">
             {[...new Array(sliceRange[getViewportName(viewportWidth)])].map(
               (e, idx) => (
                 <TopArtistAlbumWrap key={`album-loading-${idx}`}>

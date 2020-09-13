@@ -45,7 +45,7 @@ const DashboardArtists = () => {
       selectedRange={range}
       seeMoreLink="/top-artists"
     >
-      <Flex wrap>
+      <Flex flexWrap="wrap">
         {computedArtists &&
           computedArtists
             .slice(0, computedSlice)

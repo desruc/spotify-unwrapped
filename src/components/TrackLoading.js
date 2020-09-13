@@ -63,11 +63,11 @@ const TrackLoading = () => (
     <Container>
       <Image />
       <Meta>
-        <Flex flexDirection="column" justify="center">
+        <Flex flexDirection="column" justifyContent="center">
           <Text mb="5px" />
           <Text />
         </Flex>
-        <Flex flexDirection="column" justify="center">
+        <Flex flexDirection="column" justifyContent="center">
           <Text justify>0:00</Text>
         </Flex>
       </Meta>

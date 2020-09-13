@@ -74,7 +74,7 @@ const DashboardSectionWrap = ({
     </TitleWrap>
     <Container showRange={showRange}>{children}</Container>
     {seeMoreLink && (
-      <Flex align="center" justify="flex-end" mt={20}>
+      <Flex alignItems="center" justifyContent="flex-end" mt={20}>
         <StyledLink to={seeMoreLink}>
           See more <MdTrendingFlat />
         </StyledLink>
