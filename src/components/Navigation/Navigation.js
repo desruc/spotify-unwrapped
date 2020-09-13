@@ -26,7 +26,7 @@ const MobileDrawer = styled(animated.div)`
   flex-direction: column;
   padding-bottom: 48px;
   background-color: ${(props) => props.theme.cardBackground};
-  @media (min-width: 992px) {
+  @media (min-width: 1200px) {
     display: none;
   }
 `;
@@ -50,7 +50,7 @@ const MobileNavBar = styled(Headroom)`
   }
   position: absolute;
   width: 100%;
-  @media (min-width: 992px) {
+  @media (min-width: 1200px) {
     display: none;
   }
 `;
@@ -78,7 +78,7 @@ const DesktopDrawerWrap = styled.div`
   display: none;
   width: 220px;
   z-index: 12;
-  @media (min-width: 992px) {
+  @media (min-width: 1200px) {
     display: block;
   }
 `;
@@ -88,7 +88,7 @@ const DesktopDrawer = styled.div`
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   background-color: ${(props) => props.theme.cardBackground};
   z-index: 12;
-  @media (min-width: 992px) {
+  @media (min-width: 1200px) {
     position: fixed;
     height: 100vh;
     width: 220px;
@@ -104,7 +104,7 @@ const Navigation = () => {
 
   // Viewport
   const { width: windowWidth } = useWindowSize();
-  const isDesktop = windowWidth >= 768;
+  const isDesktop = windowWidth >= 1200;
 
   // Local state
   const [isOpen, setIsOpen] = useState(false);

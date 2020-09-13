@@ -9,9 +9,14 @@ import {
   MdPlaylistPlay,
   MdLibraryMusic,
   MdTagFaces,
+  MdEject
 } from 'react-icons/md';
 
+import Flex from '../Flex';
+import ProfileLoading from './ProfileLoading';
+
 import { selectProfile } from '../../store/reducer';
+import { clearTokens } from '../../utils/tokenHelpers';
 
 const Heading = styled.h2`
   margin-bottom: 60px;
@@ -37,6 +42,22 @@ const UserImage = styled.img`
   height: 100%;
   width: 100%;
   border-radius: 50%;
+`;
+
+const Username = styled.h3`
+  margin-top: 16px;
+  text-align: center;
+`
+
+const FollowersHeading = styled.h5`
+  font-weight: 300;
+  margin-bottom: 0px;
+`;
+
+const Followers = styled.h6`
+  font-weight: 300;
+  color: ${({ theme }) => theme.tertiary};
+  margin-bottom: 0px;
 `;
 
 const NavList = styled.ul`
@@ -66,6 +87,29 @@ const NavLink = styled(Link)`
   align-items: center;
   text-decoration: none !important;
   color: ${({ active, theme }) => (active ? theme.main : theme.text)};
+  &:hover {
+    color: ${({ theme }) => theme.main};
+  }
+  svg {
+    height: 24px;
+    width: 24px;
+    margin-right: 10px;
+  }
+`;
+
+const LogoutButton = styled.button`
+  width: 100%;
+  padding: 8px 24px;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  color: ${({ active, theme }) => (active ? theme.main : theme.text)};
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 16px;
   &:hover {
     color: ${({ theme }) => theme.main};
   }
@@ -124,15 +168,22 @@ const DrawerInner = () => {
           Unwrapped
           <span style={{ color: themeContext.main }}>.</span>
         </Heading>
+        {!profile && <ProfileLoading />}
         {profile && profile.images && profile.images.length > 0 && (
           <ImageWrap>
             <UserImage src={profile.images[0].url} />
           </ImageWrap>
         )}
         {profile && profile.display_name && (
-          <h3 style={{ marginBottom: 0, textAlign: 'center' }}>
+          <Username>
             {profile.display_name}
-          </h3>
+          </Username>
+        )}
+        {profile && profile.followers?.total && (
+          <Flex alignItems="center" flexDirection="column">
+            <FollowersHeading>Followers</FollowersHeading>
+            <Followers>{profile.followers.total}</Followers>
+          </Flex>
         )}
       </Profile>
       <NavList>
@@ -148,6 +199,10 @@ const DrawerInner = () => {
           );
         })}
       </NavList>
+      <LogoutButton onClick={clearTokens}>
+        <MdEject />
+        Logout
+      </LogoutButton>
     </>
   );
 };

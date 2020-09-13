@@ -8,7 +8,7 @@ const Flex = styled.div`
   width: ${({ width }) => width || '100%'};
   ${({ mb }) => mb && `margin-bottom: ${mb}px;`}
   ${({ mt }) => mt && `margin-top: ${mt}px;`}
-  flex: ${({ flex }) => flex || 'auto'};
+  flex: ${({ flex }) => flex || 'none'};
   flex-direction: ${({ flexDirection }) => flexDirection || 'row'};
   padding-right: ${({ paddingRight }) => paddingRight || '0px'};
 `;

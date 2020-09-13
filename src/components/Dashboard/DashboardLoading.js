@@ -58,10 +58,10 @@ const ImageWrap = styled.div`
   align-items: center;
   height: 170px;
   @media (min-width: 768px) {
-    height: 330px;
+    height: 200px;
   }
   @media (min-width: 992px) {
-    height: 200px;
+    height: 330px;
   }
 `;
 
