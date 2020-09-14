@@ -67,12 +67,12 @@ const DashboardSectionWrap = ({
 }) => (
   <Section id={id}>
     <TitleWrap>
-      <Heading showRange={showRange}>{heading}</Heading>
+      <Heading>{heading}</Heading>
       {showRange && actionType && selectedRange && (
         <RangeTabs actionType={actionType} selected={selectedRange} />
       )}
     </TitleWrap>
-    <Container showRange={showRange}>{children}</Container>
+    <Container>{children}</Container>
     {seeMoreLink && (
       <Flex alignItems="center" justifyContent="flex-end" mt={20}>
         <StyledLink to={seeMoreLink}>

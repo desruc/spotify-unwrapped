@@ -15,7 +15,8 @@ const Tab = styled.div`
   align-items: center;
   transition: all 0.2s ease-in-out;
   color: ${({ selected, theme }) => (selected ? theme.heading : theme.text)};
-  ${({ selected, theme }) => selected && `border-bottom: 1px solid ${theme.tertiary};`};
+  ${({ selected, theme }) =>
+    selected && `border-bottom: 1px solid ${theme.tertiary};`};
 `;
 
 const RangeTabs = ({ actionType, selected }) => {
@@ -36,7 +37,7 @@ const RangeTabs = ({ actionType, selected }) => {
   const isMonth = selected === 'month';
 
   return (
-    <Flex>
+    <Flex width="fit-content">
       <Tab onClick={() => handleClick('allTime')} selected={isAllTime}>
         All Time
       </Tab>
@@ -52,7 +53,7 @@ const RangeTabs = ({ actionType, selected }) => {
 
 RangeTabs.propTypes = {
   actionType: PropTypes.string.isRequired,
-  selected: PropTypes.string.isRequired
+  selected: PropTypes.string.isRequired,
 };
 
 export default RangeTabs;

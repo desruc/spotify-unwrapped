@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import styled, { ThemeContext } from 'styled-components';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
@@ -9,7 +10,7 @@ import {
   MdPlaylistPlay,
   MdLibraryMusic,
   MdTagFaces,
-  MdEject
+  MdEject,
 } from 'react-icons/md';
 
 import Flex from '../Flex';
@@ -47,7 +48,7 @@ const UserImage = styled.img`
 const Username = styled.h3`
   margin-top: 16px;
   text-align: center;
-`
+`;
 
 const FollowersHeading = styled.h5`
   font-weight: 300;
@@ -153,13 +154,18 @@ const menuRoutes = [
   },
 ];
 
-const DrawerInner = () => {
+const DrawerInner = ({ closeDrawer }) => {
   // Hooks
   const themeContext = useContext(ThemeContext);
   const { pathname } = useLocation();
 
   // Redux
   const profile = useSelector((state) => selectProfile(state));
+
+  // Event handlers
+  const onLinkClick = () => {
+    closeDrawer();
+  };
 
   return (
     <>
@@ -175,9 +181,7 @@ const DrawerInner = () => {
           </ImageWrap>
         )}
         {profile && profile.display_name && (
-          <Username>
-            {profile.display_name}
-          </Username>
+          <Username>{profile.display_name}</Username>
         )}
         {profile && profile.followers?.total && (
           <Flex alignItems="center" flexDirection="column">
@@ -191,7 +195,7 @@ const DrawerInner = () => {
           const isActive = pathname.includes(to);
           return (
             <NavItem key={key}>
-              <NavLink to={to} active={isActive ? 1 : 0}>
+              <NavLink to={to} active={isActive ? 1 : 0} onClick={onLinkClick}>
                 <Icon />
                 {label}
               </NavLink>
@@ -205,6 +209,10 @@ const DrawerInner = () => {
       </LogoutButton>
     </>
   );
+};
+
+DrawerInner.propTypes = {
+  toggleMenu: PropTypes.func.isRequired,
 };
 
 export default DrawerInner;

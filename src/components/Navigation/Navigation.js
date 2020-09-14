@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 import { animated, useSpring } from 'react-spring';
 import { Link } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 
 import { getUserProfile } from '../../store/actions';
 
-import { useWindowSize } from '../../utils/hooks';
+import { useWindowSize, useOnClickOutside } from '../../utils/hooks';
 
 import DrawerInner from './DrawerInner';
 
@@ -124,9 +124,30 @@ const Navigation = () => {
   const animatedProps = useSpring({ left: isOpen ? 0 : -300 });
 
   // Event handlers
-  const toggleMenu = () => {
+  const toggleDrawer = () => {
     setIsOpen(!isOpen);
   };
+
+  const closeDrawer = () => {
+    if (isOpen) {
+      setIsOpen(false);
+    }
+  };
+
+  const handleOutsideClick = (e) => {
+    const {
+      target: { id },
+    } = e;
+
+    // Dont fire if hitting menu item
+    if (id === 'menu-burger') return;
+
+    closeDrawer();
+  };
+
+  // Ref for detecting outside click
+  const drawerRef = useRef();
+  useOnClickOutside(drawerRef, handleOutsideClick);
 
   return (
     <>
@@ -136,16 +157,16 @@ const Navigation = () => {
           Unwrapped
           <span style={{ color: themeContext.main }}>.</span>
         </MobileHeading>
-        <SlideBurger onClick={toggleMenu} isOpen={isOpen}>
+        <SlideBurger id="menu-burger" onClick={toggleDrawer} isOpen={isOpen}>
           Toggle
         </SlideBurger>
       </MobileNavBar>
-      <MobileDrawer id="mobile-drawer" style={animatedProps}>
-        <DrawerInner />
+      <MobileDrawer id="mobile-drawer" style={animatedProps} ref={drawerRef}>
+        <DrawerInner closeDrawer={closeDrawer} />
       </MobileDrawer>
       <DesktopDrawerWrap>
         <DesktopDrawer id="desktop-drawer">
-          <DrawerInner />
+          <DrawerInner closeDrawer={closeDrawer} />
         </DesktopDrawer>
       </DesktopDrawerWrap>
     </>
