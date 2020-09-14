@@ -145,6 +145,12 @@ const DashboardLoading = () => {
           </Flex>
         </Card>
       </Section>
+      <Section>
+        <Heading>Top Genres</Heading>
+        <Card padding="16px" height="400px">
+          <LoadingBox height="100%" width="100%" borderRadius="6px" />
+        </Card>
+      </Section>
     </main>
   );
 };

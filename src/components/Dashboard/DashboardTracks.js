@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
+import Flex from '../Flex';
 import DashboardSectionWrap from './DashboardSectionWrap';
 import List from '../Elements/List';
 import Track from '../Track';
@@ -12,11 +13,6 @@ import {
   selectTopTracks,
 } from '../../store/reducer';
 import { CHANGE_TRACK_DATE_RANGE } from '../../store/types';
-
-const Section = styled.section`
-  display: flex;
-  flex-wrap: wrap;
-`;
 
 const RecentlyPlayedWrap = styled.div`
   width: 100%;
@@ -47,7 +43,7 @@ const DashboardTracks = () => {
   const computedTracks = topTracks[range];
 
   return (
-    <Section>
+    <Flex flexWrap="wrap">
       <RecentlyPlayedWrap>
         <DashboardSectionWrap
           id="recently-played"
@@ -83,7 +79,7 @@ const DashboardTracks = () => {
           </Wrap>
         </DashboardSectionWrap>
       </TopTracksWrap>
-    </Section>
+    </Flex>
   );
 };
 

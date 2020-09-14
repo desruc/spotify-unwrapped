@@ -11,7 +11,13 @@ import { selectGenreRange, selectTopArtists } from '../../store/reducer';
 import { getTopGenres } from '../../utils/helpers';
 
 const TopFiveWrap = styled.div`
-  width: 33.33333333333333%;
+  width: 100%;
+  @media (min-width: 992px) {
+    width: 50%;
+  }
+  @media (min-width: 1200px) {
+    width: 33.33333333333333%;
+  }
 `;
 
 const GenreHeading = styled.h3`
@@ -20,9 +26,13 @@ const GenreHeading = styled.h3`
 `;
 
 const MoreGenresWrap = styled.div`
-  padding-left: 16px;
-  padding-right: 16px;
-  width: calc(66.66666666666667% - 32px);
+  width: 100%;
+  @media (min-width: 992px) {
+    width: 50%;
+  }
+  @media (min-width: 1200px) {
+    width: 66.66666666666667%;
+  }
 `;
 
 const Bar = styled.div`
@@ -68,7 +78,7 @@ const DashboardGenres = () => {
       actionType={CHANGE_GENRE_DATE_RANGE}
       selectedRange={range}
     >
-      <Flex>
+      <Flex padding="16px" flexWrap="wrap">
         <TopFiveWrap width={25}>
           {genres &&
             genres.slice(0, 5).map((g, idx) => {
@@ -76,21 +86,24 @@ const DashboardGenres = () => {
               const highestValue = genres[0][1];
               const fillwidth = idx === 0 ? 100 : (value / highestValue) * 100;
               return (
-                <div>
+                <React.Fragment key={key}>
                   <GenreHeading>{key}</GenreHeading>
                   <Bar>
                     <BarFill width={fillwidth} />
                   </Bar>
-                </div>
+                </React.Fragment>
               );
             })}
         </TopFiveWrap>
         <MoreGenresWrap width={75}>
-          {genres &&
-            genres.slice(5).map((g) => {
-              const [key] = g;
-              return <Chip>{key}</Chip>;
-            })}
+          <h5>More of your favourite genres</h5>
+          <Flex flexWrap="wrap" justifyContent="center">
+            {genres &&
+              genres.slice(5).map((g) => {
+                const [key] = g;
+                return <Chip key={key}>{key}</Chip>;
+              })}
+          </Flex>
         </MoreGenresWrap>
       </Flex>
     </DashboardSectionWrap>
