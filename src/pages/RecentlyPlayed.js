@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import { selectRecentlyPlayed } from '../store/reducer';
 
-import PageHeader from '../components/PageHeader';
-import Track from '../components/Track';
+import PageHeader from '../components/Common/PageHeader';
+import Track from '../components/Common/Track';
 
 const List = styled.ul`
   transition: width 0.2s ease-in-out;

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Flex from '../Flex';
-import TrackLoading from '../TrackLoading';
-import Track from '../Track';
+import Flex from '../Common/Flex';
+import TrackLoading from '../Common/TrackLoading';
+import Track from '../Common/Track';
 
 import { getTrackRecommendations } from '../../spotify';
 import { randomId } from '../../utils/helpers';

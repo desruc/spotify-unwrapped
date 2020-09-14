@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import ButtonLink from '../components/ButtonLink';
+import ButtonLink from '../components/Common/ButtonLink';
 
 const Wrap = styled.div`
   display: flex;

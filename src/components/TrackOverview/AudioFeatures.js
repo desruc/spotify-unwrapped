@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { ThemeContext } from 'styled-components';
 import { ResponsiveBar } from '@nivo/bar';
 
-import { parseAudioFeatures } from '../utils/helpers';
+import { parseAudioFeatures } from '../../utils/helpers';
 
 // Blank data for loading state
 const emptyData = [

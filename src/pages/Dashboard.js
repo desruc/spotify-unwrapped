@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import DashboardLoading from '../components/Dashboard/DashboardLoading';
 
-import PageHeader from '../components/PageHeader';
+import PageHeader from '../components/Common/PageHeader';
 import DashboardTracks from '../components/Dashboard/DashboardTracks';
 import DashboardArtists from '../components/Dashboard/DashboardArtists';
 import DashboardGenres from '../components/Dashboard/DashboardGenres';

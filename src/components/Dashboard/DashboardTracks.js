@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
-import Flex from '../Flex';
+import Flex from '../Common/Flex';
 import DashboardSectionWrap from './DashboardSectionWrap';
-import List from '../Elements/List';
-import Track from '../Track';
+import List from '../Common/List';
+import Track from '../Common/Track';
 
 import {
   selectTrackRange,

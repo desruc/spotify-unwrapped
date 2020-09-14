@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import PageHeader from '../components/PageHeader';
-import OverviewDetails from '../components/OverviewDetails';
-import AudioAnalysis from '../components/AudioAnalysis';
-import AudioFeatures from '../components/AudioFeatures';
+import PageHeader from '../components/Common/PageHeader';
+import OverviewDetails from '../components/Common/OverviewDetails';
+import AudioAnalysis from '../components/TrackOverview/AudioAnalysis';
+import AudioFeatures from '../components/TrackOverview/AudioFeatures';
 import TrackRecommendations from '../components/TrackOverview/TrackRecommendations';
 
 import { getTrack, getTrackFeatures, getTrackAnalysis } from '../spotify';

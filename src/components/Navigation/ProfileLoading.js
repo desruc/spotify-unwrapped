@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import LoadingBox from '../Elements/LoadingBox';
-import Flex from '../Flex';
+import LoadingBox from '../Common/LoadingBox';
+import Flex from '../Common/Flex';
 
 const ProfileLoading = () => (
   <Flex flexDirection="column" alignItems="center">

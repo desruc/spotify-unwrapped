@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import Flex from './Flex';
 
-import keyframes from '../styles/keyframes';
-import mixins from '../styles/mixins';
+import keyframes from '../../styles/keyframes';
+import mixins from '../../styles/mixins';
 
 const ListItem = styled.li`
   flex: 1;

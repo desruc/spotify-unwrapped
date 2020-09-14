@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import { selectTopTracks, selectTrackRange } from '../store/reducer';
 import { CHANGE_TRACK_DATE_RANGE } from '../store/types';
 
-import PageHeader from '../components/PageHeader';
-import RangeTabs from '../components/RangeTabs';
-import Track from '../components/Track';
+import PageHeader from '../components/Common/PageHeader';
+import RangeTabs from '../components/Common/RangeTabs';
+import Track from '../components/Common/Track';
 
 const List = styled.ul`
   transition: width 0.2s ease-in-out;

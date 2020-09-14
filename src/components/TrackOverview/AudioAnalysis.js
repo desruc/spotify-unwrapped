@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import keyframes from '../styles/keyframes';
+import keyframes from '../../styles/keyframes';
 
 const Section = styled.section`
   margin-top: 40px;

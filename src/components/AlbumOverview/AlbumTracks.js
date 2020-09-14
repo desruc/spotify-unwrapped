@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
-import List from '../Elements/List';
+import List from '../Common/List';
 
 import mixins from '../../styles/mixins';
 import keyframes from '../../styles/keyframes';

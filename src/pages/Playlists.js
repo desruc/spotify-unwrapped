@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import PageHeader from '../components/PageHeader';
-import Flex from '../components/Flex';
+import PageHeader from '../components/Common/PageHeader';
+import Flex from '../components/Common/Flex';
 
 import keyframes from '../styles/keyframes';
 

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import PageHeader from '../components/PageHeader';
-import OverviewDetails from '../components/OverviewDetails';
-import Track from '../components/Track';
+import PageHeader from '../components/Common/PageHeader';
+import OverviewDetails from '../components/Common/OverviewDetails';
+import Track from '../components/Common/Track';
 
 import { getPlaylistDetails, getPlaylistTracks } from '../spotify';
 

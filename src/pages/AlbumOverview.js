@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import PageHeader from '../components/PageHeader';
-import OverviewDetails from '../components/OverviewDetails';
+import PageHeader from '../components/Common/PageHeader';
+import OverviewDetails from '../components/Common/OverviewDetails';
 import AlbumTracks from '../components/AlbumOverview/AlbumTracks';
 
 import { getAlbum } from '../spotify';

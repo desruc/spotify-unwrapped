@@ -5,9 +5,9 @@ import { useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import { SET_SELECTED_TRACK } from '../store/types';
+import { SET_SELECTED_TRACK } from '../../store/types';
 
-import { formatDuration } from '../utils/helpers';
+import { formatDuration } from '../../utils/helpers';
 
 const ListItem = styled.li`
   flex: 1;

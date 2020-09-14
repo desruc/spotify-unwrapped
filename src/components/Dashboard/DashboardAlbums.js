@@ -6,8 +6,8 @@ import { selectTopTracks, selectAlbumRange } from '../../store/reducer';
 import { CHANGE_ALBUM_DATE_RANGE } from '../../store/types';
 
 import DashboardSectionWrap from './DashboardSectionWrap';
-import Flex from '../Flex';
-import FeatureImage from '../FeatureImage';
+import Flex from '../Common/Flex';
+import FeatureImage from '../Common/FeatureImage';
 
 import { useWindowSize } from '../../utils/hooks';
 

@@ -14,10 +14,10 @@ import AlbumOverview from './AlbumOverview';
 import Playlists from './Playlists';
 import PlaylistTracks from './PlaylistDetails';
 
-import Flex from '../components/Flex';
+import Flex from '../components/Common/Flex';
 import Navigation from '../components/Navigation/Navigation';
-import Footer from '../components/Elements/Footer';
-import ScrollToTop from '../components/Elements/ScrollToTop';
+import Footer from '../components/Common/Footer';
+import ScrollToTop from '../components/Common/ScrollToTop';
 
 import { bootstrapArtists, bootstrapTracks } from '../store/actions';
 

@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { MdTrendingFlat } from 'react-icons/md';
 
-import Flex from '../Flex';
-import RangeTabs from '../RangeTabs';
+import Flex from '../Common/Flex';
+import RangeTabs from '../Common/RangeTabs';
 
 const Section = styled.section`
   margin: 20px 0px;

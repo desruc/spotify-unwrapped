@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import Flex from '../Flex';
+import Flex from '../Common/Flex';
 import DashboardSectionWrap from './DashboardSectionWrap';
 
 import { CHANGE_GENRE_DATE_RANGE } from '../../store/types';

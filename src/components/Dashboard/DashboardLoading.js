@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import PageHeader from '../PageHeader';
+import PageHeader from '../Common/PageHeader';
 
-import Flex from '../Flex';
-import Card from '../Elements/Card';
-import LoadingBox from '../Elements/LoadingBox';
-import List from '../Elements/List';
-import TrackLoading from '../TrackLoading';
+import Flex from '../Common/Flex';
+import Card from '../Common/Card';
+import LoadingBox from '../Common/LoadingBox';
+import List from '../Common/List';
+import TrackLoading from '../Common/TrackLoading';
 
 import { useWindowSize } from '../../utils/hooks';
 import { getViewportName } from '../../utils/helpers';

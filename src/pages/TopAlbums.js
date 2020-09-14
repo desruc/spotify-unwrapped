@@ -5,10 +5,10 @@ import { useHistory } from 'react-router-dom';
 import { selectTopTracks, selectAlbumRange } from '../store/reducer';
 import { CHANGE_ALBUM_DATE_RANGE } from '../store/types';
 
-import PageHeader from '../components/PageHeader';
-import RangeTabs from '../components/RangeTabs';
-import Flex from '../components/Flex';
-import FeatureImage from '../components/FeatureImage';
+import PageHeader from '../components/Common/PageHeader';
+import RangeTabs from '../components/Common/RangeTabs';
+import Flex from '../components/Common/Flex';
+import FeatureImage from '../components/Common/FeatureImage';
 
 import { useWindowSize } from '../utils/hooks';
 import {

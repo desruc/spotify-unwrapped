@@ -13,7 +13,7 @@ import {
   MdEject,
 } from 'react-icons/md';
 
-import Flex from '../Flex';
+import Flex from '../Common/Flex';
 import ProfileLoading from './ProfileLoading';
 
 import { selectProfile } from '../../store/reducer';
