@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import LoadingBox from '../Common/LoadingBox';
 import Flex from '../Common/Flex';

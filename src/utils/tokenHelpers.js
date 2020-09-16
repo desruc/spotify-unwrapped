@@ -23,42 +23,42 @@ const refreshAccessToken = async () => {
     const { data } = await axios.get(
       `/refresh_token?refresh_token=${getLocalRefreshToken()}`
     );
-    const { access_token } = data;
-    setLocalAccessToken(access_token);
+    const { access_token: accessToken } = data;
+    setLocalAccessToken(accessToken);
     window.location.reload();
     return;
   } catch (e) {
-    console.error(e);
+    console.error('Error refreshing token: ', e); // eslint-disable-line
   }
 };
 
 // Get the tokens on callback
 export const getToken = () => {
-  const { error, access_token, refresh_token } = getHashParams();
+  const { error, access_token: accessToken, refresh_token: refreshToken } = getHashParams();
 
   if (error) {
-    console.error('getAccessToken error -> ', error);
+    console.error('getAccessToken error -> ', error); // eslint-disable-line
     refreshAccessToken();
   }
 
   if (Date.now() - getTokenTimestamp() > expiryTime) {
-    console.warn('Auth token has expired, refreshing...');
+    console.warn('Auth token has expired, refreshing...'); // eslint-disable-line
     refreshAccessToken();
   }
 
-  const token = getLocalAccessToken();
-  const refreshToken = getLocalRefreshToken();
+  const localToken = getLocalAccessToken();
+  const localRefreshToken = getLocalRefreshToken();
 
-  if (!refreshToken || refreshToken === 'undefined') {
-    setLocalRefreshToken(refresh_token);
+  if (!localRefreshToken || localRefreshToken === 'undefined') {
+    setLocalRefreshToken(refreshToken);
   }
 
-  if (!token || token === 'undefined') {
-    setLocalAccessToken(access_token);
-    return access_token;
+  if (!localToken || localToken === 'undefined') {
+    setLocalAccessToken(accessToken);
+    return accessToken;
   }
 
-  return token;
+  return localToken;
 };
 
 export const clearTokens = () => {
