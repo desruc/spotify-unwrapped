@@ -7,7 +7,10 @@ import List from '../Common/List';
 
 import mixins from '../../styles/mixins';
 import keyframes from '../../styles/keyframes';
+
 import { formatDuration, randomId } from '../../utils/helpers';
+
+import { trackPropType, artistPropType } from '../../constants/types';
 
 const LoadingListItem = styled.li`
   display: flex;
@@ -127,12 +130,13 @@ const AlbumTracks = ({ loading, tracks, albumArtists }) => {
 
 AlbumTracks.propTypes = {
   loading: PropTypes.bool.isRequired,
-  tracks: PropTypes.array,
-  albumArtists: PropTypes.array.isRequired,
+  tracks: PropTypes.arrayOf(trackPropType),
+  albumArtists: PropTypes.arrayOf(artistPropType),
 };
 
 AlbumTracks.defaultProps = {
   tracks: [],
+  albumArtists: [],
 };
 
 export default AlbumTracks;

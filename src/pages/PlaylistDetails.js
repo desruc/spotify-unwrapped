@@ -109,7 +109,7 @@ const PlaylistTracks = () => {
 
   return (
     <main>
-      <PageHeader heading="Playlist" />
+      <PageHeader heading="Playlist Details" />
       <OverviewDetails
         loading={playlistLoading}
         heading={playlist?.name}

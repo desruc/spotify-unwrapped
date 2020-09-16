@@ -8,6 +8,8 @@ import RelatedArtistLoading from './RelatedArtistLoading';
 
 import { randomId } from '../../utils/helpers';
 
+import { artistPropType } from '../../constants/types';
+
 const Heading = styled.h2`
   margin-top: 0px;
 `;
@@ -117,7 +119,7 @@ const RelatedArtists = ({ loading, artists, error }) => {
 
 RelatedArtists.propTypes = {
   loading: PropTypes.bool.isRequired,
-  artists: PropTypes.array.isRequired,
+  artists: PropTypes.arrayOf(artistPropType).isRequired,
   error: PropTypes.bool,
 };
 

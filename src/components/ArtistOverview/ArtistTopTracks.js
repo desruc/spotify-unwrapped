@@ -9,6 +9,8 @@ import Track from '../Common/Track';
 
 import { randomId } from '../../utils/helpers';
 
+import { trackPropType } from '../../constants/types';
+
 const Card = styled.div`
   height: 100%;
   max-width: 100%;
@@ -65,7 +67,7 @@ const ArtistTopTracks = ({ loading, error, topTracks }) => {
 ArtistTopTracks.propTypes = {
   loading: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
-  topTracks: PropTypes.array,
+  topTracks: PropTypes.arrayOf(trackPropType),
 };
 
 ArtistTopTracks.defaultProps = {

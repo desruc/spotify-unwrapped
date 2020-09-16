@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -8,6 +7,8 @@ import styled from 'styled-components';
 import { SET_SELECTED_TRACK } from '../../store/types';
 
 import { formatDuration } from '../../utils/helpers';
+
+import { trackPropType } from '../../constants/types';
 
 const ListItem = styled.li`
   flex: 1;
@@ -160,7 +161,7 @@ const Track = ({ track }) => {
 };
 
 Track.propTypes = {
-  track: PropTypes.object.isRequired,
+  track: trackPropType.isRequired,
 };
 
 export default Track;

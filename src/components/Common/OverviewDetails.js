@@ -71,7 +71,7 @@ const OverviewDetails = ({
 
   return (
     <Wrap>
-      <Image image={imageSrc} />
+      {imageSrc && <Image image={imageSrc} />}
       <Inner>
         <Heading>{heading}</Heading>
         {children}

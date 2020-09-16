@@ -8,6 +8,8 @@ import ArtistAlbumsLoading from './ArtistAlbumsLoading';
 
 import { getAlbumYear, randomId } from '../../utils/helpers';
 
+import { albumPropType } from '../../constants/types';
+
 const Heading = styled.h2`
   margin-top: 0px;
 `;
@@ -86,19 +88,24 @@ const ArtistAlbums = ({ loading, albums, error }) => {
     <ArtistAlbumsLoading key={randomId()} />
   ));
 
-  const albumJsx = albums.map((a) => (
-    <AlbumWrap key={a.id}>
-      <AlbumImage
-        image={a.images[0]?.url}
-        title="Go to Album"
-        onClick={() => goToAlbum(a.id)}
-      />
-      <AlbumTitle title="Go to Album" onClick={() => goToAlbum(a.id)}>
-        {a.name}
-      </AlbumTitle>
-      <AlbumYear>{getAlbumYear(a)}</AlbumYear>
-    </AlbumWrap>
-  ));
+  const albumJsx =
+    albums.length > 0 ? (
+      albums.map((a) => (
+        <AlbumWrap key={a.id}>
+          <AlbumImage
+            image={a.images[0]?.url}
+            title="Go to Album"
+            onClick={() => goToAlbum(a.id)}
+          />
+          <AlbumTitle title="Go to Album" onClick={() => goToAlbum(a.id)}>
+            {a.name}
+          </AlbumTitle>
+          <AlbumYear>{getAlbumYear(a)}</AlbumYear>
+        </AlbumWrap>
+      ))
+    ) : (
+      <ErrorMessage>This artist does not have any albums</ErrorMessage>
+    );
 
   if (error)
     return (
@@ -119,7 +126,7 @@ const ArtistAlbums = ({ loading, albums, error }) => {
 
 ArtistAlbums.propTypes = {
   loading: PropTypes.bool.isRequired,
-  albums: PropTypes.array,
+  albums: PropTypes.arrayOf(albumPropType),
   error: PropTypes.bool,
 };
 

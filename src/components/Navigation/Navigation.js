@@ -25,6 +25,7 @@ const MobileDrawer = styled(animated.div)`
   display: flex;
   flex-direction: column;
   background-color: ${(props) => props.theme.cardBackground};
+  overflow: auto;
   @media (min-width: 1200px) {
     display: none;
   }
