@@ -2,8 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { selectTopArtists, selectAristRange } from '../store/reducer';
+import {
+  selectTopArtists,
+  selectAristRange,
+  selectTopArtistsLoading,
+} from '../store/reducer';
 
+import TopArtistAlbumLoading from '../components/Common/TopArtistAlbumLoading';
 import PageHeader from '../components/Common/PageHeader';
 import RangeTabs from '../components/Common/RangeTabs';
 import Flex from '../components/Common/Flex';
@@ -19,6 +24,7 @@ const TopArtists = () => {
   const history = useHistory();
 
   // Redux
+  const loading = useSelector((state) => selectTopArtistsLoading(state));
   const range = useSelector((state) => selectAristRange(state));
   const artists = useSelector((state) => selectTopArtists(state));
 
@@ -40,6 +46,8 @@ const TopArtists = () => {
   const headerActions = (
     <RangeTabs actionType={CHANGE_ARTIST_DATE_RANGE} selected={range} />
   );
+
+  if (loading) return <TopArtistAlbumLoading heading="Top Artists" />;
 
   return (
     <main>

@@ -1,32 +1,26 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
 
-import { selectRecentlyPlayed } from '../store/reducer';
+import { selectRecentlyPlayed, selectTopTracksLoading } from '../store/reducer';
 
+import TopTracksLoading from '../components/Common/TopTracksLoading';
 import PageHeader from '../components/Common/PageHeader';
+import List from '../components/Common/List';
 import Track from '../components/Common/Track';
 
 import { randomId } from '../utils/helpers';
 
-const List = styled.ul`
-  transition: width 0.2s ease-in-out;
-  margin: 0;
-  padding: 0px 26px;
-  list-style: none;
-  @media (min-width: 992px) {
-    columns: 2;
-  }
-`;
-
 const RecentlyPlayed = () => {
   // Redux
+  const loading = useSelector((state) => selectTopTracksLoading(state));
   const tracks = useSelector((state) => selectRecentlyPlayed(state));
+
+  if (loading) return <TopTracksLoading heading="Recently Played" />;
 
   return (
     <main>
       <PageHeader heading="Recently Played" />
-      <List>
+      <List twoColumns>
         {tracks &&
           tracks.map(({ track }) => <Track key={randomId()} track={track} />)}
       </List>
