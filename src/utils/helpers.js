@@ -14,12 +14,21 @@ export const getHashParams = () => {
   return hashParams;
 };
 
+/**
+ * Returns the string with the first letter of every word capitalized
+ * @param {String} str The string you want to capitalize
+ */
 export const capitalizeWords = (str) =>
   str.replace(
     /\w\S*/g,
     (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
   );
 
+/**
+ * Returns a sorted array of key/value pairs. The key being to genre name and the value being the
+ * amount of times it appears within the array of artist objects.
+ * @param {Array} data An array of artist objects returned from spotify
+ */
 export const getTopGenres = (data) => {
   if (!data) return null;
 
@@ -44,6 +53,11 @@ export const getTopGenres = (data) => {
   return sortable.sort((a, b) => b[1] - a[1]);
 };
 
+/**
+ * Returns a sorted array of key/value pairs. The key being to album name and the value being the
+ * amount of times it appears within the array of track objects.
+ * @param {Array} data An array of track objects returned from spotify
+ */
 export const getTopAlbums = (data) => {
   if (!data) return null;
 
@@ -64,15 +78,10 @@ export const getTopAlbums = (data) => {
   return sortable.sort((a, b) => b[1] - a[1]);
 };
 
-export const getTrackWithArtist = (track) => {
-  const { artists } = track;
-  const computedArtists =
-    artists.length > 1
-      ? `${artists[0].name} (feat. ${artists.slice(1).map((a) => a.name)})`
-      : artists[0].name;
-  return `${computedArtists} - ${track.name}`;
-};
-
+/**
+ * Returns a string on the albums artists - concatenated if a comma if more than one
+ * @param {Object} data An album object returned from spotify
+ */
 export const getArtist = (data) => {
   const { artists } = data;
 
@@ -91,18 +100,32 @@ export const getArtist = (data) => {
   return artists[0].name;
 };
 
+/**
+ * Returns the name of the current viewport based off its width.
+ * Used for slicing arrays for different views.
+ * @param {Number} width number of pixels
+ */
 export const getViewportName = (width) => {
   if (width < 768) return 'mobile';
   if (width < 992) return 'tablet';
   return 'desktop';
 };
 
+/**
+ * Converts milliseconds into a string showing minutes and seconds.
+ * @param {Number} millis number of milliseconds
+ */
 export const formatDuration = (millis) => {
   const minutes = Math.floor(millis / 60000);
   const seconds = ((millis % 60000) / 1000).toFixed(0);
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 };
 
+/**
+ * Truncates a string with '...' after the given number of characters
+ * @param {String} str The string to truncate
+ * @param {Number} num Number of characters before truncating
+ */
 export function truncateString(str, num) {
   if (str.length <= num) {
     return str;
@@ -110,6 +133,10 @@ export function truncateString(str, num) {
   return `${str.slice(0, num)}...`;
 }
 
+/**
+ * Returns a array of data for the audio features Nivo bar chart
+ * @param {Object} data audio features object return from spotify
+ */
 export const parseAudioFeatures = (data) => [
   {
     id: 'Acousticness',
@@ -155,9 +182,17 @@ export const parseAudioFeatures = (data) => [
   },
 ];
 
+/**
+ * Returns a string of the albums release year
+ * @param {Object} album album object returned from spotify
+ */
 export const getAlbumYear = (album) =>
   new Date(album.release_date).getFullYear();
 
+/**
+ * Returns a string of the tracks key
+ * @param {Number} note the key in a analysis object returned by spotify (analysis.track.key)
+ */
 export const parsePitch = (note) => {
   let key = note;
 
@@ -205,6 +240,10 @@ export const parsePitch = (note) => {
   return key;
 };
 
+/**
+ * Returns an object that is ready for the TrackAnalysis component
+ * @param {Object} analysis analysis object returned by spotify
+ */
 export const parseAnalysis = (analysis) => {
   if (!analysis) return null;
   return {
@@ -219,10 +258,17 @@ export const parseAnalysis = (analysis) => {
   };
 };
 
+/**
+ * Generates a random string to use for map keys
+ */
 export const randomId = () =>
   Math.random().toString(36).substring(2, 15) +
   Math.random().toString(36).substring(2, 15);
 
+/**
+ * Returns a string of the albums full duration (based of individual track lengths)
+ * @param {Object} album album object returned by spotify
+ */
 export const getAlbumDuration = (album) => {
   if (!album) return null;
   const {
