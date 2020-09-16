@@ -7,8 +7,18 @@ module.exports = {
   output: {
     filename: `${paths.jsFolder}/[name].[hash].js`,
     path: paths.outputPath,
-    chunkFilename: '[name].[chunkhash].js'
+    chunkFilename: '[name].[chunkhash].js',
   },
   plugins: [new CleanWebpackPlugin()],
-  devtool: 'source-map'
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
 };

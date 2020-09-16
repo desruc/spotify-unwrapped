@@ -11,7 +11,7 @@ module.exports = {
     paths.entryPath,
   ],
   node: {
-    __dirname: false
+    __dirname: false,
   },
   module: {
     rules,
