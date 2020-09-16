@@ -8,6 +8,7 @@ const List = styled.ul`
   columns: 1;
   @media (min-width: 768px) {
     ${({ twoColumns }) => twoColumns && 'columns: 2;'}
+  }
 `;
 
 export default List;

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import ErrorMessage from '../Common/ErrorMessage';
+
 import keyframes from '../../styles/keyframes';
 
 const Section = styled.section`
@@ -41,11 +43,6 @@ const Card = styled.div`
   @media (min-width: 1500px) {
     height: 552px;
   }
-`;
-
-const Error = styled.h4`
-  padding: 16px;
-  text-align: center;
 `;
 
 const Grid = styled.div`
@@ -96,7 +93,7 @@ const AudioAnalysis = ({
     <Heading>Audio Analysis</Heading>
     <Card>
       {error ? (
-        <Error>There was an error retrieving the audio analysis.</Error>
+        <ErrorMessage>There was an error retrieving the audio analysis.</ErrorMessage>
       ) : (
         <Grid>
           <AnalysisWrap>

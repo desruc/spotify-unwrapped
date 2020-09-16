@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled, { ThemeContext } from 'styled-components';
 import { ResponsiveBar } from '@nivo/bar';
 
+import ErrorMessage from '../Common/ErrorMessage';
+
 import { parseAudioFeatures } from '../../utils/helpers';
 
 // Blank data for loading state
@@ -89,11 +91,6 @@ const Heading = styled.h2`
   margin-top: 0px;
 `;
 
-const Error = styled.h4`
-  padding: 16px;
-  text-align: center;
-`;
-
 const AudioFeatures = ({ loading, error, data }) => {
   const computedData = loading || !data ? emptyData : parseAudioFeatures(data);
   const getColor = (bar) => bar.data.color;
@@ -103,7 +100,9 @@ const AudioFeatures = ({ loading, error, data }) => {
       <Heading>Audio Features</Heading>
       <Card>
         {error ? (
-          <Error>There was an error retrieving the audio features.</Error>
+          <ErrorMessage>
+            There was an error retrieving the audio features.
+          </ErrorMessage>
         ) : (
           <ResponsiveBar
             data={computedData}

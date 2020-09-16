@@ -178,6 +178,7 @@ const ArtistOverview = () => {
         imageSrc={artist?.images[0]?.url}
         heading={artist?.name}
         spotifyUrl={artist?.external_links?.spotify}
+        error={artistError}
       >
         <Popularity>Popularity: {artist?.popularity}</Popularity>
         <Followers>Followers: {artist?.followers?.total}</Followers>
@@ -204,10 +205,11 @@ const ArtistOverview = () => {
           <RelatedArtists
             loading={relatedArtistsLoading}
             artists={relatedArtists}
+            error={relatedArtistsError}
           />
         </Column>
         <Column albumWrap>
-          <ArtistAlbums loading={albumsLoading} albums={albums} />
+          <ArtistAlbums loading={albumsLoading} albums={albums} error={albumsError} />
         </Column>
       </ArtistInfo>
     </main>

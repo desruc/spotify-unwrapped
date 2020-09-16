@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import ErrorMessage from '../Common/ErrorMessage';
 import Flex from '../Common/Flex';
 import TrackLoading from '../Common/TrackLoading';
 import Track from '../Common/Track';
@@ -41,11 +42,6 @@ const List = styled.ul`
   @media (min-width: 768px) {
     columns: 2;
   }
-`;
-
-const Error = styled.h4`
-  padding: 16px;
-  text-align: center;
 `;
 
 const TrackRecommendations = ({ trackId }) => {
@@ -99,7 +95,9 @@ const TrackRecommendations = ({ trackId }) => {
       <Card>
         <Flex alignItems="center" justifyContent="center" flex={1}>
           {error ? (
-            <Error>There was an error retrieving similar tracks.</Error>
+            <ErrorMessage>
+              There was an error retrieving similar tracks.
+            </ErrorMessage>
           ) : (
             <List>{loading ? loadingJsx : tracksJsx}</List>
           )}

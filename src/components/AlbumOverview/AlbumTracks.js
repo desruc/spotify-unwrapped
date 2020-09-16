@@ -128,7 +128,7 @@ const AlbumTracks = ({ loading, tracks, albumArtists }) => {
 AlbumTracks.propTypes = {
   loading: PropTypes.bool.isRequired,
   tracks: PropTypes.array,
-  albumArtists: PropTypes.array,
+  albumArtists: PropTypes.array.isRequired,
 };
 
 AlbumTracks.defaultProps = {

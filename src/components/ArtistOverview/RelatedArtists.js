@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
+import ErrorMessage from '../Common/ErrorMessage';
 import RelatedArtistLoading from './RelatedArtistLoading';
 
 import { randomId } from '../../utils/helpers';
@@ -78,7 +79,7 @@ const Artist = styled.span`
   margin: 0;
 `;
 
-const RelatedArtists = ({ loading, artists }) => {
+const RelatedArtists = ({ loading, artists, error }) => {
   const history = useHistory();
 
   const onArtistClick = (artistId) => history.push(`/artist/${artistId}`);
@@ -99,6 +100,11 @@ const RelatedArtists = ({ loading, artists }) => {
     </ListItem>
   ));
 
+  if (error)
+    return (
+      <ErrorMessage>There was an error retrieving related artists</ErrorMessage>
+    );
+
   return (
     <>
       <Heading>Fans also like</Heading>
@@ -112,6 +118,11 @@ const RelatedArtists = ({ loading, artists }) => {
 RelatedArtists.propTypes = {
   loading: PropTypes.bool.isRequired,
   artists: PropTypes.array.isRequired,
+  error: PropTypes.bool,
+};
+
+RelatedArtists.defaultProps = {
+  error: false,
 };
 
 export default RelatedArtists;

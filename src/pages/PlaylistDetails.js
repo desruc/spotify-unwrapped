@@ -4,7 +4,9 @@ import styled from 'styled-components';
 
 import PageHeader from '../components/Common/PageHeader';
 import OverviewDetails from '../components/Common/OverviewDetails';
+import ErrorMessage from '../components/Common/ErrorMessage';
 import Track from '../components/Common/Track';
+import TrackLoading from '../components/Common/TrackLoading';
 
 import { getPlaylistDetails, getPlaylistTracks } from '../spotify';
 
@@ -97,6 +99,14 @@ const PlaylistTracks = () => {
     };
   }, []);
 
+  const trackLoadingJsx = [...new Array(50)].map(() => (
+    <TrackLoading key={randomId()} />
+  ));
+
+  const tracksJsx = playlistTracks.map((t) => (
+    <Track key={randomId()} track={t.track} />
+  ));
+
   return (
     <main>
       <PageHeader heading="Playlist" />
@@ -105,14 +115,19 @@ const PlaylistTracks = () => {
         heading={playlist?.name}
         spotifyUrl={playlist?.external_urls?.spotify}
         imageSrc={playlist?.images[0].url}
+        error={playlistError}
       >
         <TotalTracks>{playlist && playlist.tracks.total} songs</TotalTracks>
         <Followers>{playlist && playlist.followers.total} followers</Followers>
       </OverviewDetails>
-      <List>
-        {playlistTracks &&
-          playlistTracks.map((t) => <Track key={randomId()} track={t.track} />)}
-      </List>
+      {playlistTracksError && (
+        <ErrorMessage>
+          There was an error retreiving the playlists tracks
+        </ErrorMessage>
+      )}
+      {!playlistTracksError && (
+        <List>{playlistTracksLoading ? trackLoadingJsx : tracksJsx}</List>
+      )}
     </main>
   );
 };

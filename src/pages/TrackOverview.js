@@ -180,6 +180,7 @@ const TrackOverview = () => {
         imageSrc={track?.album.images[0].url}
         heading={track?.name}
         spotifyUrl={track?.external_urls.spotify}
+        error={trackError}
       >
         <div>
           {track &&

@@ -31,6 +31,11 @@ const AlbumMeta = styled.h4`
   color: ${({ theme }) => theme.tertiary};
 `;
 
+const Error = styled.h4`
+  padding: 16px;
+  text-align: center;
+`;
+
 const AlbumOverview = () => {
   // Hooks
   const { albumId } = useParams();
@@ -70,6 +75,17 @@ const AlbumOverview = () => {
       isSubscribed = false;
     };
   }, [albumId]);
+
+  if (error)
+    return (
+      <main>
+        <PageHeader heading="Album details" />
+        <Error>
+          There was an error retrieving the album details. Please refresh the
+          page.
+        </Error>
+      </main>
+    );
 
   return (
     <main>

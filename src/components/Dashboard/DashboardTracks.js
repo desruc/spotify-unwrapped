@@ -31,10 +31,6 @@ const TopTracksWrap = styled.div`
   }
 `;
 
-const Wrap = styled.div`
-  padding: 16px;
-`;
-
 const DashboardTracks = () => {
   // Redux
   const range = useSelector((state) => selectTrackRange(state));
@@ -52,14 +48,12 @@ const DashboardTracks = () => {
           heading="Recently Played"
           seeMoreLink="/recently-played"
         >
-          <Wrap>
-            <List>
-              {recentlyPlayed &&
-                recentlyPlayed
-                  .slice(0, 5)
-                  .map(({ track }) => <Track key={randomId()} track={track} />)}
-            </List>
-          </Wrap>
+          <List>
+            {recentlyPlayed &&
+              recentlyPlayed
+                .slice(0, 5)
+                .map(({ track }) => <Track key={randomId()} track={track} />)}
+          </List>
         </DashboardSectionWrap>
       </RecentlyPlayedWrap>
       <TopTracksWrap>
@@ -71,14 +65,12 @@ const DashboardTracks = () => {
           selectedRange={range}
           seeMoreLink="/top-tracks"
         >
-          <Wrap>
-            <List twoColumns>
-              {computedTracks &&
-                computedTracks
-                  .slice(0, 10)
-                  .map((track) => <Track key={randomId()} track={track} />)}
-            </List>
-          </Wrap>
+          <List twoColumns>
+            {computedTracks &&
+              computedTracks
+                .slice(0, 10)
+                .map((track) => <Track key={randomId()} track={track} />)}
+          </List>
         </DashboardSectionWrap>
       </TopTracksWrap>
     </Flex>

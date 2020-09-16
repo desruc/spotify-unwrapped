@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import ErrorMessage from '../components/Common/ErrorMessage';
 import PageHeader from '../components/Common/PageHeader';
 import Flex from '../components/Common/Flex';
 
@@ -19,10 +20,6 @@ const Grid = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 24px;
   }
-`;
-
-const ErrorHeading = styled.h2`
-  text-align: center;
 `;
 
 const LoadingBox = styled.div`
@@ -112,9 +109,9 @@ const Playlists = () => {
     <main id="your-playlists">
       <PageHeader heading="Your playlists" />
       {playlistsError && (
-        <ErrorHeading>
+        <ErrorMessage>
           There was an error retreiving your playlists. Please refresh the page.
-        </ErrorHeading>
+        </ErrorMessage>
       )}
       {playlistsLoading && (
         <Grid>

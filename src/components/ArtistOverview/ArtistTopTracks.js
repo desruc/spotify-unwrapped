@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import ErrorMessage from '../Common/ErrorMessage';
 import Flex from '../Common/Flex';
 import TrackLoading from '../Common/TrackLoading';
 import Track from '../Common/Track';
@@ -34,11 +35,6 @@ const List = styled.ul`
   }
 `;
 
-const Error = styled.h4`
-  padding: 16px;
-  text-align: center;
-`;
-
 const ArtistTopTracks = ({ loading, error, topTracks }) => {
   const loadingJsx = [...new Array(10)].map(() => (
     <TrackLoading key={randomId()} />
@@ -54,9 +50,9 @@ const ArtistTopTracks = ({ loading, error, topTracks }) => {
       <Card>
         <Flex>
           {error ? (
-            <Error>
+            <ErrorMessage>
               There was an error retrieving the artists popular tracks.
-            </Error>
+            </ErrorMessage>
           ) : (
             <List>{loading ? loadingJsx : tracksJsx}</List>
           )}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
+import ErrorMessage from '../Common/ErrorMessage';
 import ArtistAlbumsLoading from './ArtistAlbumsLoading';
 
 import { getAlbumYear, randomId } from '../../utils/helpers';
@@ -76,7 +77,7 @@ const AlbumYear = styled.h6`
   user-select: none;
 `;
 
-const ArtistAlbums = ({ loading, albums }) => {
+const ArtistAlbums = ({ loading, albums, error }) => {
   const history = useHistory();
 
   const goToAlbum = (albumId) => history.push(`/album/${albumId}`);
@@ -99,6 +100,13 @@ const ArtistAlbums = ({ loading, albums }) => {
     </AlbumWrap>
   ));
 
+  if (error)
+    return (
+      <ErrorMessage>
+        There was an error retreivng the artists albums
+      </ErrorMessage>
+    );
+
   return (
     <>
       <Heading>Albums</Heading>
@@ -112,10 +120,12 @@ const ArtistAlbums = ({ loading, albums }) => {
 ArtistAlbums.propTypes = {
   loading: PropTypes.bool.isRequired,
   albums: PropTypes.array,
+  error: PropTypes.bool,
 };
 
 ArtistAlbums.defaultProps = {
   albums: [],
+  error: false,
 };
 
 export default ArtistAlbums;

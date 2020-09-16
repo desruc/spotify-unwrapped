@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import ErrorMessage from './ErrorMessage';
 import OverviewDetailsLoading from './OverviewDetailsLoading';
 import ButtonLink from './ButtonLink';
 
@@ -57,8 +58,16 @@ const OverviewDetails = ({
   spotifyUrl,
   children,
   loading,
+  error,
 }) => {
   if (loading) return <OverviewDetailsLoading />;
+
+  if (!loading && error)
+    return (
+      <ErrorMessage>
+        There was an error retrieving the data. Please refresh the page.
+      </ErrorMessage>
+    );
 
   return (
     <Wrap>
@@ -86,6 +95,7 @@ OverviewDetails.propTypes = {
   heading: PropTypes.string,
   spotifyUrl: PropTypes.string,
   children: PropTypes.node,
+  error: PropTypes.bool,
 };
 
 OverviewDetails.defaultProps = {
@@ -94,6 +104,7 @@ OverviewDetails.defaultProps = {
   heading: '',
   spotifyUrl: '',
   children: null,
+  error: false,
 };
 
 export default OverviewDetails;
