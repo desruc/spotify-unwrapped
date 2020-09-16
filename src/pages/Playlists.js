@@ -9,6 +9,8 @@ import keyframes from '../styles/keyframes';
 
 import { getPlaylists } from '../spotify';
 
+import { randomId } from '../utils/helpers';
+
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -40,6 +42,7 @@ const LoadingText = styled.span`
   color: ${({ theme }) => theme.secondary};
   background-color: ${({ theme }) => theme.secondary};
   animation: ${keyframes.glow} 1.5s ease-in-out infinite;
+  margin-bottom: 2px;
 `;
 
 const PlaylistImageLink = styled(Link)`
@@ -115,14 +118,15 @@ const Playlists = () => {
       )}
       {playlistsLoading && (
         <Grid>
-          {[...new Array(8)].map((e, idx) => (
+          {[...new Array(24)].map(() => (
             <Flex
-              key={`loading-playlists-${idx}`} // eslint-disable-line
+              key={randomId()} // eslint-disable-line
               flexDirection="column"
               alignItems="center"
             >
               <LoadingBox />
               <LoadingText>Loading playlists</LoadingText>
+              <LoadingText>songs</LoadingText>
             </Flex>
           ))}
         </Grid>

@@ -41,11 +41,11 @@ const MobileNavBar = styled(Headroom)`
   .headroom--unfixed {
     transition: background-color 0.2s ease-in-out;
     background: ${({ isOpen, theme }) =>
-      isOpen ? 'transparent' : theme.background};
+    isOpen ? 'transparent' : theme.background};
   }
   .headroom--pinned {
     background: ${({ isOpen, theme }) =>
-      isOpen ? 'transparent' : theme.cardBackground};
+    isOpen ? 'transparent' : theme.cardBackground};
   }
   position: absolute;
   width: 100%;

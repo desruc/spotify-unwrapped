@@ -6,11 +6,14 @@ import Flex from './Flex';
 
 const Heading = styled.h1`
   flex: 1;
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   margin-bottom: 16px;
   margin-top: 0px;
   @media (min-width: 992px) {
     margin-bottom: 0;
+  }
+  @media (min-width: 1200px) {
+    font-size: 3.5rem;
   }
 `;
 

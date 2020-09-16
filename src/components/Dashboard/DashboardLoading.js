@@ -9,7 +9,7 @@ import List from '../Common/List';
 import TrackLoading from '../Common/TrackLoading';
 
 import { useWindowSize } from '../../utils/hooks';
-import { getViewportName } from '../../utils/helpers';
+import { getViewportName, randomId } from '../../utils/helpers';
 
 const Section = styled.section`
   margin: 20px 0px;
@@ -86,8 +86,8 @@ const DashboardLoading = () => {
               <Heading>Recently Played</Heading>
               <Card>
                 <List>
-                  {[...new Array(5)].map((e, idx) => (
-                    <TrackLoading key={`recent-loading-${idx}`} />
+                  {[...new Array(5)].map(() => (
+                    <TrackLoading key={randomId()} />
                   ))}
                 </List>
               </Card>
@@ -98,8 +98,8 @@ const DashboardLoading = () => {
               <Heading>Top Tracks</Heading>
               <Card>
                 <List twoColumns>
-                  {[...new Array(10)].map((e, idx) => (
-                    <TrackLoading key={`recent-loading-${idx}`} />
+                  {[...new Array(10)].map(() => (
+                    <TrackLoading key={randomId()} />
                   ))}
                 </List>
               </Card>
@@ -112,8 +112,8 @@ const DashboardLoading = () => {
         <Card padding="5px">
           <Flex flexWrap="wrap">
             {[...new Array(sliceRange[getViewportName(viewportWidth)])].map(
-              (e, idx) => (
-                <TopArtistAlbumWrap key={`artist-loading-${idx}`}>
+              () => (
+                <TopArtistAlbumWrap key={randomId()}>
                   <ImageWrap>
                     <LoadingBox
                       height="calc(100% - 10px)"
@@ -131,8 +131,8 @@ const DashboardLoading = () => {
         <Card padding="5px">
           <Flex flexWrap="wrap">
             {[...new Array(sliceRange[getViewportName(viewportWidth)])].map(
-              (e, idx) => (
-                <TopArtistAlbumWrap key={`album-loading-${idx}`}>
+              () => (
+                <TopArtistAlbumWrap key={randomId()}>
                   <ImageWrap>
                     <LoadingBox
                       height="calc(100% - 10px)"

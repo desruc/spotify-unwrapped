@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -69,7 +69,7 @@ const RelatedTracksColumn = styled.div`
   }
 `;
 
-const TrackDetails = () => {
+const TrackOverview = () => {
   // Hooks
   const history = useHistory();
   const { trackId } = useParams();
@@ -184,9 +184,8 @@ const TrackDetails = () => {
         <div>
           {track &&
             track.artists.map(({ id: artistId, name: artistName }, i) => (
-              <>
+              <Fragment key={artistId}>
                 <TrackArtist
-                  key={artistId}
                   onClick={() => onArtistClick(artistId)}
                 >
                   {artistName}
@@ -195,7 +194,7 @@ const TrackDetails = () => {
                   ? ''
                   : ','}
                 &nbsp;
-              </>
+              </Fragment>
             ))}
         </div>
         {track && (
@@ -235,4 +234,4 @@ const TrackDetails = () => {
   );
 };
 
-export default TrackDetails;
+export default TrackOverview;

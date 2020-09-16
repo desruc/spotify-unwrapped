@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
@@ -7,7 +7,7 @@ import List from '../Common/List';
 
 import mixins from '../../styles/mixins';
 import keyframes from '../../styles/keyframes';
-import { formatDuration } from '../../utils/helpers';
+import { formatDuration, randomId } from '../../utils/helpers';
 
 const LoadingListItem = styled.li`
   display: flex;
@@ -76,8 +76,8 @@ const AlbumTracks = ({ loading, tracks, albumArtists }) => {
     history.push(`/artist/${artistId}`);
   };
 
-  const loadingJsx = [...new Array(10)].map((e, idx) => (
-    <LoadingListItem key={`loadingAlbumTrack-${idx}`}>
+  const loadingJsx = [...new Array(10)].map(() => (
+    <LoadingListItem key={randomId()}>
       <LoadingText>Loading</LoadingText>
     </LoadingListItem>
   ));
@@ -103,7 +103,7 @@ const AlbumTracks = ({ loading, tracks, albumArtists }) => {
               <span> - </span>
               {featuredArtists.map(
                 ({ id: artistId, name: artistName }, idx) => (
-                  <>
+                  <Fragment key={artistId}>
                     <FeatureArtist onClick={(e) => onArtistClick(e, artistId)}>
                       {artistName}
                     </FeatureArtist>
@@ -111,7 +111,7 @@ const AlbumTracks = ({ loading, tracks, albumArtists }) => {
                     idx === featuredArtists.length - 1
                       ? ''
                       : ', '}
-                  </>
+                  </Fragment>
                 )
               )}
             </>

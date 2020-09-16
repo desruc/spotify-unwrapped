@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -84,14 +84,14 @@ const AlbumOverview = () => {
           {album && album.artists.length > 0 && (
             <span>
               {album.artists.map(({ id: artistId, name: artistName }, idx) => (
-                <>
+                <Fragment key={artistId}>
                   <TrackArtist to={`/artist/${artistId}`}>
                     {artistName}
                   </TrackArtist>
                   {album.artists.length > 0 && idx === album.artists.length - 1
                     ? ''
                     : ', '}
-                </>
+                </Fragment>
               ))}
             </span>
           )}

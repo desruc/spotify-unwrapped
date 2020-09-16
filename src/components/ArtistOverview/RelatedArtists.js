@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom';
 
 import RelatedArtistLoading from './RelatedArtistLoading';
 
+import { randomId } from '../../utils/helpers';
+
 const Heading = styled.h2`
   margin-top: 0px;
 `;
@@ -81,7 +83,9 @@ const RelatedArtists = ({ loading, artists }) => {
 
   const onArtistClick = (artistId) => history.push(`/artist/${artistId}`);
 
-  const loadingJsx = [...new Array(10)].map(() => <RelatedArtistLoading />);
+  const loadingJsx = [...new Array(10)].map(() => (
+    <RelatedArtistLoading key={randomId()} />
+  ));
 
   const artistJsx = artists.slice(10).map((artist) => (
     <ListItem key={artist.id}>

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { MdTrendingFlat } from 'react-icons/md';
 
 import Flex from '../Common/Flex';
+import Card from '../Common/Card';
 import RangeTabs from '../Common/RangeTabs';
 
 const Section = styled.section`
@@ -31,12 +32,6 @@ const Heading = styled.h2`
     flex: 1;
     margin: 0;
   }
-`;
-
-const Container = styled.div`
-  background-color: ${({ theme }) => theme.cardBackground};
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
 `;
 
 const StyledLink = styled(Link)`
@@ -72,7 +67,7 @@ const DashboardSectionWrap = ({
         <RangeTabs actionType={actionType} selected={selectedRange} />
       )}
     </TitleWrap>
-    <Container>{children}</Container>
+    <Card>{children}</Card>
     {seeMoreLink && (
       <Flex alignItems="center" justifyContent="flex-end" mt={20}>
         <StyledLink to={seeMoreLink}>

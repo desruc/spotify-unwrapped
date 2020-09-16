@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import ArtistAlbumsLoading from './ArtistAlbumsLoading';
 
-import { getAlbumYear } from '../../utils/helpers';
+import { getAlbumYear, randomId } from '../../utils/helpers';
 
 const Heading = styled.h2`
   margin-top: 0px;
@@ -81,7 +81,9 @@ const ArtistAlbums = ({ loading, albums }) => {
 
   const goToAlbum = (albumId) => history.push(`/album/${albumId}`);
 
-  const loadingJsx = [...new Array(10)].map(() => <ArtistAlbumsLoading />);
+  const loadingJsx = [...new Array(10)].map(() => (
+    <ArtistAlbumsLoading key={randomId()} />
+  ));
 
   const albumJsx = albums.map((a) => (
     <AlbumWrap key={a.id}>

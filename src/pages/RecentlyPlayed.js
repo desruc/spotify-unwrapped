@@ -7,6 +7,8 @@ import { selectRecentlyPlayed } from '../store/reducer';
 import PageHeader from '../components/Common/PageHeader';
 import Track from '../components/Common/Track';
 
+import { randomId } from '../utils/helpers';
+
 const List = styled.ul`
   transition: width 0.2s ease-in-out;
   margin: 0;
@@ -26,7 +28,7 @@ const RecentlyPlayed = () => {
       <PageHeader heading="Recently Played" />
       <List>
         {tracks &&
-          tracks.map(({ track }) => <Track key={track.id} track={track} />)}
+          tracks.map(({ track }) => <Track key={randomId()} track={track} />)}
       </List>
     </main>
   );

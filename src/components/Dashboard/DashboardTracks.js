@@ -14,6 +14,8 @@ import {
 } from '../../store/reducer';
 import { CHANGE_TRACK_DATE_RANGE } from '../../store/types';
 
+import { randomId } from '../../utils/helpers';
+
 const RecentlyPlayedWrap = styled.div`
   width: 100%;
   @media (min-width: 1200px) {
@@ -55,7 +57,7 @@ const DashboardTracks = () => {
               {recentlyPlayed &&
                 recentlyPlayed
                   .slice(0, 5)
-                  .map(({ track }) => <Track key={track.id} track={track} />)}
+                  .map(({ track }) => <Track key={randomId()} track={track} />)}
             </List>
           </Wrap>
         </DashboardSectionWrap>
@@ -74,7 +76,7 @@ const DashboardTracks = () => {
               {computedTracks &&
                 computedTracks
                   .slice(0, 10)
-                  .map((track) => <Track key={track.id} track={track} />)}
+                  .map((track) => <Track key={randomId()} track={track} />)}
             </List>
           </Wrap>
         </DashboardSectionWrap>

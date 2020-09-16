@@ -8,6 +8,8 @@ import Track from '../components/Common/Track';
 
 import { getPlaylistDetails, getPlaylistTracks } from '../spotify';
 
+import { randomId } from '../utils/helpers';
+
 const List = styled.ul`
   flex: 1;
   transition: width 0.2s ease-in-out;
@@ -108,7 +110,8 @@ const PlaylistTracks = () => {
         <Followers>{playlist && playlist.followers.total} followers</Followers>
       </OverviewDetails>
       <List>
-        {playlistTracks && playlistTracks.map((t) => <Track track={t.track} />)}
+        {playlistTracks &&
+          playlistTracks.map((t) => <Track key={randomId()} track={t.track} />)}
       </List>
     </main>
   );

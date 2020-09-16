@@ -212,7 +212,7 @@ const DrawerInner = ({ closeDrawer }) => {
 };
 
 DrawerInner.propTypes = {
-  toggleMenu: PropTypes.func.isRequired,
+  closeDrawer: PropTypes.func.isRequired,
 };
 
 export default DrawerInner;

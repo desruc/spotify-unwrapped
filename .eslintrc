@@ -28,7 +28,6 @@
       "semi": "warn",
       "arrow-body-style": "off",
       "no-multiple-empty-lines": ["warn", { "max": 1 }],
-      "no-array-index-key": false,
       "no-unused-expressions": [
           "error",
           {

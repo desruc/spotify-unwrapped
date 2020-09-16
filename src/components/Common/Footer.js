@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Text = styled.p`
-  margin-right: 16px;
+  margin-top: 40px;
   font-size: 12px;
   text-transform: uppercase;
   text-align: end;
