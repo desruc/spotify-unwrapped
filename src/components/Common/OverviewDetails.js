@@ -8,12 +8,14 @@ import ButtonLink from './ButtonLink';
 
 const Wrap = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   margin-bottom: 40px;
   @media (min-width: 768px) {
-    flex-wrap: no-wrap;
+    flex-direction: row;
     justify-content: flex-start;
+    align-items: flex-start;
   }
 `;
 
@@ -33,8 +35,8 @@ const Inner = styled.div`
 `;
 
 const Image = styled.div`
-  width: 300px;
-  height: 300px;
+  width: 290px;
+  height: 290px;
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
   background-size: cover;

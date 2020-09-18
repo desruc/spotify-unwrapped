@@ -6,13 +6,16 @@ const Flex = styled.div`
   align-items: ${({ alignItems }) => alignItems || 'flex-start'};
   flex-wrap: ${({ flexWrap }) => flexWrap || 'no-wrap'};
   width: ${({ width }) => width || '100%'};
-  ${({ mb }) => mb && `margin-bottom: ${mb}px;`}
   ${({ mt }) => mt && `margin-top: ${mt}px;`}
   flex: ${({ flex }) => flex || 'none'};
   flex-direction: ${({ flexDirection }) => flexDirection || 'row'};
   padding-right: ${({ paddingRight }) => paddingRight || '0px'};
   padding: ${({ padding }) => padding || '0px'};
   height: ${({ height }) => height || 'auto'};
+  margin-bottom: ${({ mb }) => mb || '0px'};
+  margin-top: ${({ mt }) => mt || '0px'};
+  margin-right: ${({ mr }) => mr || '0px'};
+  margin-left: ${({ ml }) => ml || '0px'};
 `;
 
 export default Flex;

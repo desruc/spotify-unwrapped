@@ -7,13 +7,6 @@ import Card from '../Common/Card';
 
 import keyframes from '../../styles/keyframes';
 
-const Section = styled.section`
-  margin-top: 40px;
-  @media (min-height: 768px) {
-    margin-top: 0px;
-  }
-`;
-
 const Loading = styled.span`
   border-radius: 6px;
   background-color: ${({ theme }) => theme.secondary};
@@ -28,12 +21,6 @@ const StyledCard = styled(Card)`
   @media (min-width: 758px) {
     height: 552px;
   }
-  @media (min-width: 992px) {
-    height: auto;
-  }
-  @media (min-width: 1500px) {
-    height: 552px;
-  }
 `;
 
 const Grid = styled.div`
@@ -41,9 +28,6 @@ const Grid = styled.div`
   grid-template-columns: repeat(2, minmax(100px, 1fr));
   width: 100%;
   text-align: center;
-  @media (min-width: 992px) {
-    grid-template-columns: repeat(5, minmax(100px, 1fr));
-  }
   @media (min-width: 1500px) {
     grid-template-columns: repeat(2, minmax(100px, 1fr));
   }
@@ -80,7 +64,7 @@ const AudioAnalysis = ({
   sections,
   segments,
 }) => (
-  <Section>
+  <section id="audio-analysis">
     <h2>Audio Analysis</h2>
     <StyledCard>
       {error ? (
@@ -132,7 +116,7 @@ const AudioAnalysis = ({
         </Grid>
       )}
     </StyledCard>
-  </Section>
+  </section>
 );
 
 AudioAnalysis.propTypes = {

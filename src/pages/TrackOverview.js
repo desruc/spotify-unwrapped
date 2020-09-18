@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import PageHeader from '../components/Common/PageHeader';
 import OverviewDetails from '../components/Common/OverviewDetails';
+import Flex from '../components/Common/Flex';
 import AudioAnalysis from '../components/TrackOverview/AudioAnalysis';
 import AudioFeatures from '../components/TrackOverview/AudioFeatures';
 import TrackRecommendations from '../components/TrackOverview/TrackRecommendations';
@@ -15,7 +16,6 @@ import { getAlbumYear, formatDuration, parseAnalysis } from '../utils/helpers';
 const TrackArtist = styled.h3`
   display: inline-block;
   cursor: pointer;
-  margin-top: 0;
   margin-bottom: 10px;
   color: ${({ theme }) => theme.secondary};
   transition: all 0.2s ease-in-out;
@@ -26,7 +26,6 @@ const TrackArtist = styled.h3`
 
 const TrackAlbum = styled.h4`
   display: inline-block;
-  margin-top: 0;
   margin-bottom: 10px;
   color: ${({ theme }) => theme.tertiary};
   & span {
@@ -34,38 +33,31 @@ const TrackAlbum = styled.h4`
   }
 `;
 
-const TrackInfo = styled.div`
-  margin-right: -16px;
-  margin-left: -16px;
-  display: flex;
-  flex-wrap: wrap;
-`;
-
 const Column = styled.div`
   width: 100%;
-  padding: 0px 16px;
-  ${({ isAnalysis }) => isAnalysis && `margin-top: 40px;`}
+  margin-top: ${({ isAnalysis }) => isAnalysis ? '40px' : '0px'};
   @media (min-width: 768px) {
-    ${({ isAnalysis }) => isAnalysis && `margin-top: 0px;`}
     width: 50%;
-  }
-  @media (min-width: 992px) {
-    ${({ isAnalysis }) => isAnalysis && `margin-top: 40px;`}
-    width: 100%;
-  }
-  @media (min-width: 1500px) {
+    padding: ${({ isAnalysis }) => isAnalysis ? '0px 0px 0px 16px' : '0px 16px 0px 0px'};
     margin-top: 0px;
+  }
+  // @media (min-width: 992px) {
+  //   padding: 0px;
+  //   width: 100%;
+  // }
+  @media (min-width: 1500px) {
     width: 25%;
+    padding: ${({ isAnalysis }) => isAnalysis ? '0px 16px 0px 16px' : '0px 16px 0px 0px'};
   }
 `;
 
 const RelatedTracksColumn = styled.div`
   width: 100%;
-  padding: 0px 16px;
   margin-top: 40px;
   @media (min-width: 1500px) {
     margin-top: 0px;
     width: 50%;
+    padding-left: 16px;
   }
 `;
 
@@ -210,15 +202,15 @@ const TrackOverview = () => {
           </TrackAlbum>
         )}
       </OverviewDetails>
-      <TrackInfo>
-        <Column>
+      <Flex flexWrap="wrap">
+        <Column padding="0px 16px 0px 0px">
           <AudioFeatures
             loading={featuresLoading}
             data={features}
             error={featuresError}
           />
         </Column>
-        <Column isAnalysis>
+        <Column isAnalysis padding="0px 16px 0px 16px">
           <AudioAnalysis
             loading={analysisLoading}
             error={analysisError}
@@ -230,7 +222,7 @@ const TrackOverview = () => {
         <RelatedTracksColumn>
           <TrackRecommendations trackId={trackId} />
         </RelatedTracksColumn>
-      </TrackInfo>
+      </Flex>
     </main>
   );
 };

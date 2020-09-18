@@ -96,7 +96,7 @@ const RelatedArtists = ({ loading, artists, error }) => {
   return (
     <>
       <h2>Fans also like</h2>
-      <Card display="flex" alignItems="center" justifyContent="center">
+      <Card>
         <List>{loading ? loadingJsx : artistJsx}</List>
       </Card>
     </>

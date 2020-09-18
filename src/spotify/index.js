@@ -271,11 +271,12 @@ export const getPlaylists = async () => {
  * @param {String} playlistId
  */
 export const getPlaylistDetails = async (playlistId) => {
-  const {
-    data,
-  } = await axios.get(`https://api.spotify.com/v1/playlists/${playlistId}`, {
-    headers,
-  });
+  const { data } = await axios.get(
+    `https://api.spotify.com/v1/playlists/${playlistId}`,
+    {
+      headers,
+    }
+  );
   return data;
 };
 

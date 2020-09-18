@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import ErrorMessage from '../Common/ErrorMessage';
 import Card from '../Common/Card';
-import Flex from '../Common/Flex';
 import List from '../Common/List';
 import TrackLoading from '../Common/TrackLoading';
 import Track from '../Common/Track';
@@ -25,7 +23,7 @@ const ArtistTopTracks = ({ loading, error, topTracks }) => {
   return (
     <>
       <h2>Popular Tracks</h2>
-      <Card display="flex" alignItems="center" justifyContent="center">
+      <Card>
         {error ? (
           <ErrorMessage>
             There was an error retrieving the artists popular tracks.

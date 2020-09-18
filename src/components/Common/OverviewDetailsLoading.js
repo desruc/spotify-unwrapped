@@ -1,16 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import keyframes from '../../styles/keyframes';
+import LoadingBox from './LoadingBox';
 
 const Wrap = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   margin-bottom: 40px;
   @media (min-width: 768px) {
-    flex-wrap: no-wrap;
+    flex-direction: row;
     justify-content: flex-start;
+    align-items: flex-start;
   }
 `;
 
@@ -29,41 +31,30 @@ const Inner = styled.div`
   }
 `;
 
-const Image = styled.div`
-  width: 300px;
-  height: 300px;
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
-  background-color: ${({ theme }) => theme.secondary};
-  color: ${({ theme }) => theme.secondary};
-  animation: ${keyframes.glow} 1.5s ease-in-out infinite;
+const Image = styled(LoadingBox)`
   @media (min-width: 768px) {
     margin-right: 24px;
   }
 `;
 
-const Heading = styled.h2`
-  font-size: 42px;
-  margin-bottom: 5px;
-  background-color: ${({ theme }) => theme.secondary};
-  color: ${({ theme }) => theme.secondary};
-  animation: ${keyframes.glow} 1.5s ease-in-out infinite;
-`;
-
-const Text = styled.span`
-  background-color: ${({ theme }) => theme.secondary};
-  color: ${({ theme }) => theme.secondary};
-  animation: ${keyframes.glow} 1.5s ease-in-out infinite;
-  margin-bottom: 5px;
-`;
-
 const OverviewDetailsLoading = () => (
   <Wrap>
-    <Image />
+    <Image height="290px" width="290px" borderRadius="6px" />
     <Inner>
-      <Heading>The heading is loading</Heading>
-      <Text>Please hold while we load your data</Text>
-      <Text>Loading...</Text>
+      <LoadingBox
+        fontSize="42px"
+        mb="5px"
+        height="fit-content"
+        width="fit-content"
+      >
+        The heading is loading
+      </LoadingBox>
+      <LoadingBox mb="5px" height="fit-content" width="fit-content">
+        Please hold while we load your data
+      </LoadingBox>
+      <LoadingBox mb="5px" height="fit-content" width="fit-content">
+        Loading...
+      </LoadingBox>
     </Inner>
   </Wrap>
 );

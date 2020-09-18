@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import PageHeader from '../components/Common/PageHeader';
 import OverviewDetails from '../components/Common/OverviewDetails';
+import Flex from '../components/Common/Flex';
 import ArtistTopTracks from '../components/ArtistOverview/ArtistTopTracks';
 import RelatedArtists from '../components/ArtistOverview/RelatedArtists';
 import ArtistAlbums from '../components/ArtistOverview/ArtistAlbums';
@@ -17,18 +18,12 @@ import {
 
 import { capitalizeWords } from '../utils/helpers';
 
-const ArtistInfo = styled.div`
-  margin-right: -16px;
-  margin-left: -16px;
-`;
-
 const Column = styled.div`
-  display: inline-block;
   width: 100%;
-  padding: 0px 16px;
   margin-bottom: 40px;
   @media (min-width: 1200px) {
-    ${({ albumWrap }) => !albumWrap && `width: 50%`}
+    padding: ${({ padding }) => padding || '0px'};
+    width: ${({ albumWrap }) => (albumWrap ? '100%' : '50%')};
   }
 `;
 
@@ -42,10 +37,6 @@ const Popularity = styled.h3`
   margin-top: 0;
   margin-bottom: 10px;
   color: ${({ theme }) => theme.tertiary};
-`;
-
-const Genres = styled.h5`
-  margin-top: 0;
 `;
 
 const ArtistOverview = () => {
@@ -182,7 +173,7 @@ const ArtistOverview = () => {
       >
         <Popularity>Popularity: {artist?.popularity}</Popularity>
         <Followers>Followers: {artist?.followers?.total}</Followers>
-        <Genres>
+        <h5>
           {artist?.genres?.map((g, idx) => (
             <span key={g}>
               {capitalizeWords(g)}
@@ -191,17 +182,17 @@ const ArtistOverview = () => {
                 : ', '}
             </span>
           ))}
-        </Genres>
+        </h5>
       </OverviewDetails>
-      <ArtistInfo>
-        <Column>
+      <Flex flexWrap="wrap">
+        <Column padding="0px 16px 0px 0px">
           <ArtistTopTracks
             loading={topTracksLoading}
             error={topTracksError}
             topTracks={topTracks}
           />
         </Column>
-        <Column>
+        <Column padding="0px 0px 0px 16px">
           <RelatedArtists
             loading={relatedArtistsLoading}
             artists={relatedArtists}
@@ -209,9 +200,13 @@ const ArtistOverview = () => {
           />
         </Column>
         <Column albumWrap>
-          <ArtistAlbums loading={albumsLoading} albums={albums} error={albumsError} />
+          <ArtistAlbums
+            loading={albumsLoading}
+            albums={albums}
+            error={albumsError}
+          />
         </Column>
-      </ArtistInfo>
+      </Flex>
     </main>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import styled, { ThemeContext } from 'styled-components';
+import { ThemeContext } from 'styled-components';
 import { ResponsiveBar } from '@nivo/bar';
 
 import ErrorMessage from '../Common/ErrorMessage';
@@ -69,19 +69,12 @@ const CustomTick = (tick) => {
   );
 };
 
-const Section = styled.section`
-  margin-top: 40px;
-  @media (min-height: 768px) {
-    margin-top: 0px;
-  }
-`;
-
 const AudioFeatures = ({ loading, error, data }) => {
   const computedData = loading || !data ? emptyData : parseAudioFeatures(data);
   const getColor = (bar) => bar.data.color;
 
   return (
-    <Section id="audio-features">
+    <section id="audio-features">
       <h2>Audio Features</h2>
       <Card padding="0px">
         <Flex flexDirection="column" justifyContent="center" alignContent="center"  height="552px">
@@ -130,7 +123,7 @@ const AudioFeatures = ({ loading, error, data }) => {
           )}
         </Flex>
       </Card>
-    </Section>
+    </section>
   );
 };
 
