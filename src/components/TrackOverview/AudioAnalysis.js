@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import ErrorMessage from '../Common/ErrorMessage';
+import Card from '../Common/Card';
 
 import keyframes from '../../styles/keyframes';
 
@@ -20,20 +21,10 @@ const Loading = styled.span`
   animation: ${keyframes.glow} 1.5s ease-in-out infinite;
 `;
 
-const Heading = styled.h2`
-  margin-top: 0px;
-`;
-
-const Card = styled.div`
-  width: 100%;
-  max-width: 100%;
+const StyledCard = styled(Card)`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.cardBackground};
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
-  padding: 16px;
   @media (min-width: 758px) {
     height: 552px;
   }
@@ -90,10 +81,12 @@ const AudioAnalysis = ({
   segments,
 }) => (
   <Section>
-    <Heading>Audio Analysis</Heading>
-    <Card>
+    <h2>Audio Analysis</h2>
+    <StyledCard>
       {error ? (
-        <ErrorMessage>There was an error retrieving the audio analysis.</ErrorMessage>
+        <ErrorMessage>
+          There was an error retrieving the audio analysis.
+        </ErrorMessage>
       ) : (
         <Grid>
           <AnalysisWrap>
@@ -138,7 +131,7 @@ const AudioAnalysis = ({
           </AnalysisWrap>
         </Grid>
       )}
-    </Card>
+    </StyledCard>
   </Section>
 );
 

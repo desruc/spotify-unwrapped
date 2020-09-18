@@ -5,25 +5,11 @@ import { useHistory } from 'react-router-dom';
 
 import ErrorMessage from '../Common/ErrorMessage';
 import ArtistAlbumsLoading from './ArtistAlbumsLoading';
+import Card from '../Common/Card';
 
 import { getAlbumYear, randomId } from '../../utils/helpers';
 
 import { albumPropType } from '../../constants/types';
-
-const Heading = styled.h2`
-  margin-top: 0px;
-`;
-
-const Card = styled.div`
-  height: 100%;
-  max-width: 100%;
-  display: flex;
-  justify-content: center;
-  background-color: ${({ theme }) => theme.cardBackground};
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
-  padding: 16px;
-`;
 
 const Grid = styled.div`
   display: grid;
@@ -116,7 +102,7 @@ const ArtistAlbums = ({ loading, albums, error }) => {
 
   return (
     <>
-      <Heading>Albums</Heading>
+      <h2>Albums</h2>
       <Card>
         <Grid>{loading ? loadingJsx : albumJsx}</Grid>
       </Card>

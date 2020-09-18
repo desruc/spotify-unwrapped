@@ -172,17 +172,3 @@ export const getRecentlyPlayed = () => async (dispatch) => {
     await dispatch({ type: types.RECENTLY_PLAYED_LOADING_STATE, state: false });
   }
 };
-
-export const getTrack = (trackId) => async (dispatch) => {
-  try {
-    dispatch({ type: types.TRACK_LOADING_STATE, state: true });
-    const track = await spotify.getTrack(trackId);
-    dispatch({
-      type: types.GET_TRACK_SUCCESS,
-      track,
-    });
-    dispatch({ type: types.TRACK_LOADING_STATE, state: false });
-  } catch (error) {
-    dispatch({ type: types.TRACK_LOADING_STATE, state: false });
-  }
-};

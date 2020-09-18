@@ -26,11 +26,9 @@ const TitleWrap = styled.div`
 
 const Heading = styled.h2`
   font-size: 2rem;
-  margin: 0px;
   margin-bottom: 16px;
   @media (min-width: 768px) {
     flex: 1;
-    margin: 0;
   }
 `;
 

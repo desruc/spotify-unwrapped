@@ -2,9 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Flex from './Flex';
-
-import keyframes from '../../styles/keyframes';
-import mixins from '../../styles/mixins';
+import LoadingBox from './LoadingBox';
 
 const ListItem = styled.li`
   flex: 1;
@@ -37,38 +35,19 @@ const Meta = styled.div`
   grid-gap: 10px;
 `;
 
-const Image = styled.div`
-  width: 50px;
-  margin-right: 20px;
-  height: 50px;
-  background-color: ${({ theme }) => theme.secondary};
-  color: ${({ theme }) => theme.secondary};
-  animation: ${keyframes.glow} 1.5s ease-in-out infinite;
-  border-radius: 6px;
-`;
-
-const Text = styled.div`
-  height: 12px;
-  font-size: 12px;
-  background-color: ${({ theme }) => theme.secondary};
-  animation: ${keyframes.glow} 1.5s ease-in-out infinite;
-  color: ${({ theme }) => theme.secondary};
-  width: 100%;
-  margin-bottom: ${({ mb }) => mb || 0};
-  ${mixins.overflowEllipsis}
-`;
-
 const TrackLoading = () => (
   <ListItem>
     <Container>
-      <Image />
+      <LoadingBox height="50px" width="50px" borderRadius="6px" mr="20px" />
       <Meta>
         <Flex flexDirection="column" justifyContent="center">
-          <Text mb="5px" />
-          <Text />
+          <LoadingBox height="12px" mb="5px" width="55%" />
+          <LoadingBox height="12px" width="30%" />
         </Flex>
         <Flex flexDirection="column" justifyContent="center">
-          <Text justify>0:00</Text>
+          <LoadingBox height="fit-content" fontSize="12px" justify>
+            0:00
+          </LoadingBox>
         </Flex>
       </Meta>
     </Container>

@@ -49,7 +49,6 @@ const Heading = styled.h2`
   line-height: 1;
   font-size: 42px;
   margin-bottom: 5px;
-  margin-top: 0;
 `;
 
 const OverviewDetails = ({

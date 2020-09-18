@@ -1,10 +1,7 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
-
-import { SET_SELECTED_TRACK } from '../../store/types';
 
 import { formatDuration } from '../../utils/helpers';
 
@@ -95,13 +92,11 @@ const Duration = styled.span`
 
 const Track = ({ track }) => {
   // Hooks
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const onClickTrack = (e) => {
     e.stopPropagation();
     const { id } = track;
-    dispatch({ type: SET_SELECTED_TRACK, track });
     history.push(`/track/${id}`);
   };
 

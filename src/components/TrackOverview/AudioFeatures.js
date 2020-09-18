@@ -4,6 +4,8 @@ import styled, { ThemeContext } from 'styled-components';
 import { ResponsiveBar } from '@nivo/bar';
 
 import ErrorMessage from '../Common/ErrorMessage';
+import Card from '../Common/Card';
+import Flex from '../Common/Flex';
 
 import { parseAudioFeatures } from '../../utils/helpers';
 
@@ -74,74 +76,59 @@ const Section = styled.section`
   }
 `;
 
-const Card = styled.div`
-  width: 100%;
-  max-width: 100%;
-  height: 552px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  background-color: ${({ theme }) => theme.cardBackground};
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
-`;
-
-const Heading = styled.h2`
-  margin-top: 0px;
-`;
-
 const AudioFeatures = ({ loading, error, data }) => {
   const computedData = loading || !data ? emptyData : parseAudioFeatures(data);
   const getColor = (bar) => bar.data.color;
 
   return (
     <Section id="audio-features">
-      <Heading>Audio Features</Heading>
-      <Card>
-        {error ? (
-          <ErrorMessage>
-            There was an error retrieving the audio features.
-          </ErrorMessage>
-        ) : (
-          <ResponsiveBar
-            data={computedData}
-            margin={{ top: 50, right: 32, bottom: 50, left: 136 }}
-            padding={0.2}
-            borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
-            colors={getColor}
-            axisTop={null}
-            axisRight={null}
-            borderRadius={6}
-            borderWidth={2}
-            layout="horizontal"
-            axisBottom={null}
-            axisLeft={{
-              tickSize: 5,
-              tickPadding: 0,
-              tickRotation: 0,
-              legendPosition: 'middle',
-              legendOffset: -40,
-              renderTick: CustomTick,
-            }}
-            tooltip={({ indexValue, value, color }) => (
-              <strong style={{ color }}>
-                {indexValue}: {value}
-              </strong>
-            )}
-            theme={{
-              tooltip: {
-                container: {
-                  background: '#333',
+      <h2>Audio Features</h2>
+      <Card padding="0px">
+        <Flex flexDirection="column" justifyContent="center" alignContent="center"  height="552px">
+          {error ? (
+            <ErrorMessage>
+              There was an error retrieving the audio features.
+            </ErrorMessage>
+          ) : (
+            <ResponsiveBar
+              data={computedData}
+              margin={{ top: 50, right: 32, bottom: 50, left: 136 }}
+              padding={0.2}
+              borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
+              colors={getColor}
+              axisTop={null}
+              axisRight={null}
+              borderRadius={6}
+              borderWidth={2}
+              layout="horizontal"
+              axisBottom={null}
+              axisLeft={{
+                tickSize: 5,
+                tickPadding: 0,
+                tickRotation: 0,
+                legendPosition: 'middle',
+                legendOffset: -40,
+                renderTick: CustomTick,
+              }}
+              tooltip={({ indexValue, value, color }) => (
+                <strong style={{ color }}>
+                  {indexValue}: {value}
+                </strong>
+              )}
+              theme={{
+                tooltip: {
+                  container: {
+                    background: '#333',
+                  },
                 },
-              },
-            }}
-            enableLabel={false}
-            animate
-            motionStiffness={90}
-            motionDamping={15}
-          />
-        )}
+              }}
+              enableLabel={false}
+              animate
+              motionStiffness={90}
+              motionDamping={15}
+            />
+          )}
+        </Flex>
       </Card>
     </Section>
   );

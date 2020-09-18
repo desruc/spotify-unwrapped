@@ -109,13 +109,14 @@ const DashboardLoading = () => {
       </Section>
       <Section>
         <Heading>Top Artists</Heading>
-        <Card padding="5px">
+        <Card padding="16px">
           <Flex flexWrap="wrap">
             {[...new Array(sliceRange[getViewportName(viewportWidth)])].map(
               () => (
                 <TopArtistAlbumWrap key={randomId()}>
                   <ImageWrap>
                     <LoadingBox
+                      borderRadius="6px"
                       height="calc(100% - 10px)"
                       width="calc(100% - 10px)"
                     />
@@ -128,13 +129,14 @@ const DashboardLoading = () => {
       </Section>
       <Section>
         <Heading>Top Albums</Heading>
-        <Card padding="5px">
+        <Card padding="16px">
           <Flex flexWrap="wrap">
             {[...new Array(sliceRange[getViewportName(viewportWidth)])].map(
               () => (
                 <TopArtistAlbumWrap key={randomId()}>
                   <ImageWrap>
                     <LoadingBox
+                      borderRadius="6px"
                       height="calc(100% - 10px)"
                       width="calc(100% - 10px)"
                     />

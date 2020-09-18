@@ -12,6 +12,7 @@ const Flex = styled.div`
   flex-direction: ${({ flexDirection }) => flexDirection || 'row'};
   padding-right: ${({ paddingRight }) => paddingRight || '0px'};
   padding: ${({ padding }) => padding || '0px'};
+  height: ${({ height }) => height || 'auto'};
 `;
 
 export default Flex;

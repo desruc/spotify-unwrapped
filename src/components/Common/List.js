@@ -6,6 +6,7 @@ const List = styled.ul`
   padding: 0;
   list-style: none;
   columns: 1;
+  flex: 1;
   @media (min-width: 768px) {
     ${({ twoColumns }) => twoColumns && 'columns: 2;'}
   }

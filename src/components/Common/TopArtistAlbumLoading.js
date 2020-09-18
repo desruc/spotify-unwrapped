@@ -53,6 +53,7 @@ const TopArtistAlbumLoading = ({ heading }) => {
           <ImageWrap featured key={randomId()}>
             <ImageContainer featured>
               <LoadingBox
+                borderRadius="6px"
                 height="calc(100% - 10px)"
                 width="calc(100% - 10px)"
               />
@@ -65,6 +66,7 @@ const TopArtistAlbumLoading = ({ heading }) => {
           <ImageWrap key={randomId()}>
             <ImageContainer>
               <LoadingBox
+                borderRadius="6px"
                 height="calc(100% - 10px)"
                 width="calc(100% - 10px)"
               />

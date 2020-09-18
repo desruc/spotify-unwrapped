@@ -13,8 +13,6 @@ const initialState = {
   topTracksAllTime: null,
   topTracksHalfYear: null,
   topTracksMonth: null,
-  selectedTrack: null,
-  trackLoading: false,
   topTracksLoading: true,
   topArtistsLoading: true,
 };
@@ -105,19 +103,6 @@ const appReducer = (state = initialState, action) => {
       recentlyPlayed: action.recentlyPlayed,
     };
 
-  case types.GET_TRACK_SUCCESS:
-  case types.SET_SELECTED_TRACK:
-    return {
-      ...state,
-      selectedTrack: action.track,
-    };
-
-  case types.TRACK_LOADING_STATE:
-    return {
-      ...state,
-      trackLoading: action.state,
-    };
-
   default:
     return state;
   }
@@ -153,6 +138,4 @@ export const selectTopTracks = (state) => ({
   month: state.app.topTracksMonth,
 });
 
-export const selectTrackLoading = (state) => state.app.trackLoading;
 export const selectRecentlyPlayed = (state) => state.app.recentlyPlayed;
-export const selectSelectedTrack = (state) => state.app.selectedTrack;

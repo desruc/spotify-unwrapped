@@ -34,7 +34,11 @@ const refreshAccessToken = async () => {
 
 // Get the tokens on callback
 export const getToken = () => {
-  const { error, access_token: accessToken, refresh_token: refreshToken } = getHashParams();
+  const {
+    error,
+    access_token: accessToken,
+    refresh_token: refreshToken,
+  } = getHashParams();
 
   if (error) {
     console.error('getAccessToken error -> ', error); // eslint-disable-line

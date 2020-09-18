@@ -8,9 +8,10 @@ const LoadingBox = styled.div`
   background-color: ${({ theme }) => theme.secondary};
   color: ${({ theme }) => theme.secondary};
   animation: ${keyframes.glow} 1.5s ease-in-out infinite;
-  border-radius: ${({ borderRadius }) => borderRadius || '6px'};
+  border-radius: ${({ borderRadius }) => borderRadius || '0px'};
   margin-bottom: ${({ mb }) => mb || '0px'};
   margin-top: ${({ mt }) => mt || '0px'};
+  margin-right: ${({ mr }) => mr || '0px'};
 `;
 
 export default LoadingBox;

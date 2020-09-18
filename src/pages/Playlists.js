@@ -5,8 +5,7 @@ import styled from 'styled-components';
 import ErrorMessage from '../components/Common/ErrorMessage';
 import PageHeader from '../components/Common/PageHeader';
 import Flex from '../components/Common/Flex';
-
-import keyframes from '../styles/keyframes';
+import LoadingBox from '../components/Common/LoadingBox';
 
 import { getPlaylists } from '../spotify';
 
@@ -22,24 +21,10 @@ const Grid = styled.div`
   }
 `;
 
-const LoadingBox = styled.div`
-  height: 150px;
-  width: 100%;
-  border-radius: 6px;
-  background-color: ${({ theme }) => theme.secondary};
-  animation: ${keyframes.glow} 1.5s ease-in-out infinite;
-  margin-bottom: 20px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
+const PlaylistImageLoading = styled(LoadingBox)`
   @media (min-width: 768px) {
     height: 200px;
   }
-`;
-
-const LoadingText = styled.span`
-  color: ${({ theme }) => theme.secondary};
-  background-color: ${({ theme }) => theme.secondary};
-  animation: ${keyframes.glow} 1.5s ease-in-out infinite;
-  margin-bottom: 2px;
 `;
 
 const PlaylistImageLink = styled(Link)`
@@ -121,9 +106,17 @@ const Playlists = () => {
               flexDirection="column"
               alignItems="center"
             >
-              <LoadingBox />
-              <LoadingText>Loading playlists</LoadingText>
-              <LoadingText>songs</LoadingText>
+              <PlaylistImageLoading
+                height="150px"
+                borderRadius="6px"
+                mb="20px"
+              />
+              <LoadingBox mb="2px" width="fit-content">
+                Loading playlists
+              </LoadingBox>
+              <LoadingBox mb="2px" width="fit-content">
+                songs
+              </LoadingBox>
             </Flex>
           ))}
         </Grid>

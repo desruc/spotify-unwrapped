@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import ErrorMessage from '../Common/ErrorMessage';
+import Card from '../Common/Card';
 import Flex from '../Common/Flex';
 import TrackLoading from '../Common/TrackLoading';
 import Track from '../Common/Track';
@@ -14,23 +15,11 @@ const Section = styled.section`
   flex: 1;
 `;
 
-const Card = styled.div`
-  height: 100%;
-  max-width: 100%;
-  display: flex;
-  justify-content: center;
-  background-color: ${({ theme }) => theme.cardBackground};
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
-  padding: 16px;
+const StyledCard = styled(Card)`
   @media (min-width: 768px) {
     height: auto;
     min-height: 544px;
   }
-`;
-
-const Heading = styled.h2`
-  margin-top: 0px;
 `;
 
 const List = styled.ul`
@@ -91,8 +80,8 @@ const TrackRecommendations = ({ trackId }) => {
 
   return (
     <Section>
-      <Heading>Similar Tracks</Heading>
-      <Card>
+      <h2>Similar Tracks</h2>
+      <StyledCard>
         <Flex alignItems="center" justifyContent="center" flex={1}>
           {error ? (
             <ErrorMessage>
@@ -102,7 +91,7 @@ const TrackRecommendations = ({ trackId }) => {
             <List>{loading ? loadingJsx : tracksJsx}</List>
           )}
         </Flex>
-      </Card>
+      </StyledCard>
     </Section>
   );
 };

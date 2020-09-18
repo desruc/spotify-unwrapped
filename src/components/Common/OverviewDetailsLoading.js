@@ -45,7 +45,6 @@ const Image = styled.div`
 const Heading = styled.h2`
   font-size: 42px;
   margin-bottom: 5px;
-  margin-top: 0;
   background-color: ${({ theme }) => theme.secondary};
   color: ${({ theme }) => theme.secondary};
   animation: ${keyframes.glow} 1.5s ease-in-out infinite;

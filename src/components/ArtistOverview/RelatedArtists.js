@@ -5,25 +5,11 @@ import { useHistory } from 'react-router-dom';
 
 import ErrorMessage from '../Common/ErrorMessage';
 import RelatedArtistLoading from './RelatedArtistLoading';
+import Card from '../Common/Card';
 
 import { randomId } from '../../utils/helpers';
 
 import { artistPropType } from '../../constants/types';
-
-const Heading = styled.h2`
-  margin-top: 0px;
-`;
-
-const Card = styled.div`
-  height: 100%;
-  max-width: 100%;
-  display: flex;
-  justify-content: center;
-  background-color: ${({ theme }) => theme.cardBackground};
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
-  padding: 16px;
-`;
 
 const List = styled.ul`
   flex: 1;
@@ -109,8 +95,8 @@ const RelatedArtists = ({ loading, artists, error }) => {
 
   return (
     <>
-      <Heading>Fans also like</Heading>
-      <Card>
+      <h2>Fans also like</h2>
+      <Card display="flex" alignItems="center" justifyContent="center">
         <List>{loading ? loadingJsx : artistJsx}</List>
       </Card>
     </>
