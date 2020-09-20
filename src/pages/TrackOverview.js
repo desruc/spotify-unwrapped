@@ -41,10 +41,6 @@ const Column = styled.div`
     padding: ${({ isAnalysis }) => isAnalysis ? '0px 0px 0px 16px' : '0px 16px 0px 0px'};
     margin-top: 0px;
   }
-  // @media (min-width: 992px) {
-  //   padding: 0px;
-  //   width: 100%;
-  // }
   @media (min-width: 1500px) {
     width: 25%;
     padding: ${({ isAnalysis }) => isAnalysis ? '0px 16px 0px 16px' : '0px 16px 0px 0px'};
