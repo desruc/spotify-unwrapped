@@ -34,7 +34,6 @@ module.exports = {
     port: 3000,
   },
   plugins: [
-    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new BundleAnalyzerPlugin({ openAnalyzer: false }),
   ],
