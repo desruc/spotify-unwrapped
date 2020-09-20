@@ -3,9 +3,6 @@
 
 require('dotenv').config();
 
-const webpack = require('webpack');
-const webpackConfig = require('./webpack.config');
-
 const express = require('express');
 const request = require('request');
 const cors = require('cors');
@@ -38,18 +35,19 @@ const stateKey = 'spotify_auth_state';
 
 const app = express();
 
-// Dev hot reloading
-if (process.env.NODE_ENV !== 'production') {
-  const compiler = webpack(webpackConfig);
-  app.use(
-    require('webpack-dev-middleware')(compiler, {
-      noInfo: true,
-      publicPath: webpackConfig.output.publicPath,
-      writeToDisk: true,
-    })
-  );
-  app.use(require('webpack-hot-middleware')(compiler));
-}
+// Uncomment for dev hot reloading
+// if (process.env.NODE_ENV !== 'production') {
+//   const webpackConfig = require('./webpack.config');
+//   const compiler = require('webpack')(webpackConfig);
+//   app.use(
+//     require('webpack-dev-middleware')(compiler, {
+//       noInfo: true,
+//       publicPath: webpackConfig.output.publicPath,
+//       writeToDisk: true,
+//     })
+//   );
+//   app.use(require('webpack-hot-middleware')(compiler));
+// }
 
 app
   .use(express.static(__dirname + '/build'))

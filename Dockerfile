@@ -1,15 +1,16 @@
 # dependencies layer
-FROM node:10.15.3-alpine AS dependencies
+FROM node:lts-alpine AS dependencies
 WORKDIR /app
-COPY ./package.json .
-RUN npm install --silent
+COPY package.json .
+RUN yarn install --silent
 COPY . .
-RUN npm run build
+RUN yarn build
 
-FROM node:10.15.3-alpine
+FROM node:lts-alpine
 WORKDIR /app
-RUN npm install express
-COPY --from=dependencies /app/build .
-COPY ./server.js .
+COPY package.json .
+RUN yarn install --production
+COPY --from=dependencies /app/build ./build
+COPY server.js .
 
-CMD ["node", "index.js"]
+CMD ["node", "server.js"]
