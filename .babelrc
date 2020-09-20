@@ -12,6 +12,6 @@
     "plugins": [
         "babel-plugin-styled-components",
         "@babel/plugin-transform-runtime",
-        "react-hot-loader/babel"
+        // "react-hot-loader/babel"
     ]
 }

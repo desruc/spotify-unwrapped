@@ -11,7 +11,7 @@
     "test:cover": "yarn run test --coverage",
     "start": "node server.js",
     "dev": "rimraf build && cross-env NODE_ENV=development node server.js",
-    "build": "cross-env NODE_ENV=production webpack",
+    "build": "cross-env NODE_ENV=production webpack --mode production",
     "lint": "eslint ./src/**/**.js",
     "lint:fix": "eslint ./src/**/**.js --fix"
   },
