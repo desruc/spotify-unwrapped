@@ -14,7 +14,7 @@ const Wrap = styled.div`
 const LoginSplash = () => (
   <Wrap>
     <h1>Unwrapped</h1>
-    <ButtonLink href="http://localhost:3000/login">Login</ButtonLink>
+    <ButtonLink href="https://unwrapped-lpf6k5tfna-uc.a.run.app/login">Login</ButtonLink>
   </Wrap>
 );
 

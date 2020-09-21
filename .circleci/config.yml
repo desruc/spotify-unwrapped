@@ -30,7 +30,7 @@ jobs:
       - cloudrun/deploy:
           platform: "managed"
           image: "gcr.io/$GOOGLE_PROJECT_ID/$IMAGE_NAME"
-          service-name: "orb-gcp-cloud-run"
+          service-name: "unwrapped"
           region: $GOOGLE_COMPUTE_ZONE
           unauthenticated: true
 workflows:
