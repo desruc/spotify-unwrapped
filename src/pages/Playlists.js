@@ -126,7 +126,13 @@ const Playlists = () => {
           {playlists.map(({ id, name, images, tracks }) => (
             <Flex key={id} flexDirection="column" alignItems="center">
               <PlaylistImageLink to={`/playlist/${id}`}>
-                <PlaylistImage src={images[0].url} alt="Playlist Cover" />
+                <PlaylistImage
+                  src={
+                    images[0]?.url ||
+                    'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png'
+                  }
+                  alt="Playlist Cover"
+                />
               </PlaylistImageLink>
               <PlaylistName to={`/playlist/${id}`}>{name}</PlaylistName>
               <PlaylistTracks>{`${tracks.total} songs`}</PlaylistTracks>
