@@ -36,18 +36,24 @@ const stateKey = 'spotify_auth_state';
 const app = express();
 
 // Uncomment for dev hot reloading
-// if (process.env.NODE_ENV !== 'production') {
-//   const webpackConfig = require('./webpack.config');
-//   const compiler = require('webpack')(webpackConfig);
-//   app.use(
-//     require('webpack-dev-middleware')(compiler, {
-//       noInfo: true,
-//       publicPath: webpackConfig.output.publicPath,
-//       writeToDisk: true,
-//     })
-//   );
-//   app.use(require('webpack-hot-middleware')(compiler));
-// }
+if (process.env.NODE_ENV !== 'production') {
+  const webpackConfig = require('./webpack.config.js');
+  const compiler = require('webpack')(webpackConfig);
+  app.use(
+    require('webpack-dev-middleware')(compiler, {
+      noInfo: true,
+      publicPath: webpackConfig.output.publicPath,
+      writeToDisk: true,
+    })
+  );
+  app.use(
+    require('webpack-hot-middleware')(compiler, {
+      log: false,
+      path: '/__webpack_hmr',
+      heartbeat: 10 * 1000,
+    })
+  );
+}
 
 app
   .use(express.static(__dirname + '/build'))
@@ -59,7 +65,8 @@ app.get('/login', function (req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  const scope = 'user-read-private user-read-email user-read-recently-played user-top-read user-follow-modify playlist-read-private playlist-read-collaborative playlist-modify-public';
+  const scope =
+    'user-read-private user-read-email user-read-recently-played user-top-read user-follow-modify playlist-read-private playlist-read-collaborative playlist-modify-public';
   res.redirect(
     `https://accounts.spotify.com/authorize?${querystring.stringify({
       response_type: 'code',

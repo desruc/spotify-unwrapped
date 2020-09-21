@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 import paths from './paths';
@@ -35,6 +36,11 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshPlugin({
+      overlay: {
+        sockIntegration: 'whm',
+      },
+    }),
     new BundleAnalyzerPlugin({ openAnalyzer: false }),
   ],
 };

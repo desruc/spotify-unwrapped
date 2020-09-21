@@ -196,7 +196,7 @@ const DrawerInner = ({ closeDrawer }) => {
 
           const isActive = oneRoute
             ? pathname.includes(to)
-            : to.some((p) => pathname.includes(p));
+            : to.some((p) => p === pathname);
 
           return (
             <NavItem key={key}>

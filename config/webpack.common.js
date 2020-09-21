@@ -6,8 +6,7 @@ import rules from './rules';
 
 module.exports = {
   entry: [
-    // 'react-hot-loader/patch',
-    // 'webpack-hot-middleware/client',
+    'webpack-hot-middleware/client',
     paths.entryPath,
   ],
   node: {
