@@ -126,7 +126,7 @@ const menuRoutes = [
     key: 'dashboard',
     label: 'Dashboard',
     icon: MdDashboard,
-    to: '/dashboard',
+    to: ['/dashboard', '/'],
   },
   {
     key: 'topArtists',
@@ -183,7 +183,7 @@ const DrawerInner = ({ closeDrawer }) => {
         {profile && profile.display_name && (
           <Username>{profile.display_name}</Username>
         )}
-        {profile && profile.followers?.total && (
+        {profile && profile?.followers && (
           <Flex alignItems="center" flexDirection="column">
             <FollowersHeading>Followers</FollowersHeading>
             <Followers>{profile.followers.total}</Followers>
@@ -192,10 +192,19 @@ const DrawerInner = ({ closeDrawer }) => {
       </Profile>
       <NavList>
         {menuRoutes.map(({ key, label, icon: Icon, to }) => {
-          const isActive = pathname.includes(to);
+          const oneRoute = typeof to === 'string';
+
+          const isActive = oneRoute
+            ? pathname.includes(to)
+            : to.some((p) => pathname.includes(p));
+
           return (
             <NavItem key={key}>
-              <NavLink to={to} active={isActive ? 1 : 0} onClick={onLinkClick}>
+              <NavLink
+                to={oneRoute ? to : to[0]}
+                active={isActive ? 1 : 0}
+                onClick={onLinkClick}
+              >
                 <Icon />
                 {label}
               </NavLink>

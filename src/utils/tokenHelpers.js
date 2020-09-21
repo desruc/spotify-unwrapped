@@ -17,6 +17,13 @@ const getTokenTimestamp = () => window.localStorage.getItem('tokenTimestamp');
 const getLocalAccessToken = () => window.localStorage.getItem('accessToken');
 const getLocalRefreshToken = () => window.localStorage.getItem('refreshToken');
 
+export const clearTokens = () => {
+  window.localStorage.removeItem('tokenTimestamp');
+  window.localStorage.removeItem('accessToken');
+  window.localStorage.removeItem('refreshToken');
+  window.location.reload();
+};
+
 // Refresh the auth token
 const refreshAccessToken = async () => {
   try {
@@ -29,6 +36,7 @@ const refreshAccessToken = async () => {
     return;
   } catch (e) {
     console.error('Error refreshing token: ', e); // eslint-disable-line
+    clearTokens();
   }
 };
 
@@ -63,13 +71,6 @@ export const getToken = () => {
   }
 
   return localToken;
-};
-
-export const clearTokens = () => {
-  window.localStorage.removeItem('tokenTimestamp');
-  window.localStorage.removeItem('accessToken');
-  window.localStorage.removeItem('refreshToken');
-  window.location.reload();
 };
 
 export const token = getToken();
