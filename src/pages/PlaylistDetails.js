@@ -114,7 +114,10 @@ const PlaylistTracks = () => {
         loading={playlistLoading}
         heading={playlist?.name}
         spotifyUrl={playlist?.external_urls?.spotify}
-        imageSrc={playlist?.images[0].url}
+        imageSrc={
+          playlist?.images[0]?.url ||
+          'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png'
+        }
         error={playlistError}
       >
         <TotalTracks>{playlist && playlist.tracks.total} songs</TotalTracks>
