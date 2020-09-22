@@ -1,6 +1,7 @@
 import * as types from './types';
 
 const initialState = {
+  loggedIn: false,
   profile: null,
   artistDateRange: 'allTime',
   albumDateRange: 'allTime',
@@ -19,6 +20,12 @@ const initialState = {
 
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
+  case types.SET_LOGGED_IN:
+    return {
+      ...state,
+      loggedIn: action.state,
+    };
+
   case types.GET_USER_PROFILE_SUCCESS:
     return {
       ...state,
@@ -109,6 +116,8 @@ const appReducer = (state = initialState, action) => {
 };
 
 export default appReducer;
+
+export const selectLoggedIn = (state) => state.app.loggedIn;
 
 export const selectProfile = (state) => state.app.profile;
 

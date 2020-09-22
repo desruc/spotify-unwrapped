@@ -1,21 +1,26 @@
 import axios from 'axios';
-import { getHashParams } from './helpers';
 
 // Constants
 const expiryTime = 3600 * 1000;
 
-// Getters & Setters
-const setTokenTimestamp = () =>
+// Setters
+export const setLocalAccessToken = (token) => {
   window.localStorage.setItem('tokenTimestamp', Date.now());
-const setLocalAccessToken = (token) => {
-  setTokenTimestamp();
   window.localStorage.setItem('accessToken', token);
 };
-const setLocalRefreshToken = (token) =>
-  window.localStorage.setItem('refreshToken', token);
+
+export const setTokenData = (accessToken, refreshToken) => {
+  window.localStorage.setItem('accessToken', accessToken);
+  window.localStorage.setItem('refreshToken', refreshToken);
+  window.localStorage.setItem('tokenTimestamp', Date.now());
+};
+
+// Getters
+export const getLocalAccessToken = () => window.localStorage.getItem('accessToken');
+export const getLocalRefreshToken = () => window.localStorage.getItem('refreshToken');
+
 const getTokenTimestamp = () => window.localStorage.getItem('tokenTimestamp');
-const getLocalAccessToken = () => window.localStorage.getItem('accessToken');
-const getLocalRefreshToken = () => window.localStorage.getItem('refreshToken');
+export const isTokenExpired = () => Date.now() - getTokenTimestamp() > expiryTime;
 
 export const clearTokens = () => {
   window.localStorage.removeItem('tokenTimestamp');
@@ -31,46 +36,21 @@ const refreshAccessToken = async () => {
       `/refresh_token?refresh_token=${getLocalRefreshToken()}`
     );
     const { access_token: accessToken } = data;
-    setLocalAccessToken(accessToken);
-    window.location.reload();
-    return;
+    return accessToken;
   } catch (e) {
     console.error('Error refreshing token: ', e); // eslint-disable-line
     clearTokens();
   }
+  return null;
 };
 
-// Get the tokens on callback
-export const getToken = () => {
-  const {
-    error,
-    access_token: accessToken,
-    refresh_token: refreshToken,
-  } = getHashParams();
-
-  if (error) {
-    console.error('getAccessToken error -> ', error); // eslint-disable-line
-    refreshAccessToken();
-  }
-
-  if (Date.now() - getTokenTimestamp() > expiryTime) {
-    console.warn('Auth token has expired, refreshing...'); // eslint-disable-line
-    refreshAccessToken();
-  }
-
-  const localToken = getLocalAccessToken();
+export const getNewToken = async () => {
   const localRefreshToken = getLocalRefreshToken();
 
-  if (!localRefreshToken || localRefreshToken === 'undefined') {
-    setLocalRefreshToken(refreshToken);
-  }
-
-  if (!localToken || localToken === 'undefined') {
-    setLocalAccessToken(accessToken);
+  if (localRefreshToken) {
+    const accessToken = await refreshAccessToken();
     return accessToken;
   }
 
-  return localToken;
+  return null;
 };
-
-export const token = getToken();

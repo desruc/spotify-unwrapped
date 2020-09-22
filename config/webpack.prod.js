@@ -6,9 +6,10 @@ module.exports = {
   mode: 'production',
   entry: [paths.entryPath],
   output: {
-    filename: `${paths.jsFolder}/[name].[hash].js`,
+    filename: `static/${paths.jsFolder}/[name].[hash].js`,
     path: paths.outputPath,
-    chunkFilename: '[name].[chunkhash].js',
+    chunkFilename: `static/${paths.jsFolder}/[name].[chunkhash].js`,
+    publicPath: '/'
   },
   plugins: [new CleanWebpackPlugin()],
   optimization: {

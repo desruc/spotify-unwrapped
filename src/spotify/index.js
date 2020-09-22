@@ -1,19 +1,10 @@
 import axios from 'axios';
 
-import { token } from '../utils/tokenHelpers';
-
-const headers = {
-  Authorization: `Bearer ${token}`,
-  'Content-Type': 'application/json',
-};
-
 /**
  * Get the authorized users profile
  */
 export const getUserProfile = async () => {
-  const { data } = await axios.get('https://api.spotify.com/v1/me', {
-    headers,
-  });
+  const { data } = await axios.get('https://api.spotify.com/v1/me');
   return data;
 };
 
@@ -24,10 +15,7 @@ export const getAllTimeArtists = async () => {
   const {
     data: { items },
   } = await axios.get(
-    'https://api.spotify.com/v1/me/top/artists?limit=50&time_range=long_term',
-    {
-      headers,
-    }
+    'https://api.spotify.com/v1/me/top/artists?limit=50&time_range=long_term'
   );
   return items;
 };
@@ -39,10 +27,7 @@ export const getSixMonthArtists = async () => {
   const {
     data: { items },
   } = await axios.get(
-    'https://api.spotify.com/v1/me/top/artists?limit=50&time_range=medium_term',
-    {
-      headers,
-    }
+    'https://api.spotify.com/v1/me/top/artists?limit=50&time_range=medium_term'
   );
   return items;
 };
@@ -54,10 +39,7 @@ export const getMonthArtists = async () => {
   const {
     data: { items },
   } = await axios.get(
-    'https://api.spotify.com/v1/me/top/artists?limit=50&time_range=short_term',
-    {
-      headers,
-    }
+    'https://api.spotify.com/v1/me/top/artists?limit=50&time_range=short_term'
   );
   return items;
 };
@@ -69,10 +51,7 @@ export const getAllTimeTracks = async () => {
   const {
     data: { items },
   } = await axios.get(
-    'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=long_term',
-    {
-      headers,
-    }
+    'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=long_term'
   );
   return items;
 };
@@ -84,10 +63,7 @@ export const getSixMonthTracks = async () => {
   const {
     data: { items },
   } = await axios.get(
-    'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term',
-    {
-      headers,
-    }
+    'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term'
   );
   return items;
 };
@@ -99,10 +75,7 @@ export const getMonthTracks = async () => {
   const {
     data: { items },
   } = await axios.get(
-    'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term',
-    {
-      headers,
-    }
+    'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term'
   );
   return items;
 };
@@ -114,10 +87,7 @@ export const getRecentlyPlayed = async () => {
   const {
     data: { items },
   } = await axios.get(
-    'https://api.spotify.com/v1/me/player/recently-played?limit=50',
-    {
-      headers,
-    }
+    'https://api.spotify.com/v1/me/player/recently-played?limit=50'
   );
   return items;
 };
@@ -128,10 +98,7 @@ export const getRecentlyPlayed = async () => {
  */
 export const getTrack = async (trackId) => {
   const { data } = await axios.get(
-    `https://api.spotify.com/v1/tracks/${trackId}`,
-    {
-      headers,
-    }
+    `https://api.spotify.com/v1/tracks/${trackId}`
   );
   return data;
 };
@@ -142,10 +109,7 @@ export const getTrack = async (trackId) => {
  */
 export const getTrackFeatures = async (trackId) => {
   const { data } = await axios.get(
-    `https://api.spotify.com/v1/audio-features/${trackId}`,
-    {
-      headers,
-    }
+    `https://api.spotify.com/v1/audio-features/${trackId}`
   );
   return data;
 };
@@ -156,10 +120,7 @@ export const getTrackFeatures = async (trackId) => {
  */
 export const getTrackAnalysis = async (trackId) => {
   const { data } = await axios.get(
-    `https://api.spotify.com/v1/audio-analysis/${trackId}`,
-    {
-      headers,
-    }
+    `https://api.spotify.com/v1/audio-analysis/${trackId}`
   );
   return data;
 };
@@ -169,11 +130,8 @@ export const getTrackAnalysis = async (trackId) => {
  * @param {String} trackId
  */
 export const getTrackRecommendations = async (trackId) => {
-  const {
-    data,
-  } = await axios.get(
-    `https://api.spotify.com/v1/recommendations?seed_tracks=${trackId}&limit=16`,
-    { headers }
+  const { data } = await axios.get(
+    `https://api.spotify.com/v1/recommendations?seed_tracks=${trackId}&limit=16`
   );
   return data;
 };
@@ -184,10 +142,7 @@ export const getTrackRecommendations = async (trackId) => {
  */
 export const getAlbum = async (albumId) => {
   const { data } = await axios.get(
-    `https://api.spotify.com/v1/albums/${albumId}`,
-    {
-      headers,
-    }
+    `https://api.spotify.com/v1/albums/${albumId}`
   );
   return data;
 };
@@ -198,10 +153,7 @@ export const getAlbum = async (albumId) => {
  */
 export const getArtist = async (artistId) => {
   const { data } = await axios.get(
-    `https://api.spotify.com/v1/artists/${artistId}`,
-    {
-      headers,
-    }
+    `https://api.spotify.com/v1/artists/${artistId}`
   );
   return data;
 };
@@ -214,10 +166,7 @@ export const getArtistAlbums = async (artistId) => {
   const {
     data: { items },
   } = await axios.get(
-    `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album&limit=50&country=from_token`,
-    {
-      headers,
-    }
+    `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album&limit=50&country=from_token`
   );
   return items;
 };
@@ -230,10 +179,7 @@ export const getArtistTopTracks = async (artistId) => {
   const {
     data: { tracks },
   } = await axios.get(
-    `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=from_token`,
-    {
-      headers,
-    }
+    `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=from_token`
   );
   return tracks;
 };
@@ -246,10 +192,7 @@ export const getRelatedArtists = async (artistId) => {
   const {
     data: { artists },
   } = await axios.get(
-    `https://api.spotify.com/v1/artists/${artistId}/related-artists`,
-    {
-      headers,
-    }
+    `https://api.spotify.com/v1/artists/${artistId}/related-artists`
   );
   return artists;
 };
@@ -260,9 +203,7 @@ export const getRelatedArtists = async (artistId) => {
 export const getPlaylists = async () => {
   const {
     data: { items },
-  } = await axios.get('https://api.spotify.com/v1/me/playlists?limit=50', {
-    headers,
-  });
+  } = await axios.get('https://api.spotify.com/v1/me/playlists?limit=50');
   return items;
 };
 
@@ -272,10 +213,7 @@ export const getPlaylists = async () => {
  */
 export const getPlaylistDetails = async (playlistId) => {
   const { data } = await axios.get(
-    `https://api.spotify.com/v1/playlists/${playlistId}`,
-    {
-      headers,
-    }
+    `https://api.spotify.com/v1/playlists/${playlistId}`
   );
   return data;
 };
@@ -288,8 +226,7 @@ export const getPlaylistTracks = async (playlistId) => {
   const {
     data: { items },
   } = await axios.get(
-    `https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=100`,
-    { headers }
+    `https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=100`
   );
   return items;
 };

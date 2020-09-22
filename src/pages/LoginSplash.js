@@ -13,7 +13,7 @@ const Wrap = styled.div`
 
 const loginUri =
   process.env.NODE_ENV === 'production'
-    ? 'https://unwrapped-lpf6k5tfna-uc.a.run.app/login'
+    ? 'https://unwrapped.jmscmrn.com/login'
     : 'http://localhost:3000/login';
 
 const LoginSplash = () => (
