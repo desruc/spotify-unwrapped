@@ -161,7 +161,6 @@ export const getMonthTracks = () => async (dispatch) => {
 
 export const getRecentlyPlayed = () => async (dispatch) => {
   try {
-    dispatch({ type: types.RECENTLY_PLAYED_LOADING_STATE, state: true });
     const recentlyPlayed = await spotify.getRecentlyPlayed();
     dispatch({
       type: types.GET_RECENTLY_PLAYED_SUCCESS,
@@ -169,6 +168,5 @@ export const getRecentlyPlayed = () => async (dispatch) => {
     });
   } catch (error) {
     await dispatch({ type: types.GET_RECENTLY_PLAYED_ERROR });
-    await dispatch({ type: types.RECENTLY_PLAYED_LOADING_STATE, state: false });
   }
 };
