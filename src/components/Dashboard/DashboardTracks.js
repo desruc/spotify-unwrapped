@@ -16,9 +16,18 @@ import { CHANGE_TRACK_DATE_RANGE } from '../../store/types';
 
 import { randomId } from '../../utils/helpers';
 
+const Section = styled.section`
+  margin: 20px 0px;
+  @media (min-width: 768px) {
+    margin: 40px 0px;
+  }
+`;
+
 const RecentlyPlayedWrap = styled.div`
   width: 100%;
+  margin-bottom: 40px;
   @media (min-width: 1400px) {
+    margin-bottom: 0px;
     padding-right: 16px;
     width: 25%;
   }
@@ -41,39 +50,43 @@ const DashboardTracks = () => {
   const computedTracks = topTracks[range];
 
   return (
-    <Flex flexWrap="wrap">
-      <RecentlyPlayedWrap>
-        <DashboardSectionWrap
-          id="recently-played"
-          heading="Recently Played"
-          seeMoreLink="/recently-played"
-        >
-          <List>
-            {recentlyPlayed &&
-              recentlyPlayed
-                .slice(0, 5)
-                .map(({ track }) => <Track key={randomId()} track={track} />)}
-          </List>
-        </DashboardSectionWrap>
-      </RecentlyPlayedWrap>
-      <TopTracksWrap>
-        <DashboardSectionWrap
-          id="top-tracks"
-          heading="Top Tracks"
-          showRange
-          actionType={CHANGE_TRACK_DATE_RANGE}
-          selectedRange={range}
-          seeMoreLink="/top-tracks"
-        >
-          <List twoColumns>
-            {computedTracks &&
-              computedTracks
-                .slice(0, 10)
-                .map((track) => <Track key={randomId()} track={track} />)}
-          </List>
-        </DashboardSectionWrap>
-      </TopTracksWrap>
-    </Flex>
+    <Section>
+      <Flex flexWrap="wrap">
+        <RecentlyPlayedWrap>
+          <DashboardSectionWrap
+            id="recently-played"
+            heading="Recently Played"
+            seeMoreLink="/recently-played"
+            noSectionMargin
+          >
+            <List>
+              {recentlyPlayed &&
+                recentlyPlayed
+                  .slice(0, 5)
+                  .map(({ track }) => <Track key={randomId()} track={track} />)}
+            </List>
+          </DashboardSectionWrap>
+        </RecentlyPlayedWrap>
+        <TopTracksWrap>
+          <DashboardSectionWrap
+            id="top-tracks"
+            heading="Top Tracks"
+            showRange
+            actionType={CHANGE_TRACK_DATE_RANGE}
+            selectedRange={range}
+            seeMoreLink="/top-tracks"
+            noSectionMargin
+          >
+            <List twoColumns>
+              {computedTracks &&
+                computedTracks
+                  .slice(0, 10)
+                  .map((track) => <Track key={randomId()} track={track} />)}
+            </List>
+          </DashboardSectionWrap>
+        </TopTracksWrap>
+      </Flex>
+    </Section>
   );
 };
 

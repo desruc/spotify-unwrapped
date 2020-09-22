@@ -27,7 +27,9 @@ const Heading = styled.h2`
 
 const RecentlyPlayedWrap = styled.div`
   width: 100%;
-  @media (min-width: 1200px) {
+  margin-bottom: 40px;
+  @media (min-width: 1400px) {
+    margin-bottom: 0px;
     padding-right: 16px;
     width: 25%;
   }
@@ -35,9 +37,7 @@ const RecentlyPlayedWrap = styled.div`
 
 const TopTracksWrap = styled.div`
   width: 100%;
-  margin-top: 40px;
-  @media (min-width: 1200px) {
-    margin-top: 0px;
+  @media (min-width: 1400px) {
     width: 75%;
   }
 `;
@@ -82,34 +82,30 @@ const DashboardLoading = () => {
       <Section>
         <Flex flexWrap="wrap">
           <RecentlyPlayedWrap>
-            <Section>
-              <Heading>Recently Played</Heading>
-              <Card>
-                <List>
-                  {[...new Array(5)].map(() => (
-                    <TrackLoading key={randomId()} />
-                  ))}
-                </List>
-              </Card>
-            </Section>
+            <Heading>Recently Played</Heading>
+            <Card>
+              <List>
+                {[...new Array(5)].map(() => (
+                  <TrackLoading key={randomId()} />
+                ))}
+              </List>
+            </Card>
           </RecentlyPlayedWrap>
           <TopTracksWrap>
-            <Section>
-              <Heading>Top Tracks</Heading>
-              <Card>
-                <List twoColumns>
-                  {[...new Array(10)].map(() => (
-                    <TrackLoading key={randomId()} />
-                  ))}
-                </List>
-              </Card>
-            </Section>
+            <Heading>Top Tracks</Heading>
+            <Card>
+              <List twoColumns>
+                {[...new Array(10)].map(() => (
+                  <TrackLoading key={randomId()} />
+                ))}
+              </List>
+            </Card>
           </TopTracksWrap>
         </Flex>
       </Section>
       <Section>
         <Heading>Top Artists</Heading>
-        <Card padding="16px">
+        <Card padding="0px">
           <Flex flexWrap="wrap">
             {[...new Array(sliceRange[getViewportName(viewportWidth)])].map(
               () => (
@@ -129,7 +125,7 @@ const DashboardLoading = () => {
       </Section>
       <Section>
         <Heading>Top Albums</Heading>
-        <Card padding="16px">
+        <Card padding="0px">
           <Flex flexWrap="wrap">
             {[...new Array(sliceRange[getViewportName(viewportWidth)])].map(
               () => (

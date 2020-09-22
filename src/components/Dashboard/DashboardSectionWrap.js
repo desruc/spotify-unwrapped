@@ -9,9 +9,9 @@ import Card from '../Common/Card';
 import RangeTabs from '../Common/RangeTabs';
 
 const Section = styled.section`
-  margin: 20px 0px;
+  margin: ${({ margin }) => (margin ? '20px 0px' : '0px')};
   @media (min-width: 768px) {
-    margin: 40px 0px;
+    margin: ${({ margin }) => (margin ? '40px 0px' : '0px')};
   }
 `;
 
@@ -59,8 +59,9 @@ const DashboardSectionWrap = ({
   children,
   seeMoreLink,
   cardPadding,
+  noSectionMargin,
 }) => (
-  <Section id={id}>
+  <Section margin={!noSectionMargin} id={id}>
     <TitleWrap>
       <Heading showRange={showRange}>{heading}</Heading>
       {showRange && actionType && selectedRange && (
@@ -87,6 +88,7 @@ DashboardSectionWrap.propTypes = {
   children: PropTypes.node.isRequired,
   seeMoreLink: PropTypes.string,
   cardPadding: PropTypes.string,
+  noSectionMargin: PropTypes.bool,
 };
 
 DashboardSectionWrap.defaultProps = {
@@ -97,6 +99,7 @@ DashboardSectionWrap.defaultProps = {
   selectedRange: '',
   seeMoreLink: '',
   cardPadding: '16px',
+  noSectionMargin: false,
 };
 
 export default DashboardSectionWrap;
