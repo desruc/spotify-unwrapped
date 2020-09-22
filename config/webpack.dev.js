@@ -6,6 +6,7 @@ import paths from './paths';
 
 module.exports = {
   mode: 'development',
+  entry: ['webpack-hot-middleware/client', paths.entryPath],
   output: {
     filename: '[name].js',
     path: paths.outputPath,

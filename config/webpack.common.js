@@ -5,10 +5,6 @@ import paths from './paths';
 import rules from './rules';
 
 module.exports = {
-  entry: [
-    'webpack-hot-middleware/client',
-    paths.entryPath,
-  ],
   node: {
     __dirname: false,
   },

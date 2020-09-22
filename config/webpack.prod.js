@@ -4,6 +4,7 @@ import paths from './paths';
 
 module.exports = {
   mode: 'production',
+  entry: [paths.entryPath],
   output: {
     filename: `${paths.jsFolder}/[name].[hash].js`,
     path: paths.outputPath,
