@@ -12,9 +12,6 @@ import { getTopGenres } from '../../utils/helpers';
 
 const TopFiveWrap = styled.div`
   width: 100%;
-  @media (min-width: 992px) {
-    width: 50%;
-  }
   @media (min-width: 1200px) {
     width: 33.33333333333333%;
   }
@@ -27,10 +24,8 @@ const GenreHeading = styled.h3`
 
 const MoreGenresWrap = styled.div`
   width: 100%;
-  @media (min-width: 992px) {
-    width: 50%;
-  }
   @media (min-width: 1200px) {
+    padding-left: 16px;
     width: 66.66666666666667%;
   }
 `;
@@ -78,8 +73,9 @@ const DashboardGenres = () => {
       actionType={CHANGE_GENRE_DATE_RANGE}
       selectedRange={range}
     >
-      <Flex padding="16px" flexWrap="wrap">
+      <Flex flexWrap="wrap">
         <TopFiveWrap width={25}>
+          <h5>Your favourite genres</h5>
           {genres &&
             genres.slice(0, 5).map((g, idx) => {
               const [key, value] = g;

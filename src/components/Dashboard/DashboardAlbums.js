@@ -53,6 +53,7 @@ const DashboardAlbums = () => {
       actionType={CHANGE_ALBUM_DATE_RANGE}
       selectedRange={range}
       seeMoreLink="/top-albums"
+      cardPadding="0px"
     >
       <Flex flexWrap="wrap" padding="5px">
         {computedAlbums &&

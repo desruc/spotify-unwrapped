@@ -6,7 +6,6 @@ const Flex = styled.div`
   align-items: ${({ alignItems }) => alignItems || 'flex-start'};
   flex-wrap: ${({ flexWrap }) => flexWrap || 'no-wrap'};
   width: ${({ width }) => width || '100%'};
-  ${({ mt }) => mt && `margin-top: ${mt}px;`}
   flex: ${({ flex }) => flex || 'none'};
   flex-direction: ${({ flexDirection }) => flexDirection || 'row'};
   padding-right: ${({ paddingRight }) => paddingRight || '0px'};

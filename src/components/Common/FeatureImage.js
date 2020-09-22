@@ -87,7 +87,7 @@ const SubTitle = styled.h3`
 const ArtistMobileLabel = styled.h6`
   text-align: center;
   margin-top: 0;
-  margin-bottom: 16px;
+  margin-bottom: 0px;
   font-size: ${({ isArtist }) => (isArtist ? 16 : 12)}px;
   padding: 0px 8px;
   color: ${({ theme, isArtist }) =>

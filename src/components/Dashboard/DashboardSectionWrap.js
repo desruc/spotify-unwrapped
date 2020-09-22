@@ -17,17 +17,18 @@ const Section = styled.section`
 
 const TitleWrap = styled.div`
   margin-bottom: 16px;
-  flex-wrap: wrap;
-  display: flex;
   @media (min-width: 768px) {
+    flex-wrap: wrap;
+    display: flex;
     align-items: center;
   }
 `;
 
 const Heading = styled.h2`
   font-size: 2rem;
-  margin-bottom: 16px;
+  margin-bottom: ${({ showRange }) => (showRange ? '16px' : '0px')};
   @media (min-width: 768px) {
+    margin-bottom: 0px;
     flex: 1;
   }
 `;
@@ -57,17 +58,18 @@ const DashboardSectionWrap = ({
   selectedRange,
   children,
   seeMoreLink,
+  cardPadding,
 }) => (
   <Section id={id}>
     <TitleWrap>
-      <Heading>{heading}</Heading>
+      <Heading showRange={showRange}>{heading}</Heading>
       {showRange && actionType && selectedRange && (
         <RangeTabs actionType={actionType} selected={selectedRange} />
       )}
     </TitleWrap>
-    <Card>{children}</Card>
+    <Card padding={cardPadding}>{children}</Card>
     {seeMoreLink && (
-      <Flex alignItems="center" justifyContent="flex-end" mt={20}>
+      <Flex alignItems="center" justifyContent="flex-end" mt="20px">
         <StyledLink to={seeMoreLink}>
           See more <MdTrendingFlat />
         </StyledLink>
@@ -84,6 +86,7 @@ DashboardSectionWrap.propTypes = {
   selectedRange: PropTypes.string,
   children: PropTypes.node.isRequired,
   seeMoreLink: PropTypes.string,
+  cardPadding: PropTypes.string,
 };
 
 DashboardSectionWrap.defaultProps = {
@@ -93,6 +96,7 @@ DashboardSectionWrap.defaultProps = {
   actionType: '',
   selectedRange: '',
   seeMoreLink: '',
+  cardPadding: '16px',
 };
 
 export default DashboardSectionWrap;

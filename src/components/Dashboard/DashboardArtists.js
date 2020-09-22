@@ -44,6 +44,7 @@ const DashboardArtists = () => {
       actionType={CHANGE_ARTIST_DATE_RANGE}
       selectedRange={range}
       seeMoreLink="/top-artists"
+      cardPadding="0px"
     >
       <Flex flexWrap="wrap" padding="5px">
         {computedArtists &&

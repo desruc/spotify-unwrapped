@@ -36,6 +36,7 @@ const Container = styled.div`
   padding: 0px 16px;
   width: 100%;
   @media (min-width: 1200px) {
+    padding: 0px 32px;
     margin: 40px auto 80px auto;
   }
 `;

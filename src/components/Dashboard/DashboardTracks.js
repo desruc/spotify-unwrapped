@@ -18,7 +18,7 @@ import { randomId } from '../../utils/helpers';
 
 const RecentlyPlayedWrap = styled.div`
   width: 100%;
-  @media (min-width: 1200px) {
+  @media (min-width: 1400px) {
     padding-right: 16px;
     width: 25%;
   }
@@ -26,7 +26,7 @@ const RecentlyPlayedWrap = styled.div`
 
 const TopTracksWrap = styled.div`
   width: 100%;
-  @media (min-width: 1200px) {
+  @media (min-width: 1400px) {
     width: 75%;
   }
 `;
