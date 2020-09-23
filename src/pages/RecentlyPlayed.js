@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { selectRecentlyPlayed, selectTopTracksLoading } from '../store/reducer';
 
-import TopTracksLoading from '../components/Common/TopTracksLoading';
 import PageHeader from '../components/Common/PageHeader';
+import TrackListLoading from '../components/Common/TrackListLoading';
 import List from '../components/Common/List';
 import Track from '../components/Common/Track';
 
@@ -25,15 +25,16 @@ const RecentlyPlayed = () => {
     dispatch(getRecentlyPlayed());
   }, [dispatch, getRecentlyPlayed]);
 
-  if (loading) return <TopTracksLoading heading="Recently Played" />;
-
   return (
     <main>
       <PageHeader heading="Recently Played" />
-      <List twoColumns>
-        {tracks &&
-          tracks.map(({ track }) => <Track key={randomId()} track={track} />)}
-      </List>
+      {loading && <TrackListLoading />}
+      {!loading && (
+        <List twoColumns>
+          {tracks &&
+            tracks.map(({ track }) => <Track key={randomId()} track={track} />)}
+        </List>
+      )}
     </main>
   );
 };

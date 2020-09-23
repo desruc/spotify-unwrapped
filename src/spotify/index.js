@@ -230,3 +230,18 @@ export const getPlaylistTracks = async (playlistId) => {
   );
   return items;
 };
+
+export const getRecommendationsForTracks = async (tracks) => {
+  const shuffledTracks = tracks.sort(() => 0.5 - Math.random());
+  const seedTracks = shuffledTracks
+    .slice(0, 5)
+    .map(({ track }) => track.id)
+    .join(',');
+
+  const {
+    data: { tracks: recommendations },
+  } = await axios.get(
+    `https://api.spotify.com/v1/recommendations?seed_tracks=${seedTracks}&limit=50`
+  );
+  return recommendations;
+};

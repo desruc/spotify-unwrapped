@@ -8,8 +8,8 @@ import {
 } from '../store/reducer';
 import { CHANGE_TRACK_DATE_RANGE } from '../store/types';
 
-import TopTracksLoading from '../components/Common/TopTracksLoading';
 import PageHeader from '../components/Common/PageHeader';
+import TrackListLoading from '../components/Common/TrackListLoading';
 import RangeTabs from '../components/Common/RangeTabs';
 import List from '../components/Common/List';
 import Track from '../components/Common/Track';
@@ -27,15 +27,18 @@ const TopTracksPage = () => {
     <RangeTabs actionType={CHANGE_TRACK_DATE_RANGE} selected={range} />
   );
 
-  if (loading) return <TopTracksLoading heading="Top Tracks" />;
-
   return (
     <main>
       <PageHeader heading="Top Tracks" actions={headerActions} />
-      <List twoColumns>
-        {computedTracks &&
-          computedTracks.map((track) => <Track key={track.id} track={track} />)}
-      </List>
+      {loading && <TrackListLoading />}
+      {!loading && (
+        <List twoColumns>
+          {computedTracks &&
+            computedTracks.map((track) => (
+              <Track key={track.id} track={track} />
+            ))}
+        </List>
+      )}
     </main>
   );
 };

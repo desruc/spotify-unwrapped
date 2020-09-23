@@ -11,6 +11,7 @@ import {
   MdLibraryMusic,
   MdTagFaces,
   MdEject,
+  MdSearch,
 } from 'react-icons/md';
 
 import Flex from '../Common/Flex';
@@ -151,6 +152,12 @@ const menuRoutes = [
     label: 'Playlists',
     icon: MdPlaylistPlay,
     to: '/playlists',
+  },
+  {
+    key: 'discover',
+    label: 'Discover',
+    icon: MdSearch,
+    to: '/discover',
   },
 ];
 

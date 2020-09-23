@@ -13,6 +13,7 @@ import ArtistOverview from './ArtistOverview';
 import AlbumOverview from './AlbumOverview';
 import Playlists from './Playlists';
 import PlaylistTracks from './PlaylistDetails';
+import Discover from './Discover';
 
 import Flex from '../components/Common/Flex';
 import Navigation from '../components/Navigation/Navigation';
@@ -69,6 +70,7 @@ const AuthenticatedView = () => {
               <Route exact path="/album/:albumId" component={AlbumOverview} />
               <Route exact path="/playlists" component={Playlists} />
               <Route exact path="/playlist/:playlistId" component={PlaylistTracks} />
+              <Route exact path="/discover" component={Discover} />
               <Route path={['/', '/dashboard']} component={Dashboard} />
             </Switch>
             <Footer />
