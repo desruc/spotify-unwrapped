@@ -2,8 +2,22 @@
   Spotify Unwrapped
 </h1>
 <p align="center">
-  A year round <i>Spotify Wrapped</i>!
+  Unwrapped is a web application that uses Spotifys API to provide a visual representation of your personalized data.
+<p align="center">
+  <a href="https://unwrapped.jmscmrn.com" target="_blank">Check it out here!<a>
 </p>
+<p align="center">
+  <a href="https://unwrapped.jmscmrn.com">
+    <img src="https://circleci.com/gh/desruc/spotify-unwrapped.svg?style=svg">
+  </a>
+</p>
+
+## Stack
+
+- React
+- Redux
+- React-Router
+- Styled-Components
 
 ## Development
 
@@ -13,7 +27,9 @@
    yarn install
    ```
 
-2. Start the app
+2. Create an `.env` file from the `.env.example` file
+
+3. Start the app
 
    ```sh
    yarn start
