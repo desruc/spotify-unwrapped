@@ -1,0 +1,39 @@
+version: 2.1
+orbs:
+  cloudrun: circleci/gcp-cloud-run@1.0.0
+  gcp-gcr: circleci/gcp-gcr@0.6.1
+jobs:
+  build_push_image_cloud_run_managed:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: false
+      - run:
+          name: Build docker image
+          command: |
+            echo 'export PATH=~$PATH:~/.local/bin' >> $BASH_ENV && source $BASH_ENV
+            echo ${GCP_PROJECT_KEY} | base64 --decode --ignore-garbage > $HOME/gcloud-service-key.json
+            echo 'export GOOGLE_CLOUD_KEYS=$(cat $HOME/gcloud-service-key.json)' >> $BASH_ENV
+            echo 'export TAG=${CIRCLE_SHA1}' >> $BASH_ENV
+            echo 'export IMAGE_NAME=$CIRCLE_PROJECT_REPONAME' >> $BASH_ENV && source $BASH_ENV
+            docker build -t gcr.io/$GOOGLE_PROJECT_ID/$IMAGE_NAME -t gcr.io/$GOOGLE_PROJECT_ID/$IMAGE_NAME:$TAG .
+      - gcp-gcr/gcr-auth:
+          gcloud-service-key: GOOGLE_CLOUD_KEYS
+          google-project-id: GOOGLE_PROJECT_ID
+          google-compute-zone: GOOGLE_COMPUTE_ZONE
+      - gcp-gcr/push-image:
+          google-project-id: GOOGLE_PROJECT_ID
+          registry-url: "gcr.io"
+          image: $IMAGE_NAME
+      - cloudrun/deploy:
+          platform: "managed"
+          image: "gcr.io/$GOOGLE_PROJECT_ID/$IMAGE_NAME"
+          service-name: "unwrapped"
+          region: $GOOGLE_COMPUTE_ZONE
+          unauthenticated: true
+workflows:
+  build_deploy:
+    jobs:
+      - build_push_image_cloud_run_managed

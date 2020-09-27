@@ -5,26 +5,29 @@ import paths from './paths';
 import rules from './rules';
 
 module.exports = {
-  entry: paths.entryPath,
+  node: {
+    __dirname: false,
+  },
   module: {
-    rules
+    rules,
   },
   resolve: {
     modules: ['src', 'node_modules'],
-    extensions: ['*', '.js']
+    extensions: ['*', '.js'],
   },
   plugins: [
     new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({
       template: paths.templatePath,
+      favicon: `${paths.root}/src/static/favicon.ico`,
       minify: {
         collapseInlineTagWhitespace: true,
         collapseWhitespace: true,
         preserveLineBreaks: true,
         minifyURLs: true,
         removeComments: true,
-        removeAttributeQuotes: true
-      }
-    })
-  ]
+        removeAttributeQuotes: true,
+      },
+    }),
+  ],
 };

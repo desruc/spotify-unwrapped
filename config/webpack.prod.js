@@ -4,11 +4,23 @@ import paths from './paths';
 
 module.exports = {
   mode: 'production',
+  entry: [paths.entryPath],
   output: {
-    filename: `${paths.jsFolder}/[name].[hash].js`,
+    filename: `static/${paths.jsFolder}/[name].[hash].js`,
     path: paths.outputPath,
-    chunkFilename: '[name].[chunkhash].js'
+    chunkFilename: `static/${paths.jsFolder}/[name].[chunkhash].js`,
+    publicPath: '/'
   },
   plugins: [new CleanWebpackPlugin()],
-  devtool: 'source-map'
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
 };

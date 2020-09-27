@@ -34,6 +34,6 @@
               "allowTaggedTemplates": true
           }
       ],
-      "no-underscore-dangle": ["error", { "allow": ["__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"] }]
+      "no-underscore-dangle": [2, { "allow": ["__REDUX_DEVTOOLS_EXTENSION__"] }]
   }
 }
