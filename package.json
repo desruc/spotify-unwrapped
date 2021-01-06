@@ -61,7 +61,7 @@
   "dependencies": {
     "@animated-burgers/burger-slide": "^1.1.2",
     "@nivo/bar": "^0.62.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
